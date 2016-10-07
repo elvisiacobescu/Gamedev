@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>helo canvas</title>
+  </head>
+  <body style="margin:0px">
+    <canvas id="feeldsbord" width="1000" height="1000"></canvas>
+    <canvas id="canvas2" width="1000" height="1000"></canvas>
+    <script type="text/javascript">
+  window.requestAnimFrame = (function(){
+   return  window.requestAnimationFrame       ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame    ||
+           function( callback ){
+          window.setTimeout(callback, 1000 / 60);
+        };
+      })();
+    </script>
+    <script src="map2.js" charset="utf-8"></script>
+  </body>
+</html>

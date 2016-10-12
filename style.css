@@ -1,0 +1,18 @@
+
+.pozcan1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 95;
+}
+.pozcan2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.stage{
+  width:1240px;
+  position: relative;
+  margin:0 auto;
+}

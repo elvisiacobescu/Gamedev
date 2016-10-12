@@ -27,7 +27,7 @@ bag1={
 };
 
 var player={
-  helth :100,
+  helth :50,
   max_helth : 100,
   name : "me",
   i : 0,
@@ -109,14 +109,17 @@ var player={
 },
   passtime : function(t){
   //scade 0,5 foame pe ora
-  if(this.foame>=t/3600/2){
+  if(this.foame >= (t/3600/2)){
   this.foame-=t/3600/2;
   }else {
   this.foame=0;
-  if(this.helth >this.foame-t/3600/2){
-  this.helth-=this.foame-t/3600/2;}
-  else {deth()};
-}
+  if(this.helth >this.foame+t/3600/2){
+  console.log(this.helth>this.foame-(t/3600)/2);
+  this.helth+=(this.foame-t/3600/2);}
+  else {
+    this.helth=0;
+    this.deth()};
+};
   this.time+=t;
   },
   option : function(x,y){
@@ -194,7 +197,7 @@ var player={
     };
   },
   deth:function(){
-    console.log("ups ai murit.....ps asta inseamna ca nu ai facut moartea");
+    console.log("ups ai murit.....ps asta inseamna ca nu ai facutfunctia pt moarte daca inca trimit mesaju ista");
   }
 
 };

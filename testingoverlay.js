@@ -42,8 +42,8 @@
       c_2.fillText(player.foame+"/"+player.max_foame+" food", 70, 263);
       c_2.beginPath();
       var my_pic=new Image();
-      my_pic.src="img/energi.png";
-      c_2.drawImage(my_pic,20,277)
+      my_pic.src="img/food.png";
+      c_2.drawImage(my_pic,20,247)
       //ideia de timp
       c_2.beginPath();
       c_2.fillStyle = "black";
@@ -68,8 +68,8 @@
      c_2.fillText(player.energi+"/"+player.max_energi+" En", 70, 293);
      c_2.beginPath();
      var my_pic=new Image();
-     my_pic.src="img/energi.png";
-     c_2.drawImage(my_pic,20,277)
+     my_pic.src="img/energi2.png";
+     c_2.drawImage(my_pic,20,276)
      }
 }
 (function animLoop(){

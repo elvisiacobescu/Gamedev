@@ -35,7 +35,7 @@ var player={
   sclickt: 0,
   nextloop: 5158000,
   time: 2548654,
-  energi : 15,
+  energi : 1,
   max_energi:25,
   silvar:5,
   gold:0,

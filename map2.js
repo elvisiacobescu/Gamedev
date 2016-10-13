@@ -33,8 +33,8 @@ var player={
   i : 0,
   j : 0,
   sclickt: 0,
-  netxtloop: 5158000,
-  time: 0,
+  nextloop: 5158000,
+  time: 2548654,
   energi : 15,
   max_energi:25,
   silvar:5,
@@ -361,7 +361,7 @@ player.setposition(2,3);
            var x;
            var y;
            var my_pic3=new Image();
-           my_pic3.src = "img/camp.png";
+           my_pic3.src = "img/camp1.png";
            //afla centru lui isi j
            var centers=cenAftCoordonates(i,j);
              //console.log(centers);

@@ -5,21 +5,21 @@ my_pic.src="img/green-terain.png";
 my_pic2.src="img/orange-terain.png";
 my_bolet.src="img/2-white25.png";
 var mat=[[1,1,1,1,1],[1,2,1,1,1],[1,14,2,1,1],[1,15,1,1,1],[1,2,1,1,1],[1,1,1,2,1],[2,1,2,1,1],[1,1,2,1,1],[1,1,1,1,1],[1,1,1,1,1]];
-var hexagoane=[{type:"grass",    options:{nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                 speed:"1.2",ref:"img/green-terain.png"},
-               {type:"desert",   options:{nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,deforest:["twigs","wod"]},              speed:"0.9",ref:"img/orange-terain.png"},
-               {type:"jungle",   options:{nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["twigs","wod","fruits","bunny","medium_treasure","lite_monster"],deforest:["twigs","wod"] }, speed:"0.7",ref:"img/orange-terain.png"},
-               {type:"forest",   options:{nr:4,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"],deforest:["twigs","wod"] },          speed:"1",ref:"img/orange-terain.png"},
-               {type:"swamp",    options:{nr:3,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                              speed:"0.5",ref:"img/orange-terain.png"},
-               {type:"mountain", options:{nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},               speed:"0.5",ref:"img/orange-terain.png"},
-               {type:"hill",     options:{nr:3,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:"0.9",ref:"img/orange-terain.png"},
-               {type:"inn",      options:{nr:3,camp:["fire","inn","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:"2",ref:"img/orange-terain.png"},
-               {type:"pasture",  options:{nr:4,camp:["fire","inn","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] ,work:["shepherd","build"]},       speed:"2",ref:"img/orange-terain.png"},
-               {type:"stables",  options:{nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] ,work:["clean","build"]},               speed:"2",ref:"img/orange-terain.png"},
-               {type:"home",     options:{nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , build:"cest"},                        speed:"2",ref:"img/orange-terain.png"},
-               {type:"shop",     options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:"2",ref:"img/orange-terain.png"},
-               {type:"warckshop",options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:"2",ref:"img/orange-terain.png"},
-               {type:"farm",     options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:"2",ref:"img/farm-terain.png"},
-               {type:"palace",   options:{nr:3,camp:["no-fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:"2",ref:"img/castel-terain.png"}
+var hexagoane=[{type:"grass",    options:{nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                 speed:1.2,ref:"img/green-terain.png"},
+               {type:"desert",   options:{nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,deforest:["twigs","wod"]},              speed:0.9,ref:"img/orange-terain.png"},
+               {type:"jungle",   options:{nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["twigs","wod","fruits","bunny","medium_treasure","lite_monster"],deforest:["twigs","wod"] }, speed:0.7,ref:"img/orange-terain.png"},
+               {type:"forest",   options:{nr:4,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"],deforest:["twigs","wod"] },          speed:1,ref:"img/orange-terain.png"},
+               {type:"swamp",    options:{nr:3,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                              speed:0.5,ref:"img/orange-terain.png"},
+               {type:"mountain", options:{nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},               speed:0.5,ref:"img/orange-terain.png"},
+               {type:"hill",     options:{nr:3,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:0.9,ref:"img/orange-terain.png"},
+               {type:"inn",      options:{nr:3,camp:["fire","inn","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
+               {type:"pasture",  options:{nr:4,camp:["fire","inn","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] ,work:["shepherd","build"]},       speed:2,ref:"img/orange-terain.png"},
+               {type:"stables",  options:{nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] ,work:["clean","build"]},               speed:2,ref:"img/orange-terain.png"},
+               {type:"home",     options:{nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , build:"cest"},                        speed:2,ref:"img/orange-terain.png"},
+               {type:"shop",     options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
+               {type:"warckshop",options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
+               {type:"farm",     options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/farm-terain.png"},
+               {type:"palace",   options:{nr:3,camp:["no-fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:2,ref:"img/castel-terain.png"}
              ];
 bag1={
   ref:"img/2-white25.png",
@@ -32,10 +32,11 @@ var player={
   name : "me",
   i : 0,
   j : 0,
+  warning:0,
   sclickt: 0,
   nextloop: 5158000,
   time: 2548654,
-  energi : 1,
+  energi : 10,
   max_energi:25,
   silvar:5,
   gold:0,
@@ -68,7 +69,12 @@ var player={
     var c=  clickt(x,y);
     //intreb daca patratica e adiacenta
     //merge 1,2
-
+    //formula pt consum de energie este dificultatea terenuli / 1.5
+    if(c.i===player.i && c.j===player.j){
+     player.self=1;
+     //test self
+   }
+else if(this.energi>=1.5/hexagoane[mat[c.i][c.j]-1].speed){
      if((c.i+2===player.i && c.j===player.j && player.i%2===0) ||
         (c.i-2===player.i && c.j===player.j && player.i%2===0) ||
         (c.i+1===player.i && c.j===player.j && player.i%2===0) ||
@@ -84,7 +90,10 @@ var player={
       {
         // console.log(c.i+2);
       //  console.log("mutare legala i:"+player.i+" j:"+player.j)
-         player.setposition(c.i,c.j);
+         this.setposition(c.i,c.j);
+         this.energi-=1.5/hexagoane[mat[this.i][this.j]-1].speed;
+         this.passtime(Math.floor(3600/hexagoane[mat[this.i][this.j]-1].speed));
+console.log(this.foame);
          //testam daca exista parametru in obiect
         //  if (hexagoane[mat[player.i][player.j] - 1 ].options.deforest==null){
         //    console.log(' sunt  null');
@@ -95,32 +104,33 @@ var player={
           //  console.log(player);
     //  console.log(cenAftCoordonates(this.i,this.j) );
     //clicktest
-      }else if(c.i===player.i && c.j===player.j){
-        player.self=1;
-        //test self
-      }
-
+  }
       else {
         // console.log("muta "+c.i +" unde jucatorul este ="+player.i);
        console.log("mutare ilegala player ");
         // console.log("tu ai apasat pe acest i:"+c.i+" j:"+c.j);
       }
+    }else{
+      console.log("nu aveti destula energie pentru a face acasta actiune");
+    }
   //  console.log(c);//acici ar trebui sa se miste jucatorul (MUVE)
 },
   passtime : function(t){
-  //scade 0,5 foame pe ora
+  //scade 1 foame pe ora
   if(this.foame >= (t/3600/2)){
   this.foame-=t/3600/2;
   }else {
-  this.foame=0;
   if(this.helth >this.foame+t/3600/2){
-  console.log(this.helth>this.foame-(t/3600)/2);
-  this.helth+=(this.foame-t/3600/2);}
+  //console.log(this.helth>this.foame-(t/3600)/2);
+  this.helth+=(this.foame-t/3600/2);
+  this.foame=0;}
   else {
     this.helth=0;
     this.deth()};
 };
   this.time+=t;
+  //cu trecerea timpului viata iti creste
+  this.helth+=t/3600;
   },
   option : function(x,y){
     var k=this.i;
@@ -291,6 +301,7 @@ var center={
 }
 
 function clickt(x,y){
+
   var coordonate={
     i : undefined,
     j : undefined
@@ -315,7 +326,7 @@ function clickt(x,y){
   // if(cente.cx+r)
   // firstclick(center);
   // console.log(center);
-//aci se verifica coliziunea intre maus si hexagon
+//aci se verifica coliziunea intre maus si hexagon  TODO
   if((center.cx+r>x) && (center.cy+r>y))
   {
     coordonate.j=cadran.coloana-1;

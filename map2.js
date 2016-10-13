@@ -212,6 +212,7 @@ console.log("ecuatia dreptei");
 console.log(centru);
 console.log();
  //se verifica daca sa apasat pe camp
+ if(player.i%2===0){
   if(Math.sqrt(((centru.x-50-x)*(centru.x-50-x))+((centru.y-y)*(centru.y-y)))<=raza){
        buton=1;
        console.log("am apasat pe butonul 1");
@@ -238,7 +239,37 @@ console.log();
     }
   else{
     buton=0;
-  };
+  };}
+  else if(player.i%2===1){
+   if(Math.sqrt(((centru.x-50-x)*(centru.x-50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+        buton=1;
+        console.log("am apasat pe butonul 1");
+     }
+     else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y-y)*(centru.y-y)))<=raza){
+       buton=2;
+       console.log("am apasat pe butonul 2");
+     }
+     else if(Math.sqrt(((centru.x+25-x)*(centru.x+25-x))+((centru.y-y)*(centru.y-y)))<=raza){
+       buton=3;
+       console.log("am apasat pe butonul 3");
+     }
+     else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+       buton=4;
+       console.log("am apasat pe butonul 4");
+     }
+     else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+       buton=5;
+       console.log("am apasat pe butonul 5");
+     }
+     else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+       buton=6;
+       console.log("am apasat pe butonul 6");
+     }
+   else{
+     buton=0;
+   };
+ };
+   console.log(buton);
   return buton;
 };
 //afla care poligon a fost apasat//infunctiasta s-ar putea afla

@@ -36,7 +36,7 @@ var player={
   sclickt: 0,
   nextloop: 5158000,
   time: 2548654,
-  energi : 10,
+  energi : 1,
   max_energi:25,
   silvar:5,
   gold:0,
@@ -60,7 +60,8 @@ var player={
   bagpack_slot2:null,
   hors_slot:null,
   carege_slot:null,
-
+  warning:0,
+  warning_fader:0,
   setposition : function(x,k){
     this.i=x;
     this.j=k;
@@ -111,6 +112,8 @@ console.log(this.foame);
         // console.log("tu ai apasat pe acest i:"+c.i+" j:"+c.j);
       }
     }else{
+      this.warning=1;//primu warning
+      this.warning_fader=200;
       console.log("nu aveti destula energie pentru a face acasta actiune");
     }
   //  console.log(c);//acici ar trebui sa se miste jucatorul (MUVE)
@@ -299,64 +302,136 @@ var center={
   };
   return center;
 }
+//returneaza true/falce daca se afla in hexagonu cu centru c si punctul de coordonate x,y
+function inHexagon(c,x,y){
+   //avem un hexagon care are puncte care au la randul lor
+    var inside=true;
+    var h={
+      p1:{x:null,y:null},
+      p2:{x:null,y:null},
+      p3:{x:null,y:null},
+      p4:{x:null,y:null},
+      p5:{x:null,y:null},
+      p6:{x:null,y:null},
+    }
+    //declar punctele hexagonuluifata de centru
+    h.p1.x=c.x-50;h.p1.y=c.y;
+    h.p2.x=c.x-25;h.p2.y=c.y-50;
+    h.p3.x=c.x+25;h.p3.y=c.y-50;
+    h.p4.x=c.x+50;h.p4.y=c.y;
+    h.p5.x=c.x+25;h.p5.y=c.y+50;
+    h.p6.x=c.x-25;h.p6.y=c.y+50;
+    if (x < h.p1.x || x > h.p4.x || y < h.p2.y || y > h.p5.y) {
+    			inside = false;
+    		}else{
+    			if (x < h.p2.x) {
+    				var yUpLimit = (h.p6.y - h.p1.y) * (x - h.p1.x) / (h.p6.x - h.p1.x) + h.p1.y;
+    				var yDownLimit = (h.p2.y - h.p1.y) * (x - h.p1.x) / (h.p2.x - h.p1.x) + h.p1.y;
+    				if (y < yDownLimit || y > yUpLimit)
+    					inside = false;
+    			}
+    			if (x > h.p5.x) {
+    				var yUpLimit = (h.p5.y - h.p4.y) * (x - h.p4.x) / (h.p5.x - h.p4.x) + h.p4.y;
+    				var yDownLimit = (h.p4.y - h.p3.y) * (x - h.p3.x) / (h.p4.x - h.p3.x) + h.p3.y;
+    				if (y < yDownLimit || y > yUpLimit)
+    					inside = false;
+    			};
+    		};
+      //  console.log(inside);
+        return inside;
+};
 
 function clickt(x,y){
-
   var coordonate={
     i : undefined,
     j : undefined
   }
 
   var center={
-    cx: undefined ,
-    cy: undefined
+    x: undefined ,
+    y: undefined
   }
 
   var cadran={
   linie:undefined ,
   coloana: undefined
   }
+  //ar rebui sa seteze centru
+  function defcenter(z){
+    if(z===1)
+    {
+      center.x=cadran.coloana*100-50+(cadran.coloana-1)*50;
+      center.y=cadran.linie*100-50;
+    }else if(z===2){
+      center.x=cadran.coloana*150-175;
+      center.y=cadran.linie*100;
+    }else if(z===3){
+      center.x=cadran.coloana*150-175;
+      center.y=cadran.linie*100+100;
+    }else if(z===4){
+      center.x=(cadran.coloana+1)*150-175;
+      center.y=cadran.linie*100;
+    }else if(z===5){
+        center.x=(cadran.coloana+1)*150-175;
+        center.y=cadran.linie*100-100;
+    }
+  };
   // un fel de raza
   var r=47;
   cadran.linie=Math.floor(y/100)+1;
   cadran.coloana=Math.floor(x/150)+1;
   // console.log(cadran);
-  center.cx=cadran.coloana*100-50+(cadran.coloana-1)*50;
-  center.cy=cadran.linie*100-50;
-  // if(cente.cx+r)
-  // firstclick(center);
-  // console.log(center);
-//aci se verifica coliziunea intre maus si hexagon  TODO
-  if((center.cx+r>x) && (center.cy+r>y))
-  {
-    coordonate.j=cadran.coloana-1;
-    coordonate.i=cadran.linie-1+cadran.linie-1;
+  //verificam pt fiecare centru daca se afla in hexagonu respectiv
+  defcenter(1);
+    console.log(center);
+  if(inHexagon(center,x,y)){
+    coordonate.i=(cadran.linie-1)*2;
+    coordonate.j=(cadran.coloana-1);
   }
-  else
-  //lb
-  if((center.cx+r<x) && (center.cy+r>y) && center.cy>y){
-    coordonate.j=cadran.coloana-1;
-    coordonate.i=cadran.linie-1+cadran.linie-2;
-  }else
-  //lt
-  if((center.cx+r<x) && (center.cy-r<y)&& center.cy<y){
-    coordonate.j=cadran.coloana-1;
-    coordonate.i=cadran.linie-1+cadran.linie;
-  }else if((center.cx-r<x) && (center.cy-r<y)){
-    coordonate.j=cadran.coloana-1;
-    coordonate.i=cadran.linie-1+cadran.linie-1;
-  }else if((center.cx-r<x) && (center.cy+r>y)){
-    coordonate.j=cadran.coloana-1;
-    coordonate.i=cadran.linie-1+cadran.linie-1;
-  }else if((center.cx+r>x) && (center.cy-r<y)){
-    coordonate.j=cadran.coloana-1;
-    coordonate.i=cadran.linie-1+cadran.linie-1;
-  }
+  else{
+    defcenter(2);
+    console.log(center);
+    console.log(center);
+    if(inHexagon(center,x,y)){
+      coordonate.i=(cadran.linie-1)*2-1;
+      coordonate.j=(cadran.coloana-1)-1;//aici se refera de la spatiile din cadranu precedent
+    }
+    else{
+      defcenter(3);
+      console.log(center);
+      if(inHexagon(center,x,y)){
+     coordonate.i=(cadran.linie-1)*2+1;
+     coordonate.j=(cadran.coloana-1)-1;
+      }
+      else{
+        defcenter(4);
+        console.log(center);
+        console.log(inHexagon(center,x,y));
+        if(inHexagon(center,x,y)){
+          console.log((cadran.linie-1)*2+1);
+          console.log((cadran.coloana-1));
+          coordonate.i=(cadran.linie-1)*2+1;
+          coordonate.j=(cadran.coloana-1);
+        }
+        else{
+          defcenter(5);
+          console.log(center);
+          console.log(inHexagon(center,x,y));
+          if(inHexagon(center,x,y)){
+            console.log((cadran.linie-1)*2-1);
+            console.log((cadran.coloana-1));
+            coordonate.i=(cadran.linie-1)*2-1;
+            coordonate.j=(cadran.coloana-1);
+          };
+        };
+      };
+    };
+  };
   return coordonate;
 }
 
 
-player.setposition(2,3);
+player.setposition(3,0);
 
 
 (function(){
@@ -390,9 +465,11 @@ player.setposition(2,3);
             };
        };
        renderplayer();
+       renderwarning();
        if(player.self===1){
          renderoptions(player.i,player.j);
        };
+       renderwarning();
       };
 
       //aici o sa se randeze optiunile
@@ -432,7 +509,30 @@ player.setposition(2,3);
 
             c.drawImage(my_bolet,x,y);
        };
+      function renderwarning(){
+    if(player.warning!=0){
+        if (player.warning===1){
+          var f=1-1/player.warning_fader;
+          c.beginPath();
+          c.fill();
+          c.rect(50,220,300,15);
+          c.fillStyle = "red";
+          c.fill();
+          c.beginPath();
+          c.rect(51,221,298,13);
+          c.stroke();
+          c.beginPath();
+          c.fillStyle = "black";
+          c.font = "14px Verdana";
+          c.fillText("nu aveti destula energie", 70, 233);
+          if(player.warning_fader===1){
+            player.warning=0;
+          }else{player.warning_fader-=1;};
 
+        };
+
+    };
+      }
      (function animLoop(){
        requestAnimFrame(animLoop);
        render();

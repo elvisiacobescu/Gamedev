@@ -1,0 +1,4 @@
+{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:0,max_q:10,recipe:[5,6],value:5},
+             {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
+             {nem:"carot",foame:5,energie:1,href:"img/carot.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
+             {nem:"row_pig_mit",foame:4,energie:0,href:"img/row_pig_mit.png",type:"food",q:0,max_q:10,recipe:[1],value:5}

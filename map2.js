@@ -5,21 +5,32 @@ my_pic.src="img/green-terain.png";
 my_pic2.src="img/orange-terain.png";
 my_bolet.src="img/2-white25.png";
 var mat=[[1,1,1,1,1],[1,2,1,1,1],[1,14,2,1,1],[1,15,1,1,1],[1,2,1,1,1],[1,1,1,2,1],[2,1,2,1,1],[1,1,2,1,1],[1,1,1,1,1],[1,1,1,1,1]];
-var hexagoane=[{type:"grass",    options:{nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                 speed:1.2,ref:"img/green-terain.png"},
-               {type:"desert",   options:{nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,deforest:["twigs","wod"]},              speed:0.9,ref:"img/orange-terain.png"},
-               {type:"jungle",   options:{nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["twigs","wod","fruits","bunny","medium_treasure","lite_monster"],deforest:["twigs","wod"] }, speed:0.7,ref:"img/orange-terain.png"},
-               {type:"forest",   options:{nr:4,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"],deforest:["twigs","wod"] },          speed:1,ref:"img/orange-terain.png"},
-               {type:"swamp",    options:{nr:3,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                              speed:0.5,ref:"img/orange-terain.png"},
-               {type:"mountain", options:{nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},               speed:0.5,ref:"img/orange-terain.png"},
-               {type:"hill",     options:{nr:3,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:0.9,ref:"img/orange-terain.png"},
-               {type:"inn",      options:{nr:3,camp:["fire","inn","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
-               {type:"pasture",  options:{nr:4,camp:["fire","inn","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] ,work:["shepherd","build"]},       speed:2,ref:"img/orange-terain.png"},
-               {type:"stables",  options:{nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] ,work:["clean","build"]},               speed:2,ref:"img/orange-terain.png"},
-               {type:"home",     options:{nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , build:"cest"},                        speed:2,ref:"img/orange-terain.png"},
-               {type:"shop",     options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
-               {type:"warckshop",options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
-               {type:"farm",     options:{nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/farm-terain.png"},
-               {type:"palace",   options:{nr:3,camp:["no-fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:2,ref:"img/castel-terain.png"}
+var retete={
+
+}
+var stuf={food:[{name:"bred",foame: 9,energie:0,href:"img/bred.png",type:"food",q:0,max_q:10,recipe:[2,3],value:5},
+                {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
+                {name:"sendvici",foame:20,energie:5,href:"img/bred.png",type:"food",q:0,max_q:10,value:5}],
+          ingredients:[{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:0,max_q:10,recipe:[5,6],value:5},
+          {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
+          {nem:"carot",foame:5,energie:1,href:"img/carot.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
+          {nem:"row_pig_mit",foame:4,energie:0,href:"img/row_pig_mit.png",type:"food",q:0,max_q:10,recipe:[1],value:5}]
+}
+var hexagoane=[{type:"grass",    options:{shop:false,cooking:true,nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                 speed:1.2,ref:"img/green-terain.png"},
+               {type:"desert",   options:{shop:false,cooking:true,nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,deforest:["twigs","wod"]},              speed:0.9,ref:"img/orange-terain.png"},
+               {type:"jungle",  options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["twigs","wod","fruits","bunny","medium_treasure","lite_monster"],deforest:["twigs","wod"] }, speed:0.7,ref:"img/orange-terain.png"},
+               {type:"forest",  options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"],deforest:["twigs","wod"] },          speed:1,ref:"img/orange-terain.png"},
+               {type:"swamp",   options:{shop:false,cooking:true,nr:3,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                              speed:0.5,ref:"img/orange-terain.png"},
+               {type:"mountain",options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},               speed:0.5,ref:"img/orange-terain.png"},
+               {type:"hill",     options:{shop:false,cooking:true,nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:0.9,ref:"img/orange-terain.png"},
+               {type:"inn",      options:{shop:false,cooking:true,nr:3,camp:["fire","inn","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
+               {type:"pasture",  options:{shop:false,cooking:true,nr:4,camp:["fire","inn","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["shepherd","build"]},       speed:2,ref:"img/orange-terain.png"},
+               {type:"stables",  options:{shop:false,cooking:true,nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["clean","build"] },               speed:2,ref:"img/orange-terain.png"},
+               {type:"home",     options:{shop:false,cooking:true,nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , build:"cest"},                        speed:2,ref:"img/orange-terain.png"},
+               {type:"shop",     options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"], craft:true },                                  speed:2,ref:"img/orange-terain.png"},
+               {type:"warckshop",options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                      speed:2,ref:"img/orange-terain.png"},
+               {type:"farm",     options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["clean","build"] },              speed:2,ref:"img/farm-terain.png"},
+               {type:"palace",  options:{shop:true,cooking:true,nr:3,camp:["no-fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                   speed:2,ref:"img/castel-terain.png"}
              ];
 bag1={
   ref:"img/2-white25.png",
@@ -36,7 +47,7 @@ var player={
   sclickt: 0,
   nextloop: 5158000,
   time: 2548654,
-  energi : 1,
+  energi : 25,
   max_energi:25,
   silvar:5,
   gold:0,
@@ -44,7 +55,7 @@ var player={
   max_foame:30,
   self:0,
   twigs:1,
-  inventory:[],
+  inventory:[{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},{name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]}],
   status:{},
   max_inventory:15,
   torso_slot:null,
@@ -133,14 +144,16 @@ console.log(this.foame);
 };
   this.time+=t;
   //cu trecerea timpului viata iti creste
+  if(this.helth+t/3600<=this.max_helth){
   this.helth+=t/3600;
+}else{this.helth=this.max_helth;}
   },
   option : function(x,y){
     var k=this.i;
     var p=this.j;
     var centru=cenAftCoordonates(k,p);
     var opt=wherclic(x,y,centru);
-    console.log();
+
     if (opt===0){
       console.log("am apasat pe langa optiune");
       console.log(centru);
@@ -201,106 +214,178 @@ console.log(this.foame);
          this.energi=this.max_energi;
        };
 
-      console.log(this);
+    //  console.log(this);
       this.self=0;
+    }
+    //aici face hranirea
+    else if(opt===2 && hexagoane[mat[this.i][this.j]-1].options.camp != null){
+    // console.log("self");
     }
     else{
       console.log("am apasat pe langa optiune");
-      this.self=0;
+     this.self=0;
     };
   },
   deth:function(){
     console.log("ups ai murit.....ps asta inseamna ca nu ai facutfunctia pt moarte daca inca trimit mesaju ista");
-  }
+  },
+  eat: function(x,y){
+    // insne pozitia meniului cu mancare
+    var sx=70;
+    var sy=50;
+    var l=310;
+    var h=430;
+    var  j ;
+    var  i ;
+    var m;
+    var control=0;
+    if(x < sx || x > (sx+l) || y < sy || y > (sy+h) ){
+      this.self=0;
+    }
+    else {
+        j=Math.floor((x-sx)/60);
+        i=Math.floor((y-sy)/60);
+        //console.log(x>j*60+sx&&y>i*60+sy);
+        if(x>j*60+sx&&y>i*60+sy){
+         m =  i*7+j;
+        }
+    }
+    for(i=0;i<this.inventory.length && control!=1;i++){
 
+      if(this.inventory[i].type==="food"){
+        console.log(m);
+        if(m===0){
+          control=1;
+          //aici papa
+          console.log(this.foame<this.max_foame);
+          if(this.foame<this.max_foame){
+            //papa
+            this.foame+=this.inventory[i].foame;
+
+            if(this.energi+this.inventory[i].energie>this.max_energi){
+              this.energi=this.max_energi;
+            }
+            else {
+              this.energi+=this.inventory[i].energie;
+            }
+            this.passtime(600);
+          }
+          else{
+            //ne ameninta ca e burtica plina
+          this.warning=2;
+          this.warning_fader=300;
+          };
+          if(this.inventory[i].q===1){
+          //aici coatem din vector
+          if(this.warning===0){
+          this.inventory.splice(i,1);};
+          }
+          else {
+            if(this.warning===0){
+            this.inventory[i].q-=1;}
+          }
+          if (this.warning!=0){
+            this.self=0;
+          };
+        }
+        else{m-=1;}
+      }
+    }
+  }
 };
+function dice(){
+console.log("mananc");
+};
+//TODO
 function random(start,stop){
   return 1;
 }
 // vad pe care cerculet am apasat
 function wherclic(x,y,centru)
-{var buton;
-  var raza=25;
-console.log("ecuatia dreptei");
-console.log(centru);
-console.log();
- //se verifica daca sa apasat pe camp
- if(player.i%2===0){
-  if(Math.sqrt(((centru.x-50-x)*(centru.x-50-x))+((centru.y-y)*(centru.y-y)))<=raza){
-       buton=1;
-       console.log("am apasat pe butonul 1");
-    }
-    else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y-50-y)*(centru.y-50-y)))<=raza){
-      buton=2;
-      console.log("am apasat pe butonul 2");
-    }
-    else if(Math.sqrt(((centru.x+25-x)*(centru.x+25-x))+((centru.y-50-y)*(centru.y-50-y)))<=raza){
-      buton=3;
-      console.log("am apasat pe butonul 3");
-    }
-    else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
-      buton=4;
-      console.log("am apasat pe butonul 4");
-    }
-    else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
-      buton=5;
-      console.log("am apasat pe butonul 5");
-    }
-    else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
-      buton=6;
-      console.log("am apasat pe butonul 6");
-    }
-  else{
-    buton=0;
-  };}
-  else if(player.i%2===1){
-   if(Math.sqrt(((centru.x-50-x)*(centru.x-50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
-        buton=1;
-        console.log("am apasat pe butonul 1");
-     }
-     else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y-y)*(centru.y-y)))<=raza){
-       buton=2;
-       console.log("am apasat pe butonul 2");
-     }
-     else if(Math.sqrt(((centru.x+25-x)*(centru.x+25-x))+((centru.y-y)*(centru.y-y)))<=raza){
-       buton=3;
-       console.log("am apasat pe butonul 3");
-     }
-     else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
-       buton=4;
-       console.log("am apasat pe butonul 4");
-     }
-     else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
-       buton=5;
-       console.log("am apasat pe butonul 5");
-     }
-     else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
-       buton=6;
-       console.log("am apasat pe butonul 6");
-     }
-   else{
-     buton=0;
-   };
- };
-   console.log(buton);
-  return buton;
+    {var buton;
+      var raza=25;
+    console.log("ecuatia dreptei");
+    console.log(centru);
+    console.log();
+     //se verifica daca sa apasat pe camp
+     if(player.i%2===0){
+      if(Math.sqrt(((centru.x-50-x)*(centru.x-50-x))+((centru.y-y)*(centru.y-y)))<=raza){
+           buton=1;
+           console.log("am apasat pe butonul 1");
+        }
+        else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y-50-y)*(centru.y-50-y)))<=raza){
+          buton=2;
+          player.self=2;
+          console.log("am apasat pe butonul 2");
+        }
+        else if(Math.sqrt(((centru.x+25-x)*(centru.x+25-x))+((centru.y-50-y)*(centru.y-50-y)))<=raza){
+          buton=3;
+          console.log("am apasat pe butonul 3");
+        }
+        else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
+          buton=4;
+          console.log("am apasat pe butonul 4");
+        }
+        else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
+          buton=5;
+          console.log("am apasat pe butonul 5");
+        }
+        else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
+          buton=6;
+          console.log("am apasat pe butonul 6");
+        }
+      else{
+        buton=0;
+      };}
+      else if(player.i%2===1){
+       if(Math.sqrt(((centru.x-50-x)*(centru.x-50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+            buton=1;
+            console.log("am apasat pe butonul 1");
+         }
+         else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y-y)*(centru.y-y)))<=raza){
+           buton=2;
+           player.self=2;
+           console.log("am apasat pe butonul 2");
+         }
+         else if(Math.sqrt(((centru.x+25-x)*(centru.x+25-x))+((centru.y-y)*(centru.y-y)))<=raza){
+           buton=3;
+           console.log("am apasat pe butonul 3");
+         }
+         else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+           buton=4;
+           console.log("am apasat pe butonul 4");
+         }
+         else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+           buton=5;
+           console.log("am apasat pe butonul 5");
+         }
+         else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+           buton=6;
+           console.log("am apasat pe butonul 6");
+         }
+       else{
+         buton=0;
+       };
+     };
+       console.log(buton);
+      return buton;
 };
 //afla care poligon a fost apasat//infunctiasta s-ar putea afla
 // si cere e centruu si le trimita prin obiect
 function cenAftCoordonates(i,j){
-var center={
-  x:undefined,
-  y:undefined,
-}
-  if (i%2==0){
-    center.y=i*50+50;
-    center.x=150*j+50;
-  }
-  else if(i%2==1){
-    center.y=i*50;
-    center.x=150*j+125;
-  };
-  return center;
+    var center={
+      x:undefined,
+      y:undefined,
+    }
+      if (i%2==0){
+        center.y=i*50+50;
+        center.x=150*j+50;
+      }
+      else if(i%2==1){
+        center.y=i*50;
+        center.x=150*j+125;
+      };
+      return center;
 }
 //returneaza true/falce daca se afla in hexagonu cu centru c si punctul de coordonate x,y
 function inHexagon(c,x,y){
@@ -469,12 +554,60 @@ player.setposition(3,0);
        if(player.self===1){
          renderoptions(player.i,player.j);
        };
+       if(player.self===2){
+         renderfoodpanel();
+       };
        renderwarning();
       };
 
+    function renderfoodpanel(){
+        c.beginPath();
+        c.rect(70,50,310,430);
+        c.fillStyle="rgba(50,50,50,0.95)";
+        c.fill();
+      var n=5,i,j,m=7,x,y,k=0;
+      for(i=0;i<m;i++){
+        for(j=0;j<n;j++){
+        x=70+j*50+(j+1)*10;
+        y=50*i+10*(i+1)+50;
+        c.beginPath();
+        c.rect(x,y,50,50);
+        c.fillStyle="rgba(220,213,213,1)";
+        c.stroke();
+        c.fill();}
+
+      };
+
+      var food=[];
+      for(i=0;i<player.inventory.length;i++){
+        if(player.inventory[i].type==="food"){
+          food.push(player.inventory[i]);
+
+    };
+    };
+    // console.log(food);
+    for(i=0;i<m && k<food.length;i++){
+      for(j=0;j<n && k<food.length;j++){
+        x=70+j*50+(j+1)*10;
+        y=50*i+10*(i+1)+50;
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=food[k].href;
+        c.drawImage(my_pic3,x-0.75,y+0.75);
+        c.beginPath();
+        c.fillStyle = "black";
+        c.font = "20px Verdana";
+        c.fillText(food[k].q, x+35, y+45);
+        k+=1;
+      }
+      };
+    };
+
+
+
       //aici o sa se randeze optiunile
       function renderoptions(i,j){
-        var hexaop=hexagoane[mat[i][j]-1].options
+        var hexaop=hexagoane[mat[i][j]-1].options;
         //console.log(hexagoane[mat[i][j]-1].options);
         if (hexaop.camp!=null){
            var x;
@@ -491,11 +624,59 @@ player.setposition(3,0);
            x=centers.x-75;
            y=centers.y+25;
          }
-
-
            c.drawImage(my_pic3,x,y);
-          //console.log(hexaop.camp);
         }
+        c.beginPath
+        if(hexaop.eat!=null && hexaop.eat===true )
+        {var x;
+        var y;
+        var my_pic3=new Image();
+         my_pic3.src = "img/eat.png";
+         var centers=cenAftCoordonates(i,j);
+         if(player.i%2===0){
+       x=centers.x-50;
+       y=centers.y-75;
+     }else if(player.i%2===1){
+       x=centers.x-50;
+       y=centers.y-25;
+     };
+      c.drawImage(my_pic3,x,y);
+        };
+        //inventory
+        c.beginPath();
+        if(player.inventory!=null)
+        {var x;
+        var y;
+        var my_pic3=new Image();
+         my_pic3.src = "img/inventory.png";
+         var centers=cenAftCoordonates(i,j);
+         if(player.i%2===0){
+       x=centers.x-25;
+       y=centers.y-25;
+     }else if(player.i%2===1){
+       x=centers.x-25;
+       y=centers.y+25;
+     };
+      c.drawImage(my_pic3,x,y);
+        };
+        //warck
+        c.beginPath();
+        //console.log(hexaop.worck!=null);
+        if(hexaop.worck!=null)
+        {var x;
+        var y;
+        var my_pic3=new Image();
+         my_pic3.src = "img/warck.png";
+         var centers=cenAftCoordonates(i,j);
+         if(player.i%2===0){
+       x=centers.x-50;
+       y=centers.y+25;
+     }else if(player.i%2===1){
+       x=centers.x-50;
+       y=centers.y+75;
+     };
+      c.drawImage(my_pic3,x,y);
+        };
       };
 
       function renderplayer(){
@@ -528,7 +709,24 @@ player.setposition(3,0);
           if(player.warning_fader===1){
             player.warning=0;
           }else{player.warning_fader-=1;};
-
+        };
+        if (player.warning===2){
+          var f=1-1/player.warning_fader;
+          c.beginPath();
+          c.fill();
+          c.rect(50,220,300,15);
+          c.fillStyle = "red";
+          c.fill();
+          c.beginPath();
+          c.rect(51,221,298,13);
+          c.stroke();
+          c.beginPath();
+          c.fillStyle = "black";
+          c.font = "14px Verdana";
+          c.fillText("you are full", 70, 233);
+          if(player.warning_fader===1){
+            player.warning=0;
+          }else{player.warning_fader-=1;};
         };
 
     };
@@ -551,10 +749,6 @@ player.setposition(3,0);
              var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
             pozx=mousePos.x;
             pozy=mousePos.y;
-
-            //  console.log(mousePos);
-            //care este i si j? asta ne intereseaza aici pe ce casuta se afla el acuma
-            //  console.log(canvas, message);
            }, false);
 
     canvas.addEventListener('click', function(event) {
@@ -569,6 +763,9 @@ player.setposition(3,0);
               // aici ar trebui sa faca alta functie dar deocamdata testam .... trebuie sa faca(vezi optiune selectata selectata)
               player.self===0;
                 player.option(x,y);
+          }else if(player.self===2)
+          {
+            player.eat(x,y);
           }
     }, false);
 })();

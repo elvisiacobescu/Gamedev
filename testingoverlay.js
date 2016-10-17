@@ -23,14 +23,16 @@
       c_2.beginPath();
       c_2.fillStyle = "black";
       c_2.font = "14px Verdana";
-      c_2.fillText(Math.floor(player.helth)+"/"+player.max_helth+" hp", 70, 233);
+      c_2.fillText(Math.floor(player.helth*10)/10+"/"+player.max_helth+" hp", 70, 233);
       c_2.beginPath();
       var my_pic=new Image();
       my_pic.src="img/heart.png";
       c_2.drawImage(my_pic,20,217)
       //foame
       c_2.beginPath();
+      if(player.foame<=player.max_foame){
       c_2.rect(50,250,100/(player.max_foame/player.foame),15);
+      }else{c_2.rect(50,250,100,15);}
       c_2.fillStyle = "orange";
       c_2.fill();
       c_2.beginPath();
@@ -39,7 +41,7 @@
       c_2.beginPath();
       c_2.fillStyle = "black";
       c_2.font = "14px Verdana";
-      c_2.fillText(Math.floor(player.foame)+"/"+player.max_foame+" food", 70, 263);
+      c_2.fillText(Math.floor(player.foame*10)/10+"/"+player.max_foame+" ", 70, 263);
       c_2.beginPath();
       var my_pic=new Image();
       my_pic.src="img/food.png";
@@ -54,6 +56,10 @@
       var minutes= Math.floor((timeleft-(86400*days)-(3600*hours))/60);
       var seconds= timeleft-(86400*days)-(3600*hours)-(60*minutes);
       c_2.fillText(seconds+"s "+minutes+"m "+hours +"h "+ days +"d left", 35, 150);
+      c_2.beginPath();
+      var my_pic=new Image();
+      my_pic.src="img/ticktac.png";
+      c_2.drawImage(my_pic,50,35);
      //energie
      c_2.beginPath();
      c_2.rect(50,280,100/(player.max_energi/player.energi),15);
@@ -65,7 +71,7 @@
      c_2.beginPath();
      c_2.fillStyle = "black";
      c_2.font = "14px Verdana";
-     c_2.fillText(Math.floor(player.energi)+"/"+player.max_energi+" En", 70, 293);
+     c_2.fillText(Math.floor(player.energi*10)/10+"/"+player.max_energi+" En", 70, 293);
      c_2.beginPath();
      var my_pic=new Image();
      my_pic.src="img/energi2.png";

@@ -61,7 +61,7 @@ var player={
   torso_slot:null,
   hands_slot:null,
   had_slot:null,
-  pnats_slot:null,
+  pents_slot:null,
   shues_slot:null,
   ring_slot1:null,
   ring_slot2:null,
@@ -70,7 +70,7 @@ var player={
   bagpack_slot1:null,
   bagpack_slot2:null,
   hors_slot:null,
-  carege_slot:null,
+  carage_slot:null,
   warning:0,
   warning_fader:0,
   setposition : function(x,k){

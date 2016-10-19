@@ -1,0 +1,29 @@
+-2.5d hexagoane (sa iei putin in calcul si lumina si joacate su umbrele )
+    -grass (o campie poate avea mici denivelari ideia e sa
+           nu fie complet verde cum is acuma )
+    -hill  (seamana cat de cat cu campia numa ca denivelarile
+           sunt mult mai mare)
+    -munte (e o zona pietroasa care are si un munte )
+    -jungle
+    -forest
+    -swamp
+    -desert (dume de nisip nuante diferite de culori)
+    //pentru oras de aici in jos
+    -palat;
+    -ferma;
+    -stables;
+    -pasture;
+    -home (aici asi vrea sa desenezi dooar un cufar inchis foarte interesant)
+    -inn;
+    -shop;
+    -warckshop/blacksmith();
+  P.S. imi dau seama si sunt sigur ca ai mai avea idei si de alte tipuri de
+   spatii din astea spune si vedem daca si cum asi putea sale implementez
+
+-2.5d jucatorul(esti libera sa il faci cum vrei )
+(daca nu ai nici o ideie exista in img img/plaer-item-background.png de
+la care sa pornesti )
+  P.S. ps imaginile terminate se pun direct in in folderul img ,
+  daca mai ai incercari esuate sau facute pe jumate sau alte treburi de
+  genu punele in img/inspiratie
+  ca sa le avem daca o sa avem nevoie vreo data de ele

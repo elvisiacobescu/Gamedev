@@ -23,7 +23,7 @@
       c_2.beginPath();
       c_2.fillStyle = "black";
       c_2.font = "14px Verdana";
-      c_2.fillText(Math.floor(player.helth*10)/10+"/"+player.max_helth+" hp", 70, 233);
+      c_2.fillText(Math.floor(player.helth*10)/10+"/"+player.max_helth+" ", 70, 233);
       c_2.beginPath();
       var my_pic=new Image();
       my_pic.src="img/heart.png";
@@ -71,7 +71,7 @@
      c_2.beginPath();
      c_2.fillStyle = "black";
      c_2.font = "14px Verdana";
-     c_2.fillText(Math.floor(player.energi*10)/10+"/"+player.max_energi+" En", 70, 293);
+     c_2.fillText(Math.floor(player.energi*10)/10+"/"+player.max_energi+" ", 70, 293);
      c_2.beginPath();
      var my_pic=new Image();
      my_pic.src="img/energi2.png";

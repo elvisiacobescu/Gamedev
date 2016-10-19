@@ -94,7 +94,7 @@ var player={
   twigs:1,
   inventory:[{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},{name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]}],
   status:{},
-  max_inventory:2,
+  max_inventory:15,
   torso_slot:null,
   hands_slot:null,
   had_slot:null,
@@ -261,78 +261,82 @@ var player={
     //aici face hranirea
     else if(opt===2 ){
     // console.log("self");
-  }else if(opt===3 ){
-  // console.log("caut");
-  var noroc=dice();
-  renders.d1=noroc;
-  var i ;
-  var string=hexagoane[mat[this.i][this.j]].options.cauta[noroc-1];
+    }else if(opt===3 ){
+        //aici se face co cautare face self=0 important
+    // console.log("caut");
+    var noroc=dice();
+    renders.d1=noroc;
+    var i ;
+    var string=hexagoane[mat[this.i][this.j]].options.cauta[noroc-1];
 
-  console.log(string);
-  switch (string) {
-    case "loot1":
-        var loot =loot1();
-          this.self=3;//(self 3 e pentru lootingscreen)
+    console.log(string);
+    switch (string) {
+      case "loot1":
+          var loot =loot1();
+            this.self=3;//(self 3 e pentru lootingscreen)
+            var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
+            this.loot.push(clone(obj));
+        break;
+      case "loot2":
+      var loot =loot2();
+        this.self=3;
           var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
-          this.loot.push(clone(obj));
-      break;
-    case "loot2":
-    var loot =loot2();
-      this.self=3;
-        var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
-      this.loot.push(clone(obj));
-       break;
-    case "loot3":
-    var loot =loot3();
-      this.self=3;
-        var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
-      this.loot.push(clone(obj ));
-      break;
-    case "loot4":
-    var loot =loot4();
-      this.self=3;
-      this.loot.push(clone(obj));
-      break;
-    case "loot5":
-    var loot =loot5();
-      this.self=3;
-      this.loot.push(clone(obj));
-       break;
-    case "loot6":
-    var loot =loot6();
-      this.self=3;
-      this.loot.push(clone(obj));
-       break;
-    case "s_monster":
+        this.loot.push(clone(obj));
+         break;
+      case "loot3":
+      var loot =loot3();
+        this.self=3;
+          var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
+        this.loot.push(clone(obj ));
         break;
-    case "m_monster":
+      case "loot4":
+      var loot =loot4();
+        this.self=3;
+        this.loot.push(clone(obj));
         break;
-    case "l_monster":
-        break;
-    case "B_monster":
-        break;
-    case "B_monster":
-        break;
-    case "guard":
-        break;
-    case "hunt_lite":
-        break;
-    case "hunt_have":
-        break;
-    case "wood":
-        break;
-    case "twigs":
-        var num=random(1,3);
-        this.twigs+=num;
-        this.self=4;
-        break;
+      case "loot5":
+      var loot =loot5();
+        this.self=3;
+        this.loot.push(clone(obj));
+         break;
+      case "loot6":
+      var loot =loot6();
+        this.self=3;
+        this.loot.push(clone(obj));
+         break;
+      case "s_monster":
+          break;
+      case "m_monster":
+          break;
+      case "l_monster":
+          break;
+      case "B_monster":
+          break;
+      case "B_monster":
+          break;
+      case "guard":
+          break;
+      case "hunt_lite":
+          break;
+      case "hunt_have":
+          break;
+      case "wood":
+          break;
+      case "twigs":
+          var num=random(1,3);
+          this.twigs+=num;
+          this.self=4;
+          break;
 
-  }
-  }
-    else{
-      console.log("am apasat pe langa optiune");
-     this.self=0;
-    };
+    }
+  }else if(opt===7){
+    //aici se face chestii in meniu inclusiv face self=0
+
+
+  }else{
+        console.log("am apasat pe langa optiune");
+       this.self=0;
+      };
   },
   deth:function(){
     console.log("ups ai murit.....ps asta inseamna ca nu ai facutfunctia pt moarte daca inca trimit mesaju ista");
@@ -428,10 +432,9 @@ function dice(){
     // random 1-6
     var num;
     num=Math.floor((Math.random() * 6) + 1);
-//    console.log(num);
+    //    console.log(num);
     return num;
 };
-//TODO
 function random(min,max){
   var num;
   num=Math.floor((Math.random() * max)+min );
@@ -471,6 +474,11 @@ function wherclic(x,y,centru)
           buton=6;
           console.log("am apasat pe butonul 6");
         }
+        else if(Math.sqrt(((centru.x-x)*(centru.x-x))+((centru.y-y)*(centru.y-y)))<=raza){
+          buton=7;
+          player.self=5;
+          console.log("am apasat pe inventori");
+        }
       else{
         buton=0;
       };}
@@ -499,7 +507,11 @@ function wherclic(x,y,centru)
          else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
            buton=6;
            console.log("am apasat pe butonul 6");
-         }
+         }  else if(Math.sqrt(((centru.x-x)*(centru.x-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+             buton=7;
+               player.self=5;
+             console.log("am apasat pe inventori");
+           }
        else{
          buton=0;
        };
@@ -673,9 +685,62 @@ function clickt(x,y){
        };
        if(player.self===3){
          renderloot();
+       }if(player.self===5){
+         renderinventory();
        }
        renderwarning();
       };
+  function renderinventory(){
+    //randeaza suportu pentru elementele din meniu
+    c.beginPath();
+    c.rect(170,150,610,610);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+
+    var n=10,i,j,m=10,x,y,k=0;
+    var items=player.max_inventory;
+    for(i=0;i<m;i++){
+      for(j=0;j<n;j++){
+        x=170+j*50+(j+1)*10;
+        y=50*i+10*(i+1)+150;
+          if(items>0){
+          c.beginPath();
+          c.rect(x,y,50,50);
+          c.fillStyle="rgba(220,213,213,1)";
+          c.stroke();
+          c.fill();
+          items-=1;
+        }else{
+          c.beginPath();
+          c.rect(x,y,50,50);
+          c.fillStyle="rgba(220,23,13,1)";
+          c.stroke();
+          c.fill();
+
+        }
+      }
+      };
+    // randeaza suportu pentru echipamenet echipat
+    // render  spaces
+    c.beginPath();
+    c.rect(780,150,300,610);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    var my_pic3=new Image();
+    my_pic3.src="img/plaer-item-background-white.png";
+    c.drawImage(my_pic3,780,155);
+    //randeaza suportu pentru descriere
+    c.beginPath();
+    c.rect(780,460,300,300);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+    // de aici in jos desenam iteme
+
+  }
   function rendermap(){
       for(i=0;i<mat.length;i+=1){x=0;y=0
         for(j=0;j<mat[i].length;j+=1){
@@ -713,14 +778,12 @@ function clickt(x,y){
               c.fillStyle="rgba(220,213,213,1)";
               c.stroke();
               c.fill();}
-
             };
 
             var food=[];
             for(i=0;i<player.inventory.length;i++){
               if(player.inventory[i].type==="food"){
                 food.push(player.inventory[i]);
-
               };
             };
             // console.log(food);
@@ -858,7 +921,7 @@ function clickt(x,y){
     c.font = "20px Verdana";
     c.fillText("TRESH ALL", 670, 485);
 
-  }
+    }
 
     for(i=0;i<n;i++){
         y=380+10;
@@ -990,7 +1053,7 @@ function clickt(x,y){
           else if(player.self===1){
               // aici ar trebui sa faca alta functie dar deocamdata testam .... trebuie sa faca(vezi optiune selectata selectata)
               player.self===0;
-                player.option(x,y);
+              player.option(x,y);
           }else if(player.self===2)
           {
             player.eat(x,y);

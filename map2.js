@@ -97,13 +97,17 @@ var player={
   max_inventory:15,
   torso_slot:null,
   hands_slot:null,
+  hand_l_slot:null,
+  hand_r_slot:null,
   had_slot:null,
   pents_slot:null,
   shues_slot:null,
   ring_slot1:null,
   ring_slot2:null,
+  earring_slot1:null,
+  earring_slot2:null,
   necckles:null,
-  bag_slot:{ref:"img/2-white25.png",rest: 1},
+  bag_slot:null,
   bagpack_slot1:null,
   bagpack_slot2:null,
   hors_slot:null,
@@ -723,6 +727,7 @@ function clickt(x,y){
       };
     // randeaza suportu pentru echipamenet echipat
     // render  spaces
+  {
     c.beginPath();
     c.rect(780,150,300,610);
     c.fillStyle="rgba(50,50,50,0.95)";
@@ -732,6 +737,204 @@ function clickt(x,y){
     var my_pic3=new Image();
     my_pic3.src="img/plaer-item-background-white.png";
     c.drawImage(my_pic3,780,155);
+    //al doilea rand
+    c.beginPath();
+    c.rect(905,160,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(905,220,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(905,280,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(905,340,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(905,400,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    //primu rand
+    c.beginPath();
+    c.rect(795,280,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(795,220,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(795,340,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(795,160,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(795,400,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    //randu 3
+    c.beginPath();
+    c.rect(1020,160,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(1020,220,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(1020,280,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(1020,340,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(1020,400,50,50);
+    c.fillStyle="rgba(220,213,213,1)";
+    c.stroke();
+    c.fill();
+    if (player.had_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/helmet5.png";
+      c.drawImage(my_pic3,905,160);
+    }else{
+      //pune imaginea
+    }
+    if (player.hands_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/glov.png";
+      c.drawImage(my_pic3,795,220);
+    }else{
+      //pune imaginea
+    }
+    if (player.ring_slot1==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/ring.png";
+      c.drawImage(my_pic3,795,340);
+    }else{
+      //pune imaginea
+    }
+    if (player.ring_slot2==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/ring.png";
+      c.drawImage(my_pic3,1020,340);
+    }else{
+      //pune imaginea
+    }
+    if (player.earring_slot1==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/ler.png";
+      c.drawImage(my_pic3,795,160);
+    }else{
+      //pune imaginea
+    }
+    if (player.earring_slot2==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/rer.png";
+      c.drawImage(my_pic3,1020,160);
+    }else{
+      //pune imaginea
+    }
+    if (player.necckles==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/neckles.png";
+      c.drawImage(my_pic3,1020,220);
+    }else{
+      //pune imaginea
+    }
+    if (player.torso_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/body.png";
+      c.drawImage(my_pic3,905,220);
+    }else{
+      //pune imaginea
+    }
+    if (player.hand_l_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/hand1.png";
+      c.drawImage(my_pic3,1020,280);
+    }else{
+      //pune imaginea
+    }
+    if (player.hand_l_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/hand1.png";
+      c.drawImage(my_pic3,795,280);
+    }else{
+      //pune imaginea
+    }
+    if (player.pents_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/pants.png";
+      c.drawImage(my_pic3,905,280);
+    }else{//pune imaginea
+    }
+    if (player.pents_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/fit.png";
+      c.drawImage(my_pic3,905,340);
+    }else{
+    //pune imaginea
+  }
+    if (player.hors_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/hors.png";
+      c.drawImage(my_pic3,795,400);
+    }else{
+    //pune imaginea
+  }
+    if (player.hors_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/car.png";
+      c.drawImage(my_pic3,905,400);
+    }else{
+    //pune imaginea
+    }
+    if (player.bag_slot==null){
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/sleepbag.png";
+      c.drawImage(my_pic3,1020,400);
+    }else{
+    //pune imaginea
+    }
+  };
     //randeaza suportu pentru descriere
     c.beginPath();
     c.rect(780,460,300,300);
@@ -739,8 +942,7 @@ function clickt(x,y){
     c.stroke();
     c.fill();
     // de aici in jos desenam iteme
-
-  }
+}
   function rendermap(){
       for(i=0;i<mat.length;i+=1){x=0;y=0
         for(j=0;j<mat[i].length;j+=1){

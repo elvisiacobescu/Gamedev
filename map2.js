@@ -39,10 +39,11 @@ var stuf={food:[{name:"bred",foame: 9,energie:0,href:"img/bred.png",type:"food",
                 {name:"sendvici",foame:20,energie:5,href:"img/bred.png",type:"food",q:0,max_q:10,value:5}],
           ingredients:[{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:0,max_q:10,recipe:[5,6],value:5},
           {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
-          {nem:"carot",foame:5,energie:1,href:"img/carot.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
-          {nem:"row_pig_mit",foame:4,energie:0,href:"img/row_pig_mit.png",type:"food",q:0,max_q:10,recipe:[1],value:5}],
-          wepan:[],
-          armur:[],
+          {name:"carot",foame:5,energie:1,href:"img/carot.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
+          {name:"row_pig_mit",foame:4,energie:0,href:"img/row_pig_mit.png",type:"food",q:0,max_q:10,recipe:[1],value:5}],
+          wepan:[{name:"Wod sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},{name:"Iron sord",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:6}],
+          armur:[{name:"cloth-armur",def:1,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:2},{name:"Wod sord",def:3,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:10}],
+          julary:[{name:"Old ring",hp:1,href:"img/julary/ring1.png",type:"ring",value:5},{name:"Old iron ring",dmg:1,hp:1,href:"img/julary/ring2.png",type:"ring",value:10}],
           items:[{ref:"img/2-white25.png",rest: 1}]
 }
 //trebuie refacute toate imagineile si corectate in options chestii TODO
@@ -72,9 +73,12 @@ var renders={
 }
 
 var player={
+  selected:[-1,-1],
   n_monster:null,
   helth :50,
-  max_helth : 100,
+  dmg:0,
+  def:0,
+  max_helth : 101,
   name : "me",
   i : 0,
   j : 0,
@@ -92,17 +96,17 @@ var player={
   max_foame:30,
   self:0,
   twigs:1,
-  inventory:[{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},{name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]}],
+  inventory:[{name:"Old ring",hp:1,en:1,href:"img/julary/ring1.png",type:"ring",value:5},{name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:5},{name:"wod_sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},{name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]}],
   status:{},
   max_inventory:15,
   torso_slot:null,
   hands_slot:null,
-  hand_l_slot:null,
+  hand_l_slot:{name:"wod_sord",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:6},
   hand_r_slot:null,
   had_slot:null,
   pents_slot:null,
   shues_slot:null,
-  ring_slot1:null,
+  ring_slot1:{name:"Old iron ring",dmg:1,hp:1,href:"img/julary/ring2.png",type:"ring",value:10},
   ring_slot2:null,
   earring_slot1:null,
   earring_slot2:null,
@@ -333,14 +337,14 @@ var player={
           break;
 
     }
-  }else if(opt===7){
-    //aici se face chestii in meniu inclusiv face self=0
+    }else if(opt===7){
+      //aici se face chestii in meniu inclusiv face self=0
 
 
-  }else{
-        console.log("am apasat pe langa optiune");
-       this.self=0;
-      };
+    }else{
+          console.log("am apasat pe langa optiune");
+         this.self=0;
+        };
   },
   deth:function(){
     console.log("ups ai murit.....ps asta inseamna ca nu ai facutfunctia pt moarte daca inca trimit mesaju ista");
@@ -408,10 +412,344 @@ var player={
       }
     }
   },
-  cerceteaza:function(){
+  cerceteaza:function(){},
+  invaction:function(x,y){
+    if(x<140 || x>1080 || y<150 || y>780){
+    this.self=0;
+    }else if( x<780){
+    // console.log(Math.floor((y-150)/60));
+    var hj=Math.floor((x-170)/60);
+    var hi=Math.floor((y-150)/60);
+    if(x>hj*60+170+10 && y>hi*60+150+10){
+    // daca nu eraselectat ceva selecteaza
+    // console.log(this.selected[0]===-1 || this.selected[1]===-1);
+    if(this.selected[0]===-1 || this.selected[1]===-1){
+      if((hi*10+hj)<this.inventory.length){
+      this.selected[0]=hi;
+      this.selected[1]=hj;}
+    }else{//daca e selectat
+      if((hi*10+hj)<this.inventory.length){
+     var intermediar=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+     this.inventory[this.selected[0]*10+this.selected[1]]=clone(this.inventory[hi*10+hj]);
+     this.inventory[hi*10+hj]=clone(intermediar);
+     this.selected[0]=-1;
+     this.selected[1]=-1;
+        }
+      }
+    }
+   }
+   else if(x>760 && y<460){
+     console.log("suntem in equipt") ;
+      //echipam sabie in mana dreapta
+       if(x<1070&&x>1020&&y<330&&y>280){
+           // console.log("am incercat sa echipam o sabie in mana dreapta");
+              if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"){
+                  if(this.hand_l_slot==null){
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                      this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                    }
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                      this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                    }
+                    if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                      this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                    }
+                    if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                      this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                    }
+
+                    this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                    this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                    this.selected[0]=-1;
+                    this.selected[1]=-1;
+                  }else{
+                    var intermediar;
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                      this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                    }
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                      this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                    }
+                    if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                      this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                    }
+                    if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                      this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                    }
+                    if(this.hand_l_slot.hp!=null){
+                      this.max_helth-=this.hand_l_slot.hp;
+                    }
+                    if(this.hand_l_slot.en!=null) {
+                      this.max_energi-=this.hand_l_slot.en;
+                    }
+                    if (this.hand_l_slot.dmg!=null) {
+                      this.dmg-=this.hand_l_slot.dmg;
+                    }
+                    if (this.hand_l_slot.def!=null) {
+                      this.def-=this.hand_l_slot.def;
+                    }
+                    intermediar=clone(this.hand_l_slot);
+                    this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                    this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                    this.selected[0]=-1;
+                    this.selected[1]=-1;
+                  }
+                 }
+               }else{
+                 if(this.hand_l_slot.hp!=null){
+                   this.max_helth-=this.hand_l_slot.hp;
+                 }
+                 if(this.hand_l_slot.en!=null) {
+                   this.max_energi-=this.hand_l_slot.en;
+                 }
+                 if (this.hand_l_slot.dmg!=null) {
+                   this.dmg-=this.hand_l_slot.dmg;
+                 }
+                 if (this.hand_l_slot.def!=null) {
+                   this.def-=this.hand_l_slot.def;
+                 }
+                 this.inventory.push(clone(this.hand_l_slot));
+                 this.hand_l_slot=null;
+               }
+       };
+       if(x<845&&x>795&&y<330&&y>280){
+        // console.log("am incercat sa echipam o sabie in mana dreapta");
+        if(this.selected[0]!=-1 && this.selected[1]!=-1){
+        if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"){
+            // if(this.hand_r_slot==null){
+              if(this.hand_r_slot==null){
+                if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                  this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                }
+                if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                  this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                }
+                if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                  this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                }
+                if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                  this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                }
+              this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+              this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+              this.selected[0]=-1;
+              this.selected[1]=-1;
+            }else{
+              var intermediar;
+              if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+              }
+              if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+              }
+              if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+              }
+              if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+              }
+              if(this.hand_r_slot.hp!=null){
+                this.max_helth-=this.hand_r_slot.hp;
+              }
+              if(this.hand_r_slot.en!=null) {
+                this.max_energi-=this.hand_r_slot.en;
+              }
+              if (this.hand_r_slot.dmg!=null) {
+                this.dmg-=this.hand_r_slot.dmg;
+              }
+              if (this.hand_r_slot.def!=null) {
+                this.def-=this.hand_r_slot.def;
+              }
+              intermediar=clone(this.hand_r_slot);
+              this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+              this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+              this.selected[0]=-1;
+              this.selected[1]=-1;
+            }
+          // };
+         }else{
+           if(this.hand_r_slot.hp!=null){
+             this.max_helth-=this.hand_r_slot.hp;
+           }
+           if(this.hand_r_slot.en!=null) {
+             this.max_energi-=this.hand_r_slot.en;
+           }
+           if (this.hand_r_slot.dmg!=null) {
+             this.dmg-=this.hand_r_slot.dmg;
+           }
+           if (this.hand_r_slot.def!=null) {
+             this.def-=this.hand_r_slot.def;
+           }
+           this.inventory.push(clone(this.hand_r_slot));
+           this.hand_r_slot=null;}
+         }
+       }
+       if(x<845&&x>795&&y<390&&y>340){
+        //  console.log( "am apasatpe ring 1");
+        //  verifica daca avem ceva selectat
+           if(this.selected[0]!=-1 && this.selected[1]!=-1){
+                if(this.inventory[this.selected[0]*10+this.selected[1]].type==="ring"){
+                  if(this.ring_slot1==null){
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                      this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                    }
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                      this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                    }
+                    if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                      this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                    }
+                    if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                      this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                    }
+                    this.ring_slot1=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                    this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                    // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                    // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                    // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                     this.selected[0]=-1;
+                     this.selected[1]=-1;
+                   }else{
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                       this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                     }
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                       this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                     }
+                     if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                       this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                     }
+                     if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                       this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                     }
+                     if(this.ring_slot1.hp!=null){
+                       this.max_helth-=this.ring_slot1.hp;
+                     }
+                     if(this.ring_slot1.en!=null) {
+                       this.max_energi-=this.ring_slot1.en;
+                     }
+                     if (this.ring_slot1.dmg!=null) {
+                       this.dmg-=this.ring_slot1.dmg;
+                     }
+                     if (this.ring_slot1.def!=null) {
+                       this.def-=this.ring_slot1.def;
+                     }
+                     intermediar=clone(this.ring_slot1);
+                     this.ring_slot1=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                     this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                     this.selected[0]=-1;
+                     this.selected[1]=-1;
+                   }
+                }
+           }else{
+
+                 if(this.ring_slot1.hp!=null){
+                   this.max_helth-=this.ring_slot1.hp;
+                 }
+                 if(this.ring_slot1.en!=null) {
+                   this.max_energi-=this.ring_slot1.en;
+                 }
+                 if (this.ring_slot1.dmg!=null) {
+                   this.dmg-=this.ring_slot1.dmg;
+                 }
+                 if (this.ring_slot1.def!=null) {
+                   this.def-=this.ring_slot1.def;
+                 }
+                 this.inventory.push(clone(this.ring_slot1));
+                 this.ring_slot1=null;
+
+           }
+       }
+       if(x<1070&&x>1020&&y<390&&y>340){
+        //  console.log( "am apasatpe ring 2");
+         //  verifica daca avem ceva selectat
+            if(this.selected[0]!=-1 && this.selected[1]!=-1){
+                 if(this.inventory[this.selected[0]*10+this.selected[1]].type==="ring"){
+                   if(this.ring_slot2==null){
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                       this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                     }
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                       this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                     }
+                     if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                       this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                     }
+                     if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                       this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                     }
+                     this.ring_slot2=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                     this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                     // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                     // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                     // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                      this.selected[0]=-1;
+                      this.selected[1]=-1;
+                    }else{
+                      if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                        this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                      }
+                      if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                        this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                      }
+                      if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                        this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                      }
+                      if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                        this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                      }
+                      if(this.ring_slot2.hp!=null){
+                        this.max_helth-=this.ring_slot2.hp;
+                      }
+                      if(this.ring_slot2.en!=null) {
+                        this.max_energi-=this.ring_slot2.en;
+                      }
+                      if (this.ring_slot2.dmg!=null) {
+                        this.dmg-=this.ring_slot2.dmg;
+                      }
+                      if (this.ring_slot2.def!=null) {
+                        this.def-=this.ring_slot2.def;
+                      }
+                      intermediar=clone(this.ring_slot2);
+                      this.ring_slot2=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                      this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                      this.selected[0]=-1;
+                      this.selected[1]=-1;
+                    }
+                 }
+            }else{
+
+                  if(this.ring_slot2.hp!=null){
+                    this.max_helth-=this.ring_slot2.hp;
+                  }
+                  if(this.ring_slot2.en!=null) {
+                    this.max_energi-=this.ring_slot2.en;
+                  }
+                  if (this.ring_slot2.dmg!=null) {
+                    this.dmg-=this.ring_slot2.dmg;
+                  }
+                  if (this.ring_slot2.def!=null) {
+                    this.def-=this.ring_slot2.def;
+                  }
+                  this.inventory.push(clone(this.ring_slot2));
+                  this.ring_slot2=null;
+
+            }
+       }
+       if(x<965&&x>905&&y<210&&y>160){
+         //had_slot
+       }
+       if(x<845&&x>795&&y<270&&y>220){
+         //hands_slot
+       }
+  }else{
+      console.log("suntem in descriere") ;
+    }
 
   }
 };
+// };
 //asta doar ca sa setem trebuie facuta o functie pt setarea initial
 player.setposition(3,0);
 function loot1(){
@@ -695,315 +1033,397 @@ function clickt(x,y){
        renderwarning();
       };
   function renderinventory(){
-    //randeaza suportu pentru elementele din meniu
-    c.beginPath();
-    c.rect(170,150,610,610);
-    c.fillStyle="rgba(50,50,50,0.95)";
-    c.stroke();
-    c.fill();
+        //randeaza suportu pentru elementele din meniu
+        c.beginPath();
+        c.rect(170,150,610,610);
+        c.fillStyle="rgba(50,50,50,0.95)";
+        c.stroke();
+        c.fill();
 
-    var n=10,i,j,m=10,x,y,k=0;
-    var items=player.max_inventory;
-    for(i=0;i<m;i++){
-      for(j=0;j<n;j++){
-        x=170+j*50+(j+1)*10;
-        y=50*i+10*(i+1)+150;
-          if(items>0){
-          c.beginPath();
-          c.rect(x,y,50,50);
-          c.fillStyle="rgba(220,213,213,1)";
-          c.stroke();
-          c.fill();
-          items-=1;
-        }else{
-          c.beginPath();
-          c.rect(x,y,50,50);
-          c.fillStyle="rgba(220,23,13,1)";
-          c.stroke();
-          c.fill();
-
-        }
-      }
-      };
-    // randeaza suportu pentru echipamenet echipat
-    // render  spaces
-  {
-    c.beginPath();
-    c.rect(780,150,300,610);
-    c.fillStyle="rgba(50,50,50,0.95)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    var my_pic3=new Image();
-    my_pic3.src="img/plaer-item-background-white.png";
-    c.drawImage(my_pic3,780,155);
-    //al doilea rand
-    c.beginPath();
-    c.rect(905,160,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(905,220,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(905,280,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(905,340,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(905,400,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    //primu rand
-    c.beginPath();
-    c.rect(795,280,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(795,220,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(795,340,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(795,160,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(795,400,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    //randu 3
-    c.beginPath();
-    c.rect(1020,160,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(1020,220,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(1020,280,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(1020,340,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    c.beginPath();
-    c.rect(1020,400,50,50);
-    c.fillStyle="rgba(220,213,213,1)";
-    c.stroke();
-    c.fill();
-    if (player.had_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/helmet5.png";
-      c.drawImage(my_pic3,905,160);
-    }else{
-      //pune imaginea
-    }
-    if (player.hands_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/glov.png";
-      c.drawImage(my_pic3,795,220);
-    }else{
-      //pune imaginea
-    }
-    if (player.ring_slot1==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/ring.png";
-      c.drawImage(my_pic3,795,340);
-    }else{
-      //pune imaginea
-    }
-    if (player.ring_slot2==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/ring.png";
-      c.drawImage(my_pic3,1020,340);
-    }else{
-      //pune imaginea
-    }
-    if (player.earring_slot1==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/ler.png";
-      c.drawImage(my_pic3,795,160);
-    }else{
-      //pune imaginea
-    }
-    if (player.earring_slot2==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/rer.png";
-      c.drawImage(my_pic3,1020,160);
-    }else{
-      //pune imaginea
-    }
-    if (player.necckles==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/neckles.png";
-      c.drawImage(my_pic3,1020,220);
-    }else{
-      //pune imaginea
-    }
-    if (player.torso_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/body.png";
-      c.drawImage(my_pic3,905,220);
-    }else{
-      //pune imaginea
-    }
-    if (player.hand_l_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/hand1.png";
-      c.drawImage(my_pic3,1020,280);
-    }else{
-      //pune imaginea
-    }
-    if (player.hand_l_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/hand1.png";
-      c.drawImage(my_pic3,795,280);
-    }else{
-      //pune imaginea
-    }
-    if (player.pents_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/pants.png";
-      c.drawImage(my_pic3,905,280);
-    }else{//pune imaginea
-    }
-    if (player.pents_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/fit.png";
-      c.drawImage(my_pic3,905,340);
-    }else{
-    //pune imaginea
-  }
-    if (player.hors_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/hors.png";
-      c.drawImage(my_pic3,795,400);
-    }else{
-    //pune imaginea
-  }
-    if (player.hors_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/car.png";
-      c.drawImage(my_pic3,905,400);
-    }else{
-    //pune imaginea
-    }
-    if (player.bag_slot==null){
-      c.beginPath();
-      var my_pic3=new Image();
-      my_pic3.src="img/sleepbag.png";
-      c.drawImage(my_pic3,1020,400);
-    }else{
-    //pune imaginea
-    }
-  };
-    //randeaza suportu pentru descriere
-    c.beginPath();
-    c.rect(780,460,300,300);
-    c.fillStyle="rgba(50,50,50,0.95)";
-    c.stroke();
-    c.fill();
-    // de aici in jos desenam iteme
-}
-  function rendermap(){
-      for(i=0;i<mat.length;i+=1){x=0;y=0
-        for(j=0;j<mat[i].length;j+=1){
-          if(i%2===0){x=50*j+100*j;}
-          else {x=75*(j+1)+100*j-(25*j);}
-          y=50*i;
-          if(mat[i][j]===1)
-          { var my_pic3=new Image();
-            my_pic3.src=hexagoane[mat[i][j]-1].ref;
-            c.drawImage(my_pic3,x,y);
-          }
-          else  if(mat[i][j]===2)
-          {var my_pic3=new Image();
-            my_pic3.src=hexagoane[mat[i][j]-1].ref;
-            c.drawImage(my_pic3,x-0.75,y+0.75);}
-            else{
-              var my_pic3=new Image();
-              my_pic3.src=hexagoane[mat[i][j]-1].ref;
-            c.drawImage(my_pic3,x-0.75,y+0.75);}
-         };
-    };
-    }
-  function renderfoodpanel(){
-          c.beginPath();
-          c.rect(70,50,310,430);
-          c.fillStyle="rgba(50,50,50,0.95)";
-          c.fill();
-          var n=5,i,j,m=7,x,y,k=0;
-          for(i=0;i<m;i++){
-            for(j=0;j<n;j++){
-              x=70+j*50+(j+1)*10;
-              y=50*i+10*(i+1)+50;
+        var n=10,i,j,m=10,x,y,k=0,s=0;
+        var items=player.max_inventory;
+        for(i=0;i<m;i++){
+          for(j=0;j<n;j++){
+            x=170+j*50+(j+1)*10;
+            y=50*i+10*(i+1)+150;
+              if(items>0){
+              if(player.selected[0]!=i || player.selected[1]!=j ){
               c.beginPath();
               c.rect(x,y,50,50);
               c.fillStyle="rgba(220,213,213,1)";
+              c.lineWidth=1;
+              c.strokeStyle="black";
               c.stroke();
-              c.fill();}
-            };
-
-            var food=[];
-            for(i=0;i<player.inventory.length;i++){
-              if(player.inventory[i].type==="food"){
-                food.push(player.inventory[i]);
+              c.fill();
+            }else if(player.selected[0]===i && player.selected[1]===j){
+                c.beginPath();
+                c.rect(x,y,50,50);
+                c.fillStyle="rgba(220,213,213,1)";
+                c.lineWidth=4;
+                c.strokeStyle="blue";
+                c.stroke();
+                c.fill();
               };
-            };
-            // console.log(food);
-            for(i=0;i<m && k<food.length;i++){
-              for(j=0;j<n && k<food.length;j++){
+
+              items-=1;
+
+            }else{
+
+              c.beginPath();
+              c.rect(x,y,50,50);
+              c.fillStyle="rgba(220,23,13,1)";
+              c.lineWidth=1;
+              c.strokeStyle="black";
+              c.stroke();
+              c.fill();
+
+            }
+          }
+      };
+
+      for(i=0;i<player.inventory.length;i++){
+        j=i%10;
+        x=170+j*50+(j+1)*10;
+        y=50*k+10*(k+1)+150;
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.inventory[i].href;
+        c.drawImage(my_pic3,x,y);
+        if(player.inventory[i].q!=null){
+          c.beginPath();
+          c.fillStyle = "black";
+          c.font = "20px Verdana";
+          c.fillText(player.inventory[i].q, x+35, y+45);
+        }
+        if((i+1)%10!=0){s+=1;}
+      };
+    // randeaza suportu pentru echipamenet echipat
+    // render  spaces
+     {
+      c.beginPath();
+      c.rect(780,150,300,610);
+      c.fillStyle="rgba(50,50,50,0.95)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/plaer-item-background-white.png";
+      c.drawImage(my_pic3,780,155);
+      //al doilea rand
+      c.beginPath();
+      c.rect(905,160,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(905,220,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(905,280,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(905,340,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(905,400,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      //primu rand
+      c.beginPath();
+      c.rect(795,280,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(795,220,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(795,340,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(795,160,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(795,400,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      //randu 3
+      c.beginPath();
+      c.rect(1020,160,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(1020,220,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(1020,280,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(1020,340,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      c.beginPath();
+      c.rect(1020,400,50,50);
+      c.fillStyle="rgba(220,213,213,1)";
+      c.stroke();
+      c.fill();
+      if (player.had_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/helmet5.png";
+        c.drawImage(my_pic3,905,160);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.had_slot.href;
+        c.drawImage(my_pic3,905,160);
+      }
+      if (player.hands_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/glov.png";
+        c.drawImage(my_pic3,795,220);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.hands_slot.href;
+        c.drawImage(my_pic3,795,220);
+
+      }
+      if (player.ring_slot1==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/ring.png";
+        c.drawImage(my_pic3,795,340);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.ring_slot1.href;
+        c.drawImage(my_pic3,795,340);
+      }
+      if (player.ring_slot2==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/ring.png";
+        c.drawImage(my_pic3,1020,340);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.ring_slot2.href;
+        c.drawImage(my_pic3,1020,340);
+
+      }
+      if (player.earring_slot1==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/ler.png";
+        c.drawImage(my_pic3,795,160);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.earring_slot1.href;
+        c.drawImage(my_pic3,795,160);
+      }
+      if (player.earring_slot2==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/rer.png";
+        c.drawImage(my_pic3,1020,160);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.earring_slot2.href;
+        c.drawImage(my_pic3,1020,160);
+      }
+      if (player.necckles==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/neckles.png";
+        c.drawImage(my_pic3,1020,220);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+          my_pic3.src=player.necckles.href;
+        c.drawImage(my_pic3,1020,220);
+      }
+      if (player.torso_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/body.png";
+        c.drawImage(my_pic3,905,220);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.torso_slot.href;
+        c.drawImage(my_pic3,905,220);
+      }
+      if (player.hand_l_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/hand1.png";
+        c.drawImage(my_pic3,1020,280);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.hand_l_slot.href;
+        c.drawImage(my_pic3,1020,280);
+      }
+      if (player.hand_r_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/hand1.png";
+        c.drawImage(my_pic3,795,280);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.hand_r_slot.href;
+        c.drawImage(my_pic3,795,280);
+      }
+      if (player.pents_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/pants.png";
+        c.drawImage(my_pic3,905,280);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.pents_slot.href;
+        c.drawImage(my_pic3,905,280);
+      }
+      if (player.shues_slot==null){
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src="img/fit.png";
+        c.drawImage(my_pic3,905,340);
+      }else{
+        c.beginPath();
+        var my_pic3=new Image();
+        my_pic3.src=player.shues_slot.href;
+        c.drawImage(my_pic3,905,340);
+      }
+        if (player.hors_slot==null){
+          c.beginPath();
+          var my_pic3=new Image();
+          my_pic3.src="img/hors.png";
+          c.drawImage(my_pic3,795,400);
+        }else{
+          c.beginPath();
+          var my_pic3=new Image();
+          my_pic3.src=player.hors_slot.href;
+          c.drawImage(my_pic3,795,400);
+      }
+        if (player.carage_slot==null){
+          c.beginPath();
+          var my_pic3=new Image();
+          my_pic3.src="img/car.png";
+          c.drawImage(my_pic3,905,400);
+        }else{
+          c.beginPath();
+          var my_pic3=new Image();
+          my_pic3.src=player.carage_slot.href;
+          c.drawImage(my_pic3,905,400);
+        }
+        if (player.bag_slot==null){
+          c.beginPath();
+          var my_pic3=new Image();
+          my_pic3.src="img/sleepbag.png";
+          c.drawImage(my_pic3,1020,400);
+        }else{
+          c.beginPath();
+          var my_pic3=new Image();
+          my_pic3.src=player.bag_slot.href;
+          c.drawImage(my_pic3,1020,400);
+        }
+    };
+      //randeaza suportu pentru descriere
+      c.beginPath();
+      c.rect(780,460,300,300);
+      c.fillStyle="rgba(50,50,50,0.95)";
+      c.stroke();
+      c.fill();
+      // de aici in jos desenam iteme
+  }
+    function rendermap(){
+        for(i=0;i<mat.length;i+=1){x=0;y=0
+          for(j=0;j<mat[i].length;j+=1){
+            if(i%2===0){x=50*j+100*j;}
+            else {x=75*(j+1)+100*j-(25*j);}
+            y=50*i;
+            if(mat[i][j]===1)
+            { var my_pic3=new Image();
+              my_pic3.src=hexagoane[mat[i][j]-1].ref;
+              c.drawImage(my_pic3,x,y);
+            }
+            else  if(mat[i][j]===2)
+            {var my_pic3=new Image();
+              my_pic3.src=hexagoane[mat[i][j]-1].ref;
+              c.drawImage(my_pic3,x-0.75,y+0.75);}
+              else{
+                var my_pic3=new Image();
+                my_pic3.src=hexagoane[mat[i][j]-1].ref;
+              c.drawImage(my_pic3,x-0.75,y+0.75);}
+           };
+      };
+      }
+    function renderfoodpanel(){
+            c.beginPath();
+            c.rect(70,50,310,430);
+            c.fillStyle="rgba(50,50,50,0.95)";
+            c.fill();
+            var n=5,i,j,m=7,x,y,k=0;
+            for(i=0;i<m;i++){
+              for(j=0;j<n;j++){
                 x=70+j*50+(j+1)*10;
                 y=50*i+10*(i+1)+50;
                 c.beginPath();
-                var my_pic3=new Image();
-                my_pic3.src=food[k].href;
-                c.drawImage(my_pic3,x-0.75,y+0.75);
-                c.beginPath();
-                c.fillStyle = "black";
-                c.font = "20px Verdana";
-                c.fillText(food[k].q, x+35, y+45);
-                k+=1;
-              }
-            };
+                c.rect(x,y,50,50);
+                c.fillStyle="rgba(220,213,213,1)";
+                c.stroke();
+                c.fill();}
+              };
+
+              var food=[];
+              for(i=0;i<player.inventory.length;i++){
+                if(player.inventory[i].type==="food"){
+                  food.push(player.inventory[i]);
+                };
+              };
+              // console.log(food);
+              for(i=0;i<m && k<food.length;i++){
+                for(j=0;j<n && k<food.length;j++){
+                  x=70+j*50+(j+1)*10;
+                  y=50*i+10*(i+1)+50;
+                  c.beginPath();
+                  var my_pic3=new Image();
+                  my_pic3.src=food[k].href;
+                  c.drawImage(my_pic3,x-0.75,y+0.75);
+                  c.beginPath();
+                  c.fillStyle = "black";
+                  c.font = "20px Verdana";
+                  c.fillText(food[k].q, x+35, y+45);
+                  k+=1;
+                }
+              };
     };
 
 
@@ -1259,6 +1679,9 @@ function clickt(x,y){
           }else if(player.self===2)
           {
             player.eat(x,y);
+          }else if(player.self===5)
+          {
+            player.invaction(x,y);
           }
     }, false);
 })();

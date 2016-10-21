@@ -4,65 +4,10 @@ var my_bolet=new Image();
 my_pic.src="img/green-terain.png";
 my_pic2.src="img/orange-terain.png";
 my_bolet.src="img/2-white25.png";
-var mat=[[1,1,1,1,1,1,1,1],[1,2,1,1,1,1,1,1],[1,14,2,1,1,1,1,1],[1,15,1,1,1,1,1,1],[1,2,1,1,1,1,1,1],[1,1,1,2,1,1,1,1],[2,1,2,1,1,1,1,1],[1,1,2,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1]];
 var retete={
 
 }
-//numai primi de la s monster sunt facute bine obiectele TODO
-var moster={ s_monster:[ {name:"bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Spider",d1:0,d2:0,d3:1,d4:1,d5:1,d6:2,href:"img/monsters/spider.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Scorpion",d1:0,d2:0,d3:0,d4:1,d5:2,d6:3,href:"img/monsters/scorpion.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"snake",d1:0,d2:0,d3:1,d4:1,d5:2,d6:3,href:"img/monsters/snake.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Dead-Head ",d1:0,d2:0,d3:1,d4:2,d5:2,d6:4,href:"img/monsters/ded-head.png",wepan:1,armur:0,escape:99,loot:["l1","l2","l3"],lootnr:1}
-                      ],
-            m_monster:[ {name:"bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Spider",d1:0,d2:0,d3:1,d4:1,d5:1,d6:2,href:"img/monsters/spider.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Scorpion",d1:0,d2:0,d3:0,d4:1,d5:2,d6:3,href:"img/monsters/scorpion.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"snake",d1:0,d2:0,d3:1,d4:1,d5:2,d6:3,href:"img/monsters/snake.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Dead-Head ",d1:0,d2:0,d3:1,d4:2,d5:2,d6:4,href:"img/monsters/ded-head.png",wepan:1,armur:0,escape:99,loot:["l1","l2","l3"],lootnr:1}
-                      ],
-            l_monster:[ {name:"bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Spider",d1:0,d2:0,d3:1,d4:1,d5:1,d6:2,href:"img/monsters/spider.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Scorpion",d1:0,d2:0,d3:0,d4:1,d5:2,d6:3,href:"img/monsters/scorpion.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"snake",d1:0,d2:0,d3:1,d4:1,d5:2,d6:3,href:"img/monsters/snake.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Dead-Head ",d1:0,d2:0,d3:1,d4:2,d5:2,d6:4,href:"img/monsters/ded-head.png",wepan:1,armur:0,escape:99,loot:["l1","l2","l3"],lootnr:1}
-                      ],
-            B_monster:[ {name:"bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1},
-                        {name:"Bug",d1:0,d2:0,d3:0,d4:1,d5:1,d6:2,href:"img/monsters/bug.png",wepan:1,armur:0,escape:100,loot:["l1","l2","l3"],lootnr:1}
-                      ]}
-//trebuie populata TODO
-var stuf={food:[{name:"bred",foame: 9,energie:0,href:"img/bred.png",type:"food",q:0,max_q:10,recipe:[2,3],value:5},
-                {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
-                {name:"sendvici",foame:20,energie:5,href:"img/bred.png",type:"food",q:0,max_q:10,value:5}],
-          ingredients:[{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:0,max_q:10,recipe:[5,6],value:5},
-          {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
-          {name:"carot",foame:5,energie:1,href:"img/carot.png",type:"food",q:0,max_q:10,recipe:[1],value:5},
-          {name:"row_pig_mit",foame:4,energie:0,href:"img/row_pig_mit.png",type:"food",q:0,max_q:10,recipe:[1],value:5}],
-          wepan:[{name:"Wod sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},{name:"Iron sord",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:6}],
-          armur:[{name:"cloth-armur",def:1,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:2},{name:"Wod sord",def:3,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:10}],
-          julary:[{name:"Old ring",hp:1,href:"img/julary/ring1.png",type:"ring",value:5},{name:"Old iron ring",dmg:1,hp:1,href:"img/julary/ring2.png",type:"ring",value:10}],
-          items:[{ref:"img/2-white25.png",rest: 1}]
-}
-//trebuie refacute toate imagineile si corectate in options chestii TODO
-var hexagoane=[{type:"grass",    options:{shop:false,cooking:true,nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["loot1","loot2","hunt_lite","vegetables","s_monster","m_monster"],batle_feeld:"" },                               speed:1.2,ref:"img/green-terain.png"},
-               {type:"desert",   options:{shop:false,cooking:true,nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","m_monster"] ,deforest:["twigs","wod"]},            speed:0.9,ref:"img/orange-terain.png"},
-               {type:"jungle",  options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["twigs","wod","fruits","bunny","medium_treasure","lite_monster"],deforest:["twigs","wod"] },speed:0.7,ref:"img/orange-terain.png"},
-               {type:"forest",  options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"],deforest:["twigs","wod"] },         speed:1,ref:"img/orange-terain.png"},
-               {type:"swamp",   options:{shop:false,cooking:true,nr:3,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                             speed:0.5,ref:"img/orange-terain.png"},
-               {type:"mountain",options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},              speed:0.5,ref:"img/orange-terain.png"},
-               {type:"hill",     options:{shop:false,cooking:true,nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                    speed:0.9,ref:"img/orange-terain.png"},
-               {type:"inn",      options:{shop:false,cooking:true,nr:3,camp:["fire","inn","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                    speed:2,ref:"img/orange-terain.png"},
-               {type:"pasture",  options:{shop:false,cooking:true,nr:4,camp:["fire","inn","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["shepherd","build"]},   speed:2,ref:"img/orange-terain.png"},
-               {type:"stables",  options:{shop:false,cooking:true,nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["clean","build"] },          speed:2,ref:"img/orange-terain.png"},
-               {type:"home",     options:{shop:false,cooking:true,nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , build:"cest"},                      speed:2,ref:"img/orange-terain.png"},
-               {type:"shop",     options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"], craft:true },                         speed:2,ref:"img/orange-terain.png"},
-               {type:"warckshop",options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                     speed:2,ref:"img/orange-terain.png"},
-               {type:"farm",     options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","s_monster"] , worck:["clean","build"] },           speed:2,ref:"img/farm-terain.png"},
-               {type:"palace",  options:{shop:true,cooking:true,nr:3,camp:["no-fire","inn","warm"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","s_monster"] },                                   speed:2,ref:"img/castel-terain.png"}
-             ];
+
 var renders={
   d1:0,
   d2:0,
@@ -78,6 +23,7 @@ var player={
   helth :50,
   dmg:0,
   def:0,
+  dex:1,
   max_helth : 101,
   name : "me",
   i : 0,
@@ -96,9 +42,25 @@ var player={
   max_foame:30,
   self:0,
   twigs:1,
-  inventory:[{name:"Old ring",hp:1,en:1,href:"img/julary/ring1.png",type:"ring",value:5},{name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:5},{name:"wod_sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},{name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]}],
+  inventory:[{name:"Cover",def:1,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:2,modi:2},
+         {name:"Lether glovs",def:3,href:"img/armur/l_glovs1.png",type:"glovs-armur",value:10,modi:2},
+         {name:"coif",def:3,href:"img/armur/hed_armur_2.png",type:"hed-armur",value:10,modi:2},
+         {name:"Worn pants",def:3,href:"img/armur/pants1.png",type:"leg-armur",value:10,modi:2},
+         {name:"cloth armur",def:5,href:"img/armur/bodi_armur_2.png",type:"bodi-armur",value:20,modi:2},
+         {name:"Lite boots",def:3,href:"img/armur/boots2.png",type:"fit-armur",value:10,modi:2},
+         {name:"Old ring",hp:1,en:1,href:"img/julary/ring1.png",type:"ring",value:5},
+         {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:5},
+         {name:"wod_sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},
+         {name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},
+         {name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]},
+         {name:"wariar glovs",def:5,href:"img/armur/l_glovs2.png",type:"glovs-armur",value:10,modi:2},
+         {name:"lite armur",def:15,href:"img/armur/bodi_armur_1.png",type:"bodi-armur",value:30,modi:2},
+         {name:"Old earring",hp:1,en:1,href:"img/julary/earring1.png",type:"earring",value:15,modi:2},
+         {name:"Old iron earring",dmg:1,en:2,hp:1,href:"img/julary/earring2.png",type:"earring",value:25,modi:2},
+         {name:"Old lether choker",dmg:1,dex:2,hp:1,href:"img/julary/neck1.png",type:"neckles",value:35,modi:2},
+         {name:"Bone neckles",dmg:1,dex:2,hp:1,href:"img/julary/neck2.png",type:"neckles",value:40,modi:2}],
   status:{},
-  max_inventory:15,
+  max_inventory:30,
   torso_slot:null,
   hands_slot:null,
   hand_l_slot:{name:"wod_sord",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:6},
@@ -110,7 +72,7 @@ var player={
   ring_slot2:null,
   earring_slot1:null,
   earring_slot2:null,
-  necckles:null,
+  neckles:null,
   bag_slot:null,
   bagpack_slot1:null,
   bagpack_slot2:null,
@@ -125,6 +87,7 @@ var player={
   },
   move : function(x,y){
       var c=  clickt(x,y);
+      console.log(c.i+","+c.j);
       //intreb daca patratica e adiacenta
       //merge 1,2
       //formula pt consum de energie este dificultatea terenuli / 1.5
@@ -133,6 +96,7 @@ var player={
         //test self
       }
       else if(this.energi>=1.5/hexagoane[mat[c.i][c.j]-1].speed){
+        console.log(c.i+","+c.j);
         if((c.i+2===player.i && c.j===player.j && player.i%2===0) ||
           (c.i-2===player.i && c.j===player.j && player.i%2===0) ||
           (c.i+1===player.i && c.j===player.j && player.i%2===0) ||
@@ -444,7 +408,7 @@ var player={
        if(x<1070&&x>1020&&y<330&&y>280){
            // console.log("am incercat sa echipam o sabie in mana dreapta");
               if(this.selected[0]!=-1 && this.selected[1]!=-1){
-              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"||this.inventory[this.selected[0]*10+this.selected[1]].type==="sheeld"){
                   if(this.hand_l_slot==null){
                     if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
                       this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
@@ -452,11 +416,14 @@ var player={
                     if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                       this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                     }
-                    if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                       this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                     }
-                    if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                       this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                    }
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                        this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                     }
 
                     this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
@@ -471,11 +438,14 @@ var player={
                     if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                       this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                     }
-                    if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                       this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                     }
-                    if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                       this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                    }
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                       this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                     }
                     if(this.hand_l_slot.hp!=null){
                       this.max_helth-=this.hand_l_slot.hp;
@@ -483,11 +453,14 @@ var player={
                     if(this.hand_l_slot.en!=null) {
                       this.max_energi-=this.hand_l_slot.en;
                     }
-                    if (this.hand_l_slot.dmg!=null) {
+                    if(this.hand_l_slot.dmg!=null) {
                       this.dmg-=this.hand_l_slot.dmg;
                     }
-                    if (this.hand_l_slot.def!=null) {
+                    if(this.hand_l_slot.def!=null) {
                       this.def-=this.hand_l_slot.def;
+                    }
+                    if(this.hand_l_slot.dex!=null) {
+                      this.dex-=this.hand_l_slot.dex;
                     }
                     intermediar=clone(this.hand_l_slot);
                     this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
@@ -503,11 +476,14 @@ var player={
                  if(this.hand_l_slot.en!=null) {
                    this.max_energi-=this.hand_l_slot.en;
                  }
-                 if (this.hand_l_slot.dmg!=null) {
+                 if(this.hand_l_slot.dmg!=null) {
                    this.dmg-=this.hand_l_slot.dmg;
                  }
-                 if (this.hand_l_slot.def!=null) {
+                 if(this.hand_l_slot.def!=null) {
                    this.def-=this.hand_l_slot.def;
+                 }
+                 if(this.hand_l_slot.dex!=null) {
+                   this.dex-=this.hand_l_slot.dex;
                  }
                  this.inventory.push(clone(this.hand_l_slot));
                  this.hand_l_slot=null;
@@ -516,8 +492,7 @@ var player={
        if(x<845&&x>795&&y<330&&y>280){
         // console.log("am incercat sa echipam o sabie in mana dreapta");
         if(this.selected[0]!=-1 && this.selected[1]!=-1){
-        if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"){
-            // if(this.hand_r_slot==null){
+        if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon" || this.inventory[this.selected[0]*10+this.selected[1]].type==="sheeld"){
               if(this.hand_r_slot==null){
                 if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
                   this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
@@ -525,11 +500,14 @@ var player={
                 if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                   this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                 }
-                if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                   this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                 }
-                if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                   this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                }
+                if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                  this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                 }
               this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
               this.inventory.splice(this.selected[0]*10+this.selected[1],1);
@@ -543,11 +521,14 @@ var player={
               if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                 this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
               }
-              if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+              if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                 this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
               }
-              if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+              if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                 this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+              }
+              if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
               }
               if(this.hand_r_slot.hp!=null){
                 this.max_helth-=this.hand_r_slot.hp;
@@ -555,11 +536,14 @@ var player={
               if(this.hand_r_slot.en!=null) {
                 this.max_energi-=this.hand_r_slot.en;
               }
-              if (this.hand_r_slot.dmg!=null) {
+              if(this.hand_r_slot.dmg!=null) {
                 this.dmg-=this.hand_r_slot.dmg;
               }
-              if (this.hand_r_slot.def!=null) {
+              if(this.hand_r_slot.def!=null) {
                 this.def-=this.hand_r_slot.def;
+              }
+              if(this.hand_r_slot.dex!=null) {
+                this.dex-=this.hand_r_slot.dex;
               }
               intermediar=clone(this.hand_r_slot);
               this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
@@ -567,23 +551,29 @@ var player={
               this.selected[0]=-1;
               this.selected[1]=-1;
             }
-          // };
-         }else{
+          }
+         }else{console.log("dezechipez acuma sefu");
            if(this.hand_r_slot.hp!=null){
              this.max_helth-=this.hand_r_slot.hp;
            }
            if(this.hand_r_slot.en!=null) {
              this.max_energi-=this.hand_r_slot.en;
            }
-           if (this.hand_r_slot.dmg!=null) {
+           if(this.hand_r_slot.dmg!=null) {
              this.dmg-=this.hand_r_slot.dmg;
            }
-           if (this.hand_r_slot.def!=null) {
+           if(this.hand_r_slot.def!=null) {
              this.def-=this.hand_r_slot.def;
            }
+           if(this.hand_r_slot.dex!=null) {
+             this.dex-=this.hand_r_slot.dex;
+           }
+           console.log("dezechipez acuma sefu");
            this.inventory.push(clone(this.hand_r_slot));
-           this.hand_r_slot=null;}
-         }
+           this.hand_r_slot=null;
+          }
+
+
        }
        if(x<845&&x>795&&y<390&&y>340){
         //  console.log( "am apasatpe ring 1");
@@ -597,11 +587,14 @@ var player={
                     if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                       this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                     }
-                    if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                       this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                     }
-                    if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                       this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                    }
+                    if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                      this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                     }
                     this.ring_slot1=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
                     this.inventory.splice(this.selected[0]*10+this.selected[1],1);
@@ -617,11 +610,14 @@ var player={
                      if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                        this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                      }
-                     if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                        this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                      }
-                     if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                        this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                     }
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                       this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                      }
                      if(this.ring_slot1.hp!=null){
                        this.max_helth-=this.ring_slot1.hp;
@@ -629,11 +625,14 @@ var player={
                      if(this.ring_slot1.en!=null) {
                        this.max_energi-=this.ring_slot1.en;
                      }
-                     if (this.ring_slot1.dmg!=null) {
+                     if(this.ring_slot1.dmg!=null) {
                        this.dmg-=this.ring_slot1.dmg;
                      }
-                     if (this.ring_slot1.def!=null) {
+                     if(this.ring_slot1.def!=null) {
                        this.def-=this.ring_slot1.def;
+                     }
+                     if(this.ring_slot1.dex!=null) {
+                       this.dex-=this.ring_slot1.dex;
                      }
                      intermediar=clone(this.ring_slot1);
                      this.ring_slot1=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
@@ -650,10 +649,10 @@ var player={
                  if(this.ring_slot1.en!=null) {
                    this.max_energi-=this.ring_slot1.en;
                  }
-                 if (this.ring_slot1.dmg!=null) {
+                 if(this.ring_slot1.dmg!=null) {
                    this.dmg-=this.ring_slot1.dmg;
                  }
-                 if (this.ring_slot1.def!=null) {
+                 if(this.ring_slot1.def!=null) {
                    this.def-=this.ring_slot1.def;
                  }
                  this.inventory.push(clone(this.ring_slot1));
@@ -673,11 +672,14 @@ var player={
                      if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                        this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                      }
-                     if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                        this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                      }
-                     if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                        this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                     }
+                     if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                       this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                      }
                      this.ring_slot2=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
                      this.inventory.splice(this.selected[0]*10+this.selected[1],1);
@@ -693,11 +695,14 @@ var player={
                       if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
                         this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
                       }
-                      if (this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                      if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
                         this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
                       }
-                      if (this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                      if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
                         this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                      }
+                      if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                        this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
                       }
                       if(this.ring_slot2.hp!=null){
                         this.max_helth-=this.ring_slot2.hp;
@@ -705,11 +710,14 @@ var player={
                       if(this.ring_slot2.en!=null) {
                         this.max_energi-=this.ring_slot2.en;
                       }
-                      if (this.ring_slot2.dmg!=null) {
+                      if(this.ring_slot2.dmg!=null) {
                         this.dmg-=this.ring_slot2.dmg;
                       }
-                      if (this.ring_slot2.def!=null) {
+                      if(this.ring_slot2.def!=null) {
                         this.def-=this.ring_slot2.def;
+                      }
+                      if(this.ring_slot2.dex!=null) {
+                        this.dex-=this.ring_slot2.dex;
                       }
                       intermediar=clone(this.ring_slot2);
                       this.ring_slot2=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
@@ -726,11 +734,14 @@ var player={
                   if(this.ring_slot2.en!=null) {
                     this.max_energi-=this.ring_slot2.en;
                   }
-                  if (this.ring_slot2.dmg!=null) {
+                  if(this.ring_slot2.dmg!=null) {
                     this.dmg-=this.ring_slot2.dmg;
                   }
-                  if (this.ring_slot2.def!=null) {
+                  if(this.ring_slot2.def!=null) {
                     this.def-=this.ring_slot2.def;
+                  }
+                  if(this.ring_slot2.dex!=null) {
+                    this.dex-=this.ring_slot2.dex;
                   }
                   this.inventory.push(clone(this.ring_slot2));
                   this.ring_slot2=null;
@@ -739,10 +750,703 @@ var player={
        }
        if(x<965&&x>905&&y<210&&y>160){
          //had_slot
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="hed-armur"){
+                if(this.had_slot==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.had_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.had_slot.hp!=null){
+                     this.max_helth-=this.had_slot.hp;
+                   }
+                   if(this.had_slot.en!=null) {
+                     this.max_energi-=this.had_slot.en;
+                   }
+                   if(this.had_slot.dmg!=null) {
+                     this.dmg-=this.had_slot.dmg;
+                   }
+                   if(this.had_slot.def!=null) {
+                     this.def-=this.had_slot.def;
+                   }
+                   if(this.had_slot.dex!=null) {
+                     this.dex-=this.had_slot.dex;
+                   }
+                   intermediar=clone(this.had_slot);
+                   this.had_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.had_slot.hp!=null){
+                 this.max_helth-=this.had_slot.hp;
+               }
+               if(this.had_slot.en!=null) {
+                 this.max_energi-=this.had_slot.en;
+               }
+               if(this.had_slot.dmg!=null) {
+                 this.dmg-=this.had_slot.dmg;
+               }
+               if(this.had_slot.def!=null) {
+                 this.def-=this.had_slot.def;
+               }
+               if(this.had_slot.dex!=null) {
+                 this.dex-=this.had_slot.dex;
+               }
+               this.inventory.push(clone(this.had_slot));
+               this.had_slot=null;
+
+         }
        }
        if(x<845&&x>795&&y<270&&y>220){
          //hands_slot
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="glovs-armur"){
+                if(this.hands_slot==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.hands_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.hands_slot.hp!=null){
+                     this.max_helth-=this.hands_slot.hp;
+                   }
+                   if(this.hands_slot.en!=null) {
+                     this.max_energi-=this.hands_slot.en;
+                   }
+                   if(this.hands_slot.dmg!=null) {
+                     this.dmg-=this.hands_slot.dmg;
+                   }
+                   if(this.hands_slot.def!=null) {
+                     this.def-=this.hands_slot.def;
+                   }
+                   if(this.hands_slot.dex!=null) {
+                     this.dex-=this.hands_slot.dex;
+                   }
+                   intermediar=clone(this.hands_slot);
+                   this.hands_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.hands_slot.hp!=null){
+                 this.max_helth-=this.hands_slot.hp;
+               }
+               if(this.hands_slot.en!=null) {
+                 this.max_energi-=this.hands_slot.en;
+               }
+               if(this.hands_slot.dmg!=null) {
+                 this.dmg-=this.hands_slot.dmg;
+               }
+               if(this.hands_slot.def!=null) {
+                 this.def-=this.hands_slot.def;
+               }
+               if(this.hands_slot.dex!=null) {
+                 this.dex-=this.hands_slot.dex;
+               }
+               this.inventory.push(clone(this.hands_slot));
+               this.hands_slot=null;
+         }
        }
+       if(x<965&&x>905&&y<270&&y>220){
+         // torso_slot , bodi-armur
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="bodi-armur"){
+                if(this.torso_slot==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.torso_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.torso_slot.hp!=null){
+                     this.max_helth-=this.torso_slot.hp;
+                   }
+                   if(this.torso_slot.en!=null) {
+                     this.max_energi-=this.torso_slot.en;
+                   }
+                   if(this.torso_slot.dmg!=null) {
+                     this.dmg-=this.torso_slot.dmg;
+                   }
+                   if(this.torso_slot.def!=null) {
+                     this.def-=this.torso_slot.def;
+                   }
+                   if(this.torso_slot.dex!=null) {
+                     this.dex-=this.torso_slot.def;
+                   }
+                   intermediar=clone(this.torso_slot);
+                   this.torso_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.torso_slot.hp!=null){
+                 this.max_helth-=this.torso_slot.hp;
+               }
+               if(this.torso_slot.en!=null) {
+                 this.max_energi-=this.torso_slot.en;
+               }
+               if(this.torso_slot.dmg!=null) {
+                 this.dmg-=this.torso_slot.dmg;
+               }
+               if(this.torso_slot.def!=null) {
+                 this.def-=this.torso_slot.def;
+               }
+               if(this.torso_slot.dex!=null) {
+                 this.dex-=this.torso_slot.def;
+               }
+               this.inventory.push(clone(this.torso_slot));
+               this.torso_slot=null;
+         }
+       }
+       if(x<965&&x>905&&y<330&&y>280){
+         //pents_slot , leg-armur
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="leg-armur"){
+                if(this.pents_slot==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.pents_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.pents_slot.hp!=null){
+                     this.max_helth-=this.pents_slot.hp;
+                   }
+                   if(this.pents_slot.en!=null) {
+                     this.max_energi-=this.pents_slot.en;
+                   }
+                   if(this.hands_pents_slotslot.dmg!=null) {
+                     this.dmg-=this.pents_slot.dmg;
+                   }
+                   if(this.pents_slot.def!=null) {
+                     this.def-=this.pents_slot.def;
+                   }
+                   if(this.pents_slot.dex!=null) {
+                     this.dex-=this.pents_slot.dex;
+                   }
+                   intermediar=clone(this.pents_slot);
+                   this.pents_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.pents_slot.hp!=null){
+                 this.max_helth-=this.pents_slot.hp;
+               }
+               if(this.pents_slot.en!=null) {
+                 this.max_energi-=this.pents_slot.en;
+               }
+               if(this.pents_slot.dmg!=null) {
+                 this.dmg-=this.pents_slot.dmg;
+               }
+               if(this.pents_slot.def!=null) {
+                 this.def-=this.pents_slot.def;
+               }
+               if(this.pents_slot.dex!=null) {
+                 this.dex-=this.pents_slot.dex;
+               }
+               this.inventory.push(clone(this.pents_slot));
+               this.pents_slot=null;
+         }
+       }
+       if(x<965&&x>905&&y<390&&y>340){
+         //shues_slot , fit-armur
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="fit-armur"){
+                if(this.shues_slot==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.shues_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.shues_slot.hp!=null){
+                     this.max_helth-=this.shues_slot.hp;
+                   }
+                   if(this.shues_slot.en!=null) {
+                     this.max_energi-=this.shues_slot.en;
+                   }
+                   if(this.shues_slot.dmg!=null) {
+                     this.dmg-=this.shues_slot.dmg;
+                   }
+                   if(this.shues_slot.def!=null) {
+                     this.def-=this.shues_slot.def;
+                   }
+                   if(this.shues_slot.dex!=null) {
+                     this.dex-=this.shues_slot.dex;
+                   }
+                   intermediar=clone(this.shues_slot);
+                   this.shues_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.shues_slot.hp!=null){
+                 this.max_helth-=this.shues_slot.hp;
+               }
+               if(this.shues_slot.en!=null) {
+                 this.max_energi-=this.shues_slot.en;
+               }
+               if(this.shues_slot.dmg!=null) {
+                 this.dmg-=this.shues_slot.dmg;
+               }
+               if(this.shues_slot.def!=null) {
+                 this.def-=this.shues_slot.def;
+               }
+               if(this.shues_slot.dex!=null) {
+                 this.dex-=this.shues_slot.dex;
+               }
+               this.inventory.push(clone(this.shues_slot));
+               this.shues_slot=null;
+         }
+       }
+       if(x<965&&x>905&&y<450&&y>400){
+         //caruta
+       }
+       if(x<1070&&x>1020&&y<450&&y>400){
+         //sac de dormit
+       }
+       if(x<845&&x>795&&y<450&&y>400){
+         // call
+       }
+       if(x<845&&x>795&&y<210&&y>160){
+         // cercel stanga
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="earring"){
+                if(this.earring_slot1==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.earring_slot1=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.earring_slot1.hp!=null){
+                     this.max_helth-=this.earring_slot1.hp;
+                   }
+                   if(this.earring_slot1.en!=null) {
+                     this.max_energi-=this.earring_slot1.en;
+                   }
+                   if(this.earring_slot1.dmg!=null) {
+                     this.dmg-=this.earring_slot1.dmg;
+                   }
+                   if(this.earring_slot1.def!=null) {
+                     this.def-=this.earring_slot1.def;
+                   }
+                   if(this.earring_slot1.dex!=null) {
+                     this.dex-=this.earring_slot1.dex;
+                   }
+                   intermediar=clone(this.earring_slot1);
+                   this.earring_slot1=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.earring_slot1.hp!=null){
+                 this.max_helth-=this.earring_slot1.hp;
+               }
+               if(this.earring_slot1.en!=null) {
+                 this.max_energi-=this.earring_slot1.en;
+               }
+               if (this.earring_slot1.dmg!=null) {
+                 this.dmg-=this.earring_slot1.dmg;
+               }
+               if (this.earring_slot1.def!=null) {
+                 this.def-=this.earring_slot1.def;
+               }
+               if(this.earring_slot1.dex!=null) {
+                 this.dex-=this.earring_slot1.dex;
+               }
+               this.inventory.push(clone(this.earring_slot1));
+               this.earring_slot1=null;
+         }
+       }
+       if(x<1070&&x>1020&&y<210&&y>160){
+         // cercel dreapta
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="earring"){
+                if(this.earring_slot2==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.earring_slot2=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.earring_slot2.hp!=null){
+                     this.max_helth-=this.earring_slot2.hp;
+                   }
+                   if(this.earring_slot2.en!=null) {
+                     this.max_energi-=this.earring_slot2.en;
+                   }
+                   if(this.earring_slot2.dmg!=null) {
+                     this.dmg-=this.earring_slot2.dmg;
+                   }
+                   if(this.earring_slot2.def!=null) {
+                     this.def-=this.earring_slot2.def;
+                   }
+                   if(this.earring_slot2.dex!=null) {
+                     this.dex-=this.earring_slot2.dex;
+                   }
+                   intermediar=clone(this.earring_slot2);
+                   this.earring_slot2=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.earring_slot2.hp!=null){
+                 this.max_helth-=this.earring_slot2.hp;
+               }
+               if(this.earring_slot2.en!=null) {
+                 this.max_energi-=this.earring_slot2.en;
+               }
+               if(this.earring_slot2.dmg!=null) {
+                 this.dmg-=this.earring_slot2.dmg;
+               }
+               if(this.earring_slot2.def!=null) {
+                 this.def-=this.earring_slot2.def;
+               }
+               if(this.earring_slot2.dex!=null) {
+                 this.dex-=this.earring_slot2.dex;
+               }
+               this.inventory.push(clone(this.earring_slot2));
+               this.earring_slot2=null;
+         }
+       }
+       if(x<1070&&x>1020&&y<270&&y>220){
+         // pandantiv
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="neckles"){
+                if(this.neckles==null){
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                    this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                    this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                    this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                    this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                  }
+                  if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                    this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                  }
+                  this.neckles=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                  // this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                  // this.hand_r_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                  // this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }else{
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                     this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                     this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                     this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                     this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+                   }
+                   if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                     this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+                   }
+                   if(this.neckles.hp!=null){
+                     this.max_helth-=this.neckles.hp;
+                   }
+                   if(this.neckles.en!=null) {
+                     this.max_energi-=this.neckles.en;
+                   }
+                   if(this.neckles.dmg!=null) {
+                     this.dmg-=this.neckles.dmg;
+                   }
+                   if(this.neckles.def!=null) {
+                     this.def-=this.neckles.def;
+                   }
+                   if(this.neckles.dex!=null) {
+                     this.dex-=this.neckles.dex;
+                   }
+                   intermediar=clone(this.neckles);
+                   this.neckles=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+                   this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+                   this.selected[0]=-1;
+                   this.selected[1]=-1;
+                 }
+              }
+         }else{
+
+               if(this.neckles.hp!=null){
+                 this.max_helth-=this.neckles.hp;
+               }
+               if(this.neckles.en!=null) {
+                 this.max_energi-=this.neckles.en;
+               }
+               if(this.neckles.dmg!=null) {
+                 this.dmg-=this.neckles.dmg;
+               }
+               if(this.neckles.def!=null) {
+                 this.def-=this.neckles.def;
+               }
+               if(this.neckles.dex!=null) {
+                 this.dex-=this.neckles.dex;
+               }
+               this.inventory.push(clone(this.neckles));
+               this.neckles=null;
+         }
+       }
+
   }else{
       console.log("suntem in descriere") ;
     }
@@ -939,8 +1643,8 @@ function clickt(x,y){
         center.x=cadran.coloana*100-50+(cadran.coloana-1)*50;
         center.y=cadran.linie*100-50;
       }else if(z===2){
-        center.x=cadran.coloana*150-175;
-        center.y=cadran.linie*100;
+        center.x=(cadran.coloana*150)-175;
+        center.y=cadran.linie*100-100;
       }else if(z===3){
         center.x=cadran.coloana*150-175;
         center.y=cadran.linie*100+100;
@@ -951,7 +1655,7 @@ function clickt(x,y){
           center.x=(cadran.coloana+1)*150-175;
           center.y=cadran.linie*100-100;
         }
-      };
+    };
       // un fel de raza
       var r=47;
       cadran.linie=Math.floor(y/100)+1;
@@ -961,22 +1665,22 @@ function clickt(x,y){
       defcenter(1);
       // console.log(center);
       if(inHexagon(center,x,y)){
+
         coordonate.i=(cadran.linie-1)*2;
         coordonate.j=(cadran.coloana-1);
       }
       else{
         defcenter(2);
-        // console.log(center);
-        // console.log(center);
+
         if(inHexagon(center,x,y)){
+
           coordonate.i=(cadran.linie-1)*2-1;
           coordonate.j=(cadran.coloana-1)-1;//aici se refera de la spatiile din cadranu precedent
         }
         else{
           defcenter(3);
-          // console.log(center);
           if(inHexagon(center,x,y)){
-            coordonate.i=(cadran.linie-1)*2+1;
+            coordonate.i=(cadran.linie)*2+1;
             coordonate.j=(cadran.coloana-1)-1;
           }
           else{
@@ -1083,6 +1787,7 @@ function clickt(x,y){
 
       for(i=0;i<player.inventory.length;i++){
         j=i%10;
+        k=Math.floor(i/10);
         x=170+j*50+(j+1)*10;
         y=50*k+10*(k+1)+150;
         c.beginPath();
@@ -1255,7 +1960,7 @@ function clickt(x,y){
         my_pic3.src=player.earring_slot2.href;
         c.drawImage(my_pic3,1020,160);
       }
-      if (player.necckles==null){
+      if (player.neckles==null){
         c.beginPath();
         var my_pic3=new Image();
         my_pic3.src="img/neckles.png";
@@ -1263,7 +1968,7 @@ function clickt(x,y){
       }else{
         c.beginPath();
         var my_pic3=new Image();
-          my_pic3.src=player.necckles.href;
+        my_pic3.src=player.neckles.href;
         c.drawImage(my_pic3,1020,220);
       }
       if (player.torso_slot==null){
@@ -1363,7 +2068,7 @@ function clickt(x,y){
       c.fill();
       // de aici in jos desenam iteme
   }
-    function rendermap(){
+  function rendermap(){
         for(i=0;i<mat.length;i+=1){x=0;y=0
           for(j=0;j<mat[i].length;j+=1){
             if(i%2===0){x=50*j+100*j;}
@@ -1385,7 +2090,7 @@ function clickt(x,y){
            };
       };
       }
-    function renderfoodpanel(){
+  function renderfoodpanel(){
             c.beginPath();
             c.rect(70,50,310,430);
             c.fillStyle="rgba(50,50,50,0.95)";

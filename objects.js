@@ -59,28 +59,28 @@ var mat=[[1,1,1,1,1,1,1,1],
          [1,1,2,1,1,1,1,],
          [1,1,1,1,1,1,1,1],
          [1,1,1,1,1,1,1,],
-         [1,1,1,1,1,1,1,1],
+         [1,1,1,1,2,1,1,1],
          [1,1,1,1,1,1,1,],
          [1,1,1,1,1,1,1,1],
-         [1,1,1,1,1,1,1,],
-         [1,1,1,1,1,1,1,1],
-         [1,1,1,1,1,1,1,],
-         [1,1,1,1,1,1,1,1]];
+         [1,1,1,1,2,1,1,],
+         [1,1,2,1,1,1,1,1],
+         [1,1,1,2,1,1,1,],
+         [1,1,1,1,1,2,1,1]];
 
 //trebuie refacute toate imagineile si corectate in options chestii TODO
-var hexagoane=[{type:"grass",    options:{shop:false,cooking:true,nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["loot1","loot2","hunt_lite","vegetables","s_monster","m_monster"],batle_feeld:"" },                               speed:1.2,ref:"img/green-terain.png"},
+var hexagoane=[{type:"grass",    options:{shop:false,cooking:true,nr:3,camp:["fire","bag","temperate"],eat:true,cauta:["loot1","loot2","hunt_lite","vegetables","s_monster","m_monster"],batle_feeld:"" },          speed:1.2,ref:"img/green-terain.png"},
                {type:"desert",   options:{shop:false,cooking:true,nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","m_monster"] ,deforest:["twigs","wod"]},            speed:0.9,ref:"img/orange-terain.png"},
                {type:"jungle",  options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["twigs","wod","fruits","bunny","medium_treasure","lite_monster"],deforest:["twigs","wod"] },speed:0.7,ref:"img/orange-terain.png"},
                {type:"forest",  options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"],deforest:["twigs","wod"] },         speed:1,ref:"img/orange-terain.png"},
                {type:"swamp",   options:{shop:false,cooking:true,nr:3,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                             speed:0.5,ref:"img/orange-terain.png"},
-               {type:"mountain",options:{shop:false,cooking:true,nr:4,camp:["no_fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},              speed:0.5,ref:"img/orange-terain.png"},
+               {type:"mountain",options:{shop:false,cooking:true,nr:4,camp:["fire","bag","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","big_treasure","lite_monster"] ,mine:["","",""]},              speed:0.5,ref:"img/orange-terain.png"},
                {type:"hill",     options:{shop:false,cooking:true,nr:3,camp:["fire","bag","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                    speed:0.9,ref:"img/orange-terain.png"},
-               {type:"inn",      options:{shop:false,cooking:true,nr:3,camp:["fire","inn","Cold"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                    speed:2,ref:"img/orange-terain.png"},
+               {type:"inn",      options:{shop:false,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                    speed:2,ref:"img/orange-terain.png"},
                {type:"pasture",  options:{shop:false,cooking:true,nr:4,camp:["fire","inn","temperate"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["shepherd","build"]},   speed:2,ref:"img/orange-terain.png"},
                {type:"stables",  options:{shop:false,cooking:true,nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , worck:["clean","build"] },          speed:2,ref:"img/orange-terain.png"},
                {type:"home",     options:{shop:false,cooking:true,nr:4,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] , build:"cest"},                      speed:2,ref:"img/orange-terain.png"},
                {type:"shop",     options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"], craft:true },                         speed:2,ref:"img/orange-terain.png"},
                {type:"warckshop",options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["pig","sheep","buny","bunny","lite_treasure","lite_monster"] },                                     speed:2,ref:"img/orange-terain.png"},
                {type:"farm",     options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","s_monster"] , worck:["clean","build"] },           speed:2,ref:"img/farm-terain.png"},
-               {type:"palace",  options:{shop:true,cooking:true,nr:3,camp:["no-fire","inn","warm"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","s_monster"] },                                   speed:2,ref:"img/castel-terain.png"}
+               {type:"palace",  options:{shop:true,cooking:true,nr:3,camp:["fire","inn","warm"],eat:true,cauta:["loot2","loot3","loot4","loot5","s_monster","s_monster"] },                                   speed:2,ref:"img/castel-terain.png"}
              ];

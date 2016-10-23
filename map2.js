@@ -177,10 +177,11 @@ var player={
       var addenergi=0;
       //aici trebuie facuta dormirea(recuperarea de energie)
       //daca esti in oras dormi la in in daca ai bani daca nu pe strada
-    if(hexagoane[mat[this.i][this.j]-1].options.camp[2]==="inn"){
-      if(thi.silvar>=5){
+    if(hexagoane[mat[this.i][this.j]-1].options.camp[1]==="inn"){
+      if(this.silvar>=5){
           this.silvar-=5;
           f+=10;
+          console.log(f);
         }else if(this.gold>=1){
           this.silvar+=95;
           this.gold-=1;
@@ -239,7 +240,7 @@ var player={
     var noroc=dice();
     renders.d1=noroc;
     var i ;
-    var string=hexagoane[mat[this.i][this.j]].options.cauta[noroc-1];
+    var string=hexagoane[mat[this.i][this.j]-1].options.cauta[noroc];
 
     console.log(string);
     switch (string) {

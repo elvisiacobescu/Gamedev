@@ -34,36 +34,20 @@ var player={
   sclickt: 0,
   nextloop: 5158000,
   time: 2548654,
-  energi : 25,
+  energi : 1,
   max_energi:25,
-  silvar:5,
-  gold:0,
+  silvar:20,
+  gold:150,
   foame: 5,
   max_foame:30,
   self:0,
   twigs:1,
-  inventory:[{name:"Cover",def:1,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:2,modi:2},
-         {name:"Lether glovs",def:3,href:"img/armur/l_glovs1.png",type:"glovs-armur",value:10,modi:2},
-         {name:"coif",def:3,href:"img/armur/hed_armur_2.png",type:"hed-armur",value:10,modi:2},
-         {name:"Worn pants",def:3,href:"img/armur/pants1.png",type:"leg-armur",value:10,modi:2},
-         {name:"cloth armur",def:5,href:"img/armur/bodi_armur_2.png",type:"bodi-armur",value:20,modi:2},
-         {name:"Lite boots",def:3,href:"img/armur/boots2.png",type:"fit-armur",value:10,modi:2},
-         {name:"Old ring",hp:1,en:1,href:"img/julary/ring1.png",type:"ring",value:5},
-         {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:5},
-         {name:"wod_sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},
-         {name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]},
-         {name:"bred",foame: 10,energie:0 , href:"img/bred.png",type:"food",q:4,recipe:[2,3]},
-         {name:"wariar glovs",def:5,href:"img/armur/l_glovs2.png",type:"glovs-armur",value:10,modi:2},
-         {name:"lite armur",def:15,href:"img/armur/bodi_armur_1.png",type:"bodi-armur",value:30,modi:2},
-         {name:"Old earring",hp:1,en:1,href:"img/julary/earring1.png",type:"earring",value:15,modi:2},
-         {name:"Old iron earring",dmg:1,en:2,hp:1,href:"img/julary/earring2.png",type:"earring",value:25,modi:2},
-         {name:"Old lether choker",dmg:1,dex:2,hp:1,href:"img/julary/neck1.png",type:"neckles",value:35,modi:2},
-         {name:"Bone neckles",dmg:1,dex:2,hp:1,href:"img/julary/neck2.png",type:"neckles",value:40,modi:2}],
+  inventory:[],
   status:{},
   max_inventory:30,
   torso_slot:null,
   hands_slot:null,
-  hand_l_slot:{name:"wod_sord",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:6},
+  hand_l_slot:{name:"iron_sword",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:6},
   hand_r_slot:null,
   had_slot:null,
   pents_slot:null,
@@ -238,10 +222,14 @@ var player={
         //aici se face co cautare face self=0 important
     // console.log("caut");
     var noroc=dice();
-    renders.d1=noroc;
+    renders.d1=noroc-1;
     var i ;
     var string=hexagoane[mat[this.i][this.j]-1].options.cauta[noroc];
-
+     //LOTING
+    if(this.energi<0.50){
+    this.warning==1;
+    this.self=0;}
+    else{
     console.log(string);
     switch (string) {
       case "loot1":
@@ -249,11 +237,13 @@ var player={
             this.self=3;//(self 3 e pentru lootingscreen)
             var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
             this.loot.push(clone(obj));
+            this.energi-=0.5;
         break;
       case "loot2":
       var loot =loot2();
         this.self=3;
-          var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
+        var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
+          this.energi-=0.5;
         this.loot.push(clone(obj));
          break;
       case "loot3":
@@ -261,47 +251,72 @@ var player={
         this.self=3;
           var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
         this.loot.push(clone(obj ));
+          this.energi-=0.5;
         break;
       case "loot4":
       var loot =loot4();
         this.self=3;
         this.loot.push(clone(obj));
+          this.energi-=0.5;
         break;
       case "loot5":
       var loot =loot5();
         this.self=3;
         this.loot.push(clone(obj));
+          this.energi-=0.5;
          break;
       case "loot6":
       var loot =loot6();
         this.self=3;
         this.loot.push(clone(obj));
+          this.energi-=0.5;
          break;
       case "s_monster":
+        this.energi-=0.5;
           break;
       case "m_monster":
+        this.energi-=0.5;
           break;
       case "l_monster":
+        this.energi-=0.5;
           break;
       case "B_monster":
+        this.energi-=0.5;
           break;
       case "B_monster":
+        this.energi-=0.5;
           break;
       case "guard":
+        this.energi-=0.5;
           break;
       case "hunt_lite":
+        this.energi-=0.5;
           break;
       case "hunt_have":
+        this.energi-=0.5;
           break;
       case "wood":
+        this.energi-=0.5;
+          break;
+      case "vegetables":
+        this.energi-=0.5;
+            var a=[{name:"bred",foame: 9,energie:0,href:"img/bred.png",type:"food",q:1,max_q:10,recipe:[2,3],value:5},
+                            {name:"faina",foame: 5,energie:0,href:"img/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:5},
+                            {name:"sendvici",foame:20,energie:5,href:"img/bred.png",type:"food",q:1,max_q:10,value:5},{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:0,max_q:10,recipe:[5,6],value:5}]
+            var rand=random(1,a.length);
+            this.loot.push(clone(a[rand-1]));
+            this.self=3;
           break;
       case "twigs":
+        this.energi-=0.5;
           var num=random(1,3);
           this.twigs+=num;
           this.self=4;
           break;
-
     }
+    this.passtime(15*60);
+
+   }
     }else if(opt===7){
       //aici se face chestii in meniu inclusiv face self=0
 
@@ -407,91 +422,91 @@ var player={
      console.log("suntem in equipt") ;
       //echipam sabie in mana dreapta
        if(x<1070&&x>1020&&y<330&&y>280){
-           // console.log("am incercat sa echipam o sabie in mana dreapta");
-              if(this.selected[0]!=-1 && this.selected[1]!=-1){
-              if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"||this.inventory[this.selected[0]*10+this.selected[1]].type==="sheeld"){
-                  if(this.hand_l_slot==null){
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
-                      this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
-                      this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
-                      this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
-                      this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
-                        this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
-                    }
-
-                    this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
-                    this.inventory.splice(this.selected[0]*10+this.selected[1],1);
-                    this.selected[0]=-1;
-                    this.selected[1]=-1;
-                  }else{
-                    var intermediar;
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
-                      this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
-                      this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
-                      this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
-                      this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
-                    }
-                    if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
-                       this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
-                    }
-                    if(this.hand_l_slot.hp!=null){
-                      this.max_helth-=this.hand_l_slot.hp;
-                    }
-                    if(this.hand_l_slot.en!=null) {
-                      this.max_energi-=this.hand_l_slot.en;
-                    }
-                    if(this.hand_l_slot.dmg!=null) {
-                      this.dmg-=this.hand_l_slot.dmg;
-                    }
-                    if(this.hand_l_slot.def!=null) {
-                      this.def-=this.hand_l_slot.def;
-                    }
-                    if(this.hand_l_slot.dex!=null) {
-                      this.dex-=this.hand_l_slot.dex;
-                    }
-                    intermediar=clone(this.hand_l_slot);
-                    this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
-                    this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
-                    this.selected[0]=-1;
-                    this.selected[1]=-1;
-                  }
-                 }
-               }else{
-                 if(this.hand_l_slot.hp!=null){
-                   this.max_helth-=this.hand_l_slot.hp;
-                 }
-                 if(this.hand_l_slot.en!=null) {
-                   this.max_energi-=this.hand_l_slot.en;
-                 }
-                 if(this.hand_l_slot.dmg!=null) {
-                   this.dmg-=this.hand_l_slot.dmg;
-                 }
-                 if(this.hand_l_slot.def!=null) {
-                   this.def-=this.hand_l_slot.def;
-                 }
-                 if(this.hand_l_slot.dex!=null) {
-                   this.dex-=this.hand_l_slot.dex;
-                 }
-                 this.inventory.push(clone(this.hand_l_slot));
-                 this.hand_l_slot=null;
+         if(this.selected[0]!=-1 && this.selected[1]!=-1){
+         if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"||this.inventory[this.selected[0]*10+this.selected[1]].type==="sheeld"){
+             if(this.hand_l_slot==null){
+               if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                 this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
                }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                 this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                 this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                 this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                   this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+               }
+
+               this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+               this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+               this.selected[0]=-1;
+               this.selected[1]=-1;
+             }else{
+               var intermediar;
+               if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null){
+                 this.max_helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null) {
+                 this.max_energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].dmg!=null) {
+                 this.dmg+=this.inventory[this.selected[0]*10+this.selected[1]].dmg;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].def!=null) {
+                 this.def+=this.inventory[this.selected[0]*10+this.selected[1]].def;
+               }
+               if(this.inventory[this.selected[0]*10+this.selected[1]].dex!=null) {
+                  this.dex+=this.inventory[this.selected[0]*10+this.selected[1]].dex;
+               }
+               if(this.hand_l_slot.hp!=null){
+                 this.max_helth-=this.hand_l_slot.hp;
+               }
+               if(this.hand_l_slot.en!=null) {
+                 this.max_energi-=this.hand_l_slot.en;
+               }
+               if(this.hand_l_slot.dmg!=null) {
+                 this.dmg-=this.hand_l_slot.dmg;
+               }
+               if(this.hand_l_slot.def!=null) {
+                 this.def-=this.hand_l_slot.def;
+               }
+               if(this.hand_l_slot.dex!=null) {
+                 this.dex-=this.hand_l_slot.dex;
+               }
+               intermediar=clone(this.hand_l_slot);
+               this.hand_l_slot=clone(this.inventory[this.selected[0]*10+this.selected[1]]);
+               this.inventory[this.selected[0]*10+this.selected[1]]=clone(intermediar);
+               this.selected[0]=-1;
+               this.selected[1]=-1;
+             }
+            }
+          }else{
+            if(this.hand_l_slot.hp!=null){
+              this.max_helth-=this.hand_l_slot.hp;
+            }
+            if(this.hand_l_slot.en!=null) {
+              this.max_energi-=this.hand_l_slot.en;
+            }
+            if(this.hand_l_slot.dmg!=null) {
+              this.dmg-=this.hand_l_slot.dmg;
+            }
+            if(this.hand_l_slot.def!=null) {
+              this.def-=this.hand_l_slot.def;
+            }
+            if(this.hand_l_slot.dex!=null) {
+              this.dex-=this.hand_l_slot.dex;
+            }
+            this.inventory.push(clone(this.hand_l_slot));
+            this.hand_l_slot=null;
+          }
+
        };
        if(x<845&&x>795&&y<330&&y>280){
-        // console.log("am incercat sa echipam o sabie in mana dreapta");
+        console.log("am incercat sa echipam o sabie in mana dreapta");
         if(this.selected[0]!=-1 && this.selected[1]!=-1){
         if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon" || this.inventory[this.selected[0]*10+this.selected[1]].type==="sheeld"){
               if(this.hand_r_slot==null){
@@ -573,8 +588,6 @@ var player={
            this.inventory.push(clone(this.hand_r_slot));
            this.hand_r_slot=null;
           }
-
-
        }
        if(x<845&&x>795&&y<390&&y>340){
         //  console.log( "am apasatpe ring 1");
@@ -1448,12 +1461,82 @@ var player={
          }
        }
 
-  }else{
+     }else{
       console.log("suntem in descriere") ;
     }
+  },
+  incaseaza:function(x){
+    if(this.silvar+x>100){
+      this.gold=Math.floor((this.silvar+x)/100);
+      this.silvar=(this.silvar+x)%100;
+    //  console.log((this.silvar+x)%100);
+    }else
+    {
+      this.silvar+=x;
+    }
+  },
+  plateste:function(x)
+   {
+    var gold=Math.floor(x/100);
+    var silver;
+    if(this.silvar-(x-gold*100)<0)
+    {
+      gold+1;
+      silver=100+this.silvar-(x-gold*100);
+    }
+    else
+    {
+      silver=this.silvar-(x-gold*100);
+    }
+    if(this.gold>=gold && this.silvar>=silver)
+    {  this.gold-=gold;
+      this.silvar-=silver;
+      return true;
+   }else{return false;}
+  },
+  findaction:function(x,y)
+    {
+    //aici treuie pusa conditia sa le ia pe  toate
+    if(x>460&&x<610&&y>450&&y<510)
+      {
+        var i;
+        console.log(this.loot.length);
+        for(i=0;i<this.loot.length;i++)
+        {
 
+          if(typeof this.loot[i]==="number")
+          {
+              console.log("iau banuti"+this.loot[i]);
+            this.incaseaza(this.loot[i])
+          }else
+          if(typeof this.loot[i]==="object" && this.loot[i]!=null)
+          {console.log("intru aici");
+            this.inventory.push(clone(this.loot[i]));
+          }
+
+        }
+        this.loot=[];
+        this.self=0;
+      }else
+    if(x>650&&x<800&&y>450&&y<510)
+        {
+        //am apasat pe arunca gunoaiele astea
+          console.log("am apasat pe arunca gunoaiele astea");
+            this.loot=[];
+            this.self=0;
+          }else
+    if(x>460&&x<510&&y>390&&y<440){
+      if(typeof this.loot[0]=="number"){
+        this.incaseaza(this.loot[0]);
+      }else{
+        this.inventory.push(clone(this.loot[0]));
+      }
+      this.loot.splice(0,1);
+
+    }
   }
-};
+
+ };
 // };
 //asta doar ca sa setem trebuie facuta o functie pt setarea initial
 player.setposition(3,0);
@@ -2132,8 +2215,6 @@ function clickt(x,y){
               };
     };
 
-
-
       //aici o sa se randeze optiunile
   function renderoptions(i,j){
           var hexaop=hexagoane[mat[i][j]-1].options;
@@ -2250,7 +2331,7 @@ function clickt(x,y){
     c.fillText("TRESH ALL", 670, 485);
 
     }
-
+    if(player.loot.length===0){player.self=0}
     for(i=0;i<n;i++){
         y=380+10;
         x=450+50*i+10*(i+1);
@@ -2300,7 +2381,6 @@ function clickt(x,y){
 
 
     };
-
   function renderplayer(){
           x=0 ,y=0;
           i=player.i;
@@ -2357,7 +2437,7 @@ function clickt(x,y){
        requestAnimFrame(animLoop);
        render();
   })();
-   function getMousePos(canvas, evt) {
+  function getMousePos(canvas, evt) {
        var rect = canvas.getBoundingClientRect();
        return {
          x: evt.clientX - rect.left,
@@ -2388,7 +2468,10 @@ function clickt(x,y){
           }else if(player.self===5)
           {
             player.invaction(x,y);
+          }else if(player.self===3){
+            player.findaction(x,y)
           }
+
     }, false);
 })();
 function clone(obj) {

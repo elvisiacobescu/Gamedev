@@ -75,7 +75,33 @@
      c_2.beginPath();
      var my_pic=new Image();
      my_pic.src="img/energi2.png";
-     c_2.drawImage(my_pic,20,276)
+     c_2.drawImage(my_pic,20,276);
+     //deseneaza poartofelul
+     c_2.beginPath();
+     c_2.rect(10,322,140,45);
+     c_2.stroke();
+     c_2.beginPath();
+     c_2.rect(10,387,140,45);
+     c_2.stroke();
+     c_2.beginPath();
+     var my_pic=new Image();
+     my_pic.src="img/5-silvar.png";
+     c_2.drawImage(my_pic,20,320);
+     var my_pic=new Image();
+     c_2.beginPath();
+     my_pic.src="img/5-gold.png";
+     c_2.drawImage(my_pic,20,385);
+     var my_pic=new Image();
+     c_2.beginPath();
+     c_2.fillStyle = "black";
+     c_2.font = "20px Verdana";
+     c_2.fillText(player.silvar, 75, 353);
+     c_2.stroke();
+     c_2.beginPath();
+     c_2.fillStyle = "black";
+     c_2.font = "20px Verdana";
+     c_2.fillText(player.gold, 75, 418);
+     c_2.stroke();
      }
 }
 (function animLoop(){

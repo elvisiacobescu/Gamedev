@@ -8,33 +8,49 @@ var retete={
 
 }
 
-var renders={
-  d1:0,
-  d2:0,
-  d3:0,
-  d4:0,
-  d5:0,
-  d6:0
+var betle={
+  c:0,//daca vreau sa beau
+  runf:1,
+  runf_anim:0,
+  m_l:0,
+  p_l:0,
+  m_init_h:0,
+  md:null,//monster dice number
+  pd:null,//plaer dice number
+  pd1:null,
+  pd2:null,
+  pd3:null,
+  pd4:null,
+  pd5:null,
+  pd6:null,
+  md1:null,
+  md2:null,
+  md3:null,
+  md4:null,
+  md5:null,
+  md6:null
 }
 
 var player={
   selected:[-1,-1],
   n_monster:null,
   helth :50,
-  dmg:0,
-  def:0,
-  dex:1,
+  dmg:2,
+  def:2,
+  dex:3,
   max_helth : 101,
   name : "me",
   i : 0,
   j : 0,
   k : 0,
   l : 0,
+  exp:0,
+  lvl:0,
   warning:0,
   sclickt: 0,
   nextloop: 5158000,
   time: 2548654,
-  energi : 1,
+  energi : 25,
   max_energi:25,
   silvar:20,
   gold:150,
@@ -64,7 +80,7 @@ var player={
   carage_slot:null,
   warning:0,
   warning_fader:0,
-  loot:[1,2,3,{name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]}],
+  loot:[],
   setposition : function(x,k){
     this.i=x;
     this.j=k;
@@ -222,9 +238,9 @@ var player={
         //aici se face co cautare face self=0 important
     // console.log("caut");
     var noroc=dice();
-    renders.d1=noroc-1;
+    //renders.d1=noroc-1;
     var i ;
-    var string=hexagoane[mat[this.i][this.j]-1].options.cauta[noroc];
+    var string=hexagoane[mat[this.i][this.j]-1].options.cauta[noroc-1];
      //LOTING
     if(this.energi<0.50){
     this.warning==1;
@@ -233,10 +249,8 @@ var player={
     console.log(string);
     switch (string) {
       case "loot1":
-          var loot =loot1();
+            loot1();
             this.self=3;//(self 3 e pentru lootingscreen)
-            var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
-            this.loot.push(clone(obj));
             this.energi-=0.5;
         break;
       case "loot2":
@@ -247,7 +261,7 @@ var player={
         this.loot.push(clone(obj));
          break;
       case "loot3":
-      var loot =loot3();
+        loot3();
         this.self=3;
           var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
         this.loot.push(clone(obj ));
@@ -272,6 +286,9 @@ var player={
           this.energi-=0.5;
          break;
       case "s_monster":
+        this.n_monster=clone(monster.s_monster[random(0,monster.s_monster.length)])
+        betle.m_init_h=this.n_monster.hp;
+        initfight();
         this.energi-=0.5;
           break;
       case "m_monster":
@@ -1534,14 +1551,139 @@ var player={
       this.loot.splice(0,1);
 
     }
-  }
+  },
+  addxp:function(z)
+    {
+      this.exp+=z;
+      if(this.exp>lvl[this.lvl])
+      {
+        this.lvl++;
+      };
+    }
 
  };
 // };
 //asta doar ca sa setem trebuie facuta o functie pt setarea initial
 player.setposition(3,0);
+function initfight(){
+      //vede cine are mai mare dexteritatea
+      var n=1 ,m=1 , s=player.n_monster.dex;
+      if(player.n_monster.dex>player.dex){
+        m=Math.floor(player.n_monster.dex/player.dex)+1;
+      }else if(player.dex>player.n_monster.dex){
+        n=Math.floor(player.dex/player.n_monster.dex)+1;
+      }
+      if(n>6){
+        betle.pd=6;
+      }else{
+        betle.pd=n;
+      }
+      if(m>6){
+        betle.pm=6;
+      }else{
+        betle.pm=m;
+      }
+      var i;
+      for (var i = 0; i < n; i++) {
+            switch (i) {
+              case 0:betle.pd1=0;
+                break;
+              case 1:betle.pd2=0;
+                break;
+              case 2:betle.pd3=0;
+                break;
+              case 3:betle.pd4=0;
+                  break;
+              case 4:betle.pd5=0;
+                break;
+              case 5:betle.pd6=0;
+                  break;
+              default:
+
+            }
+          };
+      for (var i = 0; i < m; i++) {
+                switch (i) {
+                  case 0:betle.md1=0;
+                    break;
+                  case 1:betle.md2=0;
+                    break;
+                  case 2:betle.md3=0;
+                    break;
+                  case 3:betle.md4=0;
+                      break;
+                  case 4:betle.md5=0;
+                    break;
+                  case 5:betle.md6=0;
+                      break;
+                  default:
+
+                }
+              }
+
+}
+function killdmonster(){
+  //adauga loot
+  var i;
+  for (var i = 0; i < player.n_monster.loot.length; i++) {
+    switch (player.n_monster.loot[i]) {
+      case "l1":loot1();
+        break;
+      case "l2":loot2();
+        break;
+      case "l3":loot3();
+        break;
+      case "l4":loot4();
+        break;
+      case "l5":loot5();
+        break;
+      case "l6":loot6();
+        break;
+      case "l7":loot7();
+        break;
+      case "l7":loot8();
+        break;
+    }
+  }
+  //deschide lootscrean annd clouse batle sceen
+  player.self=3;
+  // scoate monstru din jucaotr
+  player.n_monster=null;
+}
 function loot1(){
-  return 1;
+  var list=[];
+  list.push(1);list.push(2);list.push(3);list.push(4);list.push(5);list.push(6);
+  var i;
+  //pune mancarea pe care ar putea sa o gaseasca
+  for (var i = 0; i < 5; i++) {
+    list.push(clone(stuf.food[i]));
+  }
+  //pune itemele pe care ar putea sa le gaseasca
+  list.push(clone(stuf.wepan[0]));
+  list.push(clone(stuf.armur[0]));
+  list.push(clone(stuf.armur[1]));
+  list.push(7);
+  list.push(clone(stuf.armur[2]));
+  list.push(clone(stuf.armur[3]));
+  list.push(8);
+  list.push(clone(stuf.armur[4]));
+  list.push(clone(stuf.armur[5]));
+  list.push(clone(stuf.julary[0]));
+  list.push(9);
+  list.push(clone(stuf.julary[2]));
+  list.push(clone(stuf.julary[4]));
+  list.push(10);
+  // ar mai trebui adaugate si alte iteme cand sunt facute
+
+  // puen in lu itemu
+  var ran=random(0,list.length);
+
+  if(typeof list[ran] === "number")
+  {
+    player.loot.push(list[ran]);
+  } else {
+      player.loot.push(clone(list[ran]));
+  }
 }
 function loot2(){
   return 2;
@@ -1807,6 +1949,10 @@ function clickt(x,y){
        rendermap();
        renderplayer();
        renderwarning();
+       if(player.n_monster!=null)
+       {
+         player.self=100;
+       }
        if(player.self===1){
          renderoptions(player.i,player.j);
        };
@@ -1815,11 +1961,807 @@ function clickt(x,y){
        };
        if(player.self===3){
          renderloot();
-       }if(player.self===5){
+       }
+       if(player.self===5){
          renderinventory();
+       }
+       if(player.self===100){
+         renderbatleground();
        }
        renderwarning();
       };
+  function renderbatleground(){
+    //randeaza cadru exterior
+    c.beginPath();
+    c.rect(250,150,600,600);
+    c.fillStyle="rgba(50,50,50,1)";
+    c.stroke();
+    c.fill();
+    //randeaza partea stanga
+    c.beginPath();
+    c.rect(250,150,300,300);
+    c.fillStyle="rgba(50,50,50,1)";
+    c.stroke();
+    c.fill();
+    //randeaza partea dreapta
+    c.beginPath();
+    c.rect(550,150,300,300);
+    c.fillStyle="rgba(50,50,50,1)";
+    c.stroke();
+    c.fill();
+    //aici trebuie pus backrounurile
+    // {}
+    //aici trebuie pusi monstri
+    if(player.n_monster.type==="s")
+      {
+        c.beginPath();
+        var my_pic=new Image();
+        my_pic.src=player.n_monster.href;
+        c.drawImage(my_pic,635,300);
+
+      }else if(player.n_monster.type==="m"){
+        c.beginPath();
+        var my_pic=new Image();
+        my_pic.src=player.n_monster.href;
+        c.drawImage(my_pic,625,250);
+
+      }
+      else if(player.n_monster.type==="l"){
+        c.beginPath();
+        var my_pic=new Image();
+        my_pic.src=player.n_monster.href;
+        c.drawImage(my_pic,610,200);
+
+      }
+    //randeaza vietile
+    c.beginPath();
+    var my_pic=new Image();
+    my_pic.src="img/heart.png";
+    c.drawImage(my_pic,270,170)
+    c.beginPath();
+    var my_pic=new Image();
+    my_pic.src="img/heart.png";
+    c.drawImage(my_pic,570,170);
+    c.beginPath();
+    c.rect(310,168,200/(player.max_helth/player.helth),30);
+    c.fillStyle = "red";
+    c.fill();
+    c.beginPath();
+    c.rect(310,168,200,30);
+    c.stroke();
+    c.beginPath();
+    c.rect(610,168,200/(betle.m_init_h/player.n_monster.hp),30);
+    c.fillStyle = "red";
+    c.fill();
+    c.beginPath();
+    c.rect(610,168,200,30);
+    c.stroke();
+    c.beginPath();
+    c.fillStyle = "white";
+    c.font = "14px Verdana";
+    c.fillText(Math.floor(player.helth*10)/10+"/"+player.max_helth+" ", 360, 188);
+    c.beginPath();
+    c.fillStyle = "white";
+    c.font = "14px Verdana";
+    c.fillText(Math.floor(player.n_monster.hp*10)/10+"/"+betle.m_init_h+" ", 660, 188);
+    c.beginPath();
+    c.fillStyle = "red";
+    c.font = "64px Verdana";
+    c.fillText("VS", 505, 320);
+    c.beginPath();
+    c.fillStyle = "red";
+    c.font = "20px Verdana";
+    c.fillText("-"+betle.p_l, 460, 220);
+    c.beginPath();
+    c.fillStyle = "red";
+    c.font = "20px Verdana";
+    c.fillText("-"+betle.m_l, 750, 220);
+    c.beginPath();
+    c.rect(250,450,190,130);
+    c.stroke();
+    c.beginPath();
+    c.rect(440,450,220,300);
+    c.stroke();
+    c.beginPath();
+    c.rect(660,450,190,130);
+    c.stroke();
+    //randeaza zarurile
+    var i;
+    for (var i = 0; i < 6; i++) {
+      switch (i) {
+        case 0:
+            if(betle.pd1==null){
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/no-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+            }else {
+              switch (betle.pd1) {
+                case 0:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/yes-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 1:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 2:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 3:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 4:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 5:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 6:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+              }
+            }
+              if(betle.md1==null){
+                c.beginPath();
+                // console.log(true);
+                var my_pic=new Image();
+                my_pic.src="img/no-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+              }else {
+                switch (betle.md1) {
+                  case 0:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/yes-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 1:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 2:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 3:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 4:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 5:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 6:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                }
+              }
+          break;
+        case 1:
+            if(betle.pd2==null){
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/no-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+            }else {
+              switch (betle.pd2) {
+                case 0:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/yes-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 1:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 2:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 3:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 4:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 5:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+                case 6:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,460);
+                  break;
+              }
+            }
+              if(betle.md2==null){
+                c.beginPath();
+                // console.log(true);
+                var my_pic=new Image();
+                my_pic.src="img/no-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+              }else {
+                switch (betle.md2) {
+                  case 0:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/yes-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 1:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 2:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 3:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 4:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 5:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                  case 6:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,460);
+                    break;
+                }
+              }
+          break;
+        case 2:
+          if(betle.pd3==null){
+            c.beginPath();
+            var my_pic=new Image();
+            my_pic.src="img/no-dice.png";
+            c.drawImage(my_pic,260+i*60,460);
+          }else {
+            switch (betle.pd3) {
+              case 0:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/yes-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+              case 1:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/1-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+              case 2:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/1-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+              case 3:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/1-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+              case 4:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/1-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+              case 5:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/1-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+              case 6:
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/1-dice.png";
+              c.drawImage(my_pic,260+i*60,460);
+                break;
+            }
+          }
+            if(betle.md3==null){
+              c.beginPath();
+              // console.log(true);
+              var my_pic=new Image();
+              my_pic.src="img/no-dice.png";
+              c.drawImage(my_pic,670+i*60,460);
+            }else {
+              switch (betle.md3) {
+                case 0:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/yes-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+                case 1:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+                case 2:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+                case 3:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+                case 4:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+                case 5:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+                case 6:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,670+i*60,460);
+                  break;
+              }
+            }
+          break;
+        case 3:
+          i-=3;
+            if(betle.pd4==null){
+              c.beginPath();
+              var my_pic=new Image();
+              my_pic.src="img/no-dice.png";
+              c.drawImage(my_pic,260+i*60,520);
+            }else {
+              switch (betle.pd4) {
+                case 0:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/yes-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+                case 1:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+                case 2:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+                case 3:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+                case 4:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+                case 5:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+                case 6:
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/1-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+                  break;
+              }
+            }
+              if(betle.md4==null){
+                c.beginPath();
+                // console.log(true);
+                var my_pic=new Image();
+                my_pic.src="img/no-dice.png";
+                c.drawImage(my_pic,670+i*60,520);
+              }else {
+                switch (betle.md4) {
+                  case 0:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/yes-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                  case 1:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                  case 2:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                  case 3:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                  case 4:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                  case 5:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                  case 6:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                    break;
+                }
+              }
+              i+=3;
+          break;
+        case 4:
+            i-=3;
+              if(betle.pd5==null){
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/no-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+              }else {
+                switch (betle.pd5) {
+                  case 0:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/yes-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 1:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 2:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 3:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 4:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 5:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 6:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                }
+              }
+                if(betle.md5==null){
+                  c.beginPath();
+                  // console.log(true);
+                  var my_pic=new Image();
+                  my_pic.src="img/no-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                }else {
+                  switch (betle.md5) {
+                    case 0:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/yes-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 1:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 2:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 3:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 4:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 5:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 6:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                  }
+                }
+                i+=3;
+          break;
+        case 5:
+            i-=3;
+              if(betle.pd6==null){
+                c.beginPath();
+                var my_pic=new Image();
+                my_pic.src="img/no-dice.png";
+                c.drawImage(my_pic,260+i*60,520);
+              }else {
+                switch (betle.pd6) {
+                  case 0:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/yes-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 1:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 2:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 3:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 4:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 5:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                  case 6:
+                  c.beginPath();
+                  var my_pic=new Image();
+                  my_pic.src="img/1-dice.png";
+                  c.drawImage(my_pic,260+i*60,520);
+                    break;
+                }
+              }
+                if(betle.md6==null){
+                  c.beginPath();
+                  // console.log(true);
+                  var my_pic=new Image();
+                  my_pic.src="img/no-dice.png";
+                  c.drawImage(my_pic,670+i*60,520);
+                }else {
+                  switch (betle.md6) {
+                    case 0:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/yes-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 1:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 2:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 3:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 4:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 5:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                    case 6:
+                    c.beginPath();
+                    var my_pic=new Image();
+                    my_pic.src="img/1-dice.png";
+                    c.drawImage(my_pic,670+i*60,520);
+                      break;
+                  }
+                }
+                i+=3;
+          break;
+      }
+    }
+    //randeaza butoanele
+    c.beginPath();
+    c.rect(470,480,160,60);
+    c.fillStyle="red";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    var my_pic=new Image();
+    my_pic.src="img/white_skull.png";
+    c.drawImage(my_pic,470,480);
+    c.beginPath();
+    c.fillStyle = "white";
+    c.font = "26px Verdana";
+    c.fillText("ATTACK", 530, 520);
+    c.beginPath();
+    c.rect(470,570,160,60);
+    c.fillStyle="blue";
+    c.stroke();
+    c.fill();
+    c.beginPath();
+    c.rect(470,660,160,60);
+    c.fillStyle="green";
+    c.stroke();
+    c.fill();
+    //randeaza descrierile
+    var color="white"
+    c.beginPath();
+    c.fillStyle = color;
+    c.font = "20px Verdana";
+    c.fillText("DMG: "+player.dmg, 260, 610);
+    var color="white"
+    c.beginPath();
+    c.fillStyle = color;
+    c.font = "20px Verdana";
+    c.fillText("DEF: "+player.def, 260, 668);
+    var color="white"
+    c.beginPath();
+    c.fillStyle = color;
+    c.font = "20px Verdana";
+    c.fillText("DEX: "+player.dex, 260, 735);
+    c.beginPath();
+    c.fillStyle = color;
+    c.font = "20px Verdana";
+    c.fillText("DMG: "+player.n_monster.dmg, 670, 610);
+    var color="white"
+    c.beginPath();
+    c.fillStyle = color;
+    c.font = "20px Verdana";
+    c.fillText("DEF: "+player.n_monster.def, 670, 668);
+    var color="white"
+    c.beginPath();
+    c.fillStyle = color;
+    c.font = "20px Verdana";
+    c.fillText("DEX: "+player.n_monster.dex, 670, 735);
+  }
   function renderinventory(){
         //randeaza suportu pentru elementele din meniu
         c.beginPath();

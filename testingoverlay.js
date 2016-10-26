@@ -102,7 +102,14 @@
      c_2.font = "20px Verdana";
      c_2.fillText(player.gold, 75, 418);
      c_2.stroke();
-     }
+   }else{
+     c_2.beginPath();
+     c_2.rect(0,0,300,1650);
+     // c_2.stroke();
+     c_2.fillStyle = "red";
+     c_2.fill();
+   }
+
 }
 (function animLoop(){
   requestAnimFrame(animLoop);

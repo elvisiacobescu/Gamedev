@@ -34,7 +34,7 @@ var betle={
 var player={
   selected:[-1,-1],
   n_monster:null,
-  helth :50,
+  helth :101,
   dmg:2,
   def:2,
   dex:3,
@@ -58,7 +58,20 @@ var player={
   max_foame:30,
   self:0,
   twigs:1,
-  inventory:[],
+  inventory:[  {name:"Badages",hp:15,en:null,href:"img/consumabile/smal-bandage.png",value:40,type:"consumable"},
+    {name:"Large Bandages",hp:25,en:null,href:"img/consumabile/large-bandage.png",value:55,type:"consumable"},
+    {name:"Smal Healthpeck",hp:50,en:null,href:"img/consumabile/smal-bandage.png",value:105,type:"consumable"},
+    {name:"Medium Healthpeck",hp:100,en:null,href:"img/consumabile/smal-bandage.png",value:205,type:"consumable"},
+    {name:"Largi Healthpeck",hp:150,en:null,href:"img/consumabile/smal-bandage.png",value:305,type:"consumable"},
+    {name:"Medical Cart",hp:200,en:null,href:"img/consumabile/smal-bandage.png",value:400,type:"consumable"},
+    {name:"Energi drinck S",hp:null,en:5,href:"img/consumabile/smalenergidrinck.png",value:30,type:"consumable"},
+    {name:"Energi drinck M",hp:null,en:15,href:"img/consumabile/mediumenergidrinck.png",value:90,type:"consumable"},
+    {name:"Energi drinck B",hp:null,en:30,href:"img/consumabile/largeenergidrinck.png",value:180,type:"consumable"},
+    {name:"Energi drinck G",hp:null,en:50,href:"img/consumabile/hugeenergidrinck.png",value:300,type:"consumable"},
+    {name:"pein medicine",hp:15,en:5,href:"img/consumabile/smal-bandage.png",value:70,type:"consumable"},
+    {name:"miracle drog",hp:25,en:10,href:"img/consumabile/potion1.png",value:130,type:"consumable"},
+    {name:"Strong potion",hp:50,en:10,href:"img/consumabile/potion2.png",value:170,type:"consumable"},
+    {name:"invicibil potion",hp:100,en:25,href:"img/consumabile/potion3.png",value:360,type:"consumable"}],
   status:{},
   max_inventory:30,
   torso_slot:null,
@@ -292,12 +305,21 @@ var player={
         this.energi-=0.5;
           break;
       case "m_monster":
+      this.n_monster=clone(monster.m_monster[random(0,monster.m_monster.length)])
+      betle.m_init_h=this.n_monster.hp;
+      initfight();
         this.energi-=0.5;
           break;
       case "l_monster":
+      this.n_monster=clone(monster.l_monster[random(0,monster.l_monster.length)])
+      betle.m_init_h=this.n_monster.hp;
+      initfight();
         this.energi-=0.5;
           break;
       case "B_monster":
+      this.n_monster=clone(monster.B_monster[random(0,monster.B_monster.length)])
+      betle.m_init_h=this.n_monster.hp;
+      initfight();
         this.energi-=0.5;
           break;
       case "B_monster":
@@ -1552,6 +1574,115 @@ var player={
 
     }
   },
+  atack:function(x,y){
+    if(x>465&&x<640&&y>480&&y<540)
+     {
+          // console.log("atakal");
+          this.passtime(10*60);
+          var i;
+          var p_dmg=0,m_dmg=0;
+          for (var i = 0; i < betle.pd; i++) {
+
+            var d =dice();
+            switch (i) {
+              case 0:betle.pd1=d;
+                break;
+              case 1:betle.pd2=d;
+                break;
+              case 2:betle.pd3=d;
+                break;
+              case 3:betle.pd4=d;
+                break;
+              case 4:betle.pd5=d;
+                break;
+              case 5:betle.pd6=d;
+                break;
+            }
+            p_dmg+=this.dmg*multiplaer(d);
+          }
+          for (var i = 0; i < betle.md; i++) {
+
+            var d =dice();
+            switch (i) {
+              case 0:betle.md1=d;
+                break;
+              case 1:betle.md2=d;
+                break;
+              case 2:betle.md3=d;
+                break;
+              case 3:betle.md4=d;
+                break;
+              case 4:betle.md5=d;
+                break;
+              case 5:betle.md6=d;
+                break;
+            }
+            m_dmg+=this.n_monster.dmg*multiplaer(d);
+          }
+          if(m_dmg>=this.def){
+          betle.p_l=m_dmg-this.def;
+          this.helth-=m_dmg-this.def;
+            }else{
+          betle.p_l=0;
+          this.helth-=0;
+            }
+          if(p_dmg>=this.n_monster.def){
+          betle.m_l=p_dmg-this.n_monster.def;
+          this.n_monster.hp-=p_dmg-this.n_monster.def;
+        }else{
+            betle.m_l=0;
+            this.n_monster.hp-=0;
+          }
+            if(this.helth<0)
+            {
+              this.deth();
+              this.self=0;
+              this.n_monster=null;
+            }else
+            if(this.n_monster.hp<0)
+            {
+              this.killdmonster();
+            }
+    }
+    if(x>465&&x<640&&y>570&&y<630)
+      {
+        if(this.energi>=5)
+        { var m_dmg=0;
+          this.passtime(2*60*60);
+          this.energi-=5;
+          for (var i = 0; i < betle.md; i++) {
+
+            var d =dice();
+            switch (i) {
+              case 0:betle.md1=d;
+                break;
+              case 1:betle.md2=d;
+                break;
+              case 2:betle.md3=d;
+                break;
+              case 3:betle.md4=d;
+                break;
+              case 4:betle.md5=d;
+                break;
+              case 5:betle.md6=d;
+                break;
+            }
+            m_dmg+=this.n_monster.dmg*multiplaer(d);
+          }
+          this.helth-=m_dmg/10;
+          if(this.helth<0)
+          {
+            this.deth();
+            this.self=0;
+            this.n_monster=null;
+            this.self=0;
+          }
+          console.log("fugi omulet fugi....");
+          this.n_monster=null;
+          this.self=0;
+        }
+      }
+  },
   addxp:function(z)
     {
       this.exp+=z;
@@ -1559,8 +1690,41 @@ var player={
       {
         this.lvl++;
       };
+    },
+  killdmonster:function()
+    {
+      //adauga loot
+      var i;
+      for (var i = 0; i < this.n_monster.lootnr; i++) {
+        var ran=random(0,2);
+        console.log("sunt in for"+i);
+        switch (this.n_monster.loot[ran]) {
+          case "l1":loot1();
+            break;
+          case "l2":loot2();
+            break;
+          case "l3":loot3();
+            break;
+          case "l4":loot4();
+            break;
+          case "l5":loot5();
+            break;
+          case "l6":loot6();
+            break;
+          case "l7":loot7();
+            break;
+          case "l8":loot8();
+            break;
+        }
+      }
+      //deschide lootscrean annd clouse batle sceen
+      player.n_monster=null;
+      player.self=3;
+      betle.pd1=null;betle.pd2=null;betle.pd3=null;betle.pd4=null;betle.pd5=null;betle.pd6=null;
+      betle.md1=null;betle.md2=null;betle.md3=null;betle.md4=null;betle.md5=null;betle.md6=null;
+      betle.m_l=0;
+      betle.p_l=0;
     }
-
  };
 // };
 //asta doar ca sa setem trebuie facuta o functie pt setarea initial
@@ -1579,9 +1743,9 @@ function initfight(){
         betle.pd=n;
       }
       if(m>6){
-        betle.pm=6;
+        betle.md=6;
       }else{
-        betle.pm=m;
+        betle.md=m;
       }
       var i;
       for (var i = 0; i < n; i++) {
@@ -1622,33 +1786,21 @@ function initfight(){
               }
 
 }
-function killdmonster(){
-  //adauga loot
-  var i;
-  for (var i = 0; i < player.n_monster.loot.length; i++) {
-    switch (player.n_monster.loot[i]) {
-      case "l1":loot1();
-        break;
-      case "l2":loot2();
-        break;
-      case "l3":loot3();
-        break;
-      case "l4":loot4();
-        break;
-      case "l5":loot5();
-        break;
-      case "l6":loot6();
-        break;
-      case "l7":loot7();
-        break;
-      case "l7":loot8();
-        break;
-    }
+function multiplaer(d){
+  switch (d) {
+    case 1:return 0.5;
+      break;
+    case 2:return 0.75;
+      break;
+    case 3:return 1;
+      break;
+    case 4:return 1.25;
+      break;
+    case 5:return 1.5;
+      break;
+    case 6:return 2;
+      break;
   }
-  //deschide lootscrean annd clouse batle sceen
-  player.self=3;
-  // scoate monstru din jucaotr
-  player.n_monster=null;
 }
 function loot1(){
   var list=[];
@@ -1685,8 +1837,41 @@ function loot1(){
       player.loot.push(clone(list[ran]));
   }
 }
+///loot 2 trebuie schimbat ... acum e facut in interesul functionarii TODO
 function loot2(){
-  return 2;
+  var list=[];
+  list.push(1);list.push(2);list.push(3);list.push(4);list.push(5);list.push(6);
+  var i;
+  //pune mancarea pe care ar putea sa o gaseasca
+  for (var i = 0; i < 5; i++) {
+    list.push(clone(stuf.food[i]));
+  }
+  //pune itemele pe care ar putea sa le gaseasca
+  list.push(clone(stuf.wepan[0]));
+  list.push(clone(stuf.armur[0]));
+  list.push(clone(stuf.armur[1]));
+  list.push(7);
+  list.push(clone(stuf.armur[2]));
+  list.push(clone(stuf.armur[3]));
+  list.push(8);
+  list.push(clone(stuf.armur[4]));
+  list.push(clone(stuf.armur[5]));
+  list.push(clone(stuf.julary[0]));
+  list.push(9);
+  list.push(clone(stuf.julary[2]));
+  list.push(clone(stuf.julary[4]));
+  list.push(10);
+  // ar mai trebui adaugate si alte iteme cand sunt facute
+
+  // puen in lu itemu
+  var ran=random(0,list.length);
+
+  if(typeof list[ran] === "number")
+  {
+    player.loot.push(list[ran]);
+  } else {
+      player.loot.push(clone(list[ran]));
+  }
 }
 function loot3(){
   return 3;
@@ -2003,14 +2188,14 @@ function clickt(x,y){
         c.beginPath();
         var my_pic=new Image();
         my_pic.src=player.n_monster.href;
-        c.drawImage(my_pic,625,250);
+        c.drawImage(my_pic,575,200);
 
       }
-      else if(player.n_monster.type==="l"){
+      else if(player.n_monster.type==="l"||player.n_monster.type==="b"){
         c.beginPath();
         var my_pic=new Image();
         my_pic.src=player.n_monster.href;
-        c.drawImage(my_pic,610,200);
+        c.drawImage(my_pic,545,150);
 
       }
     //randeaza vietile
@@ -2092,31 +2277,31 @@ function clickt(x,y){
                 case 2:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/2-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 3:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/3-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 4:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/4-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 5:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/5-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 6:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/6-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
               }
@@ -2144,31 +2329,31 @@ function clickt(x,y){
                   case 2:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/2-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 3:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/3-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 4:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/4-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 5:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/5-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 6:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/6-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                 }
@@ -2197,31 +2382,31 @@ function clickt(x,y){
                 case 2:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/2-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 3:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/3-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 4:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/4-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 5:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/5-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
                 case 6:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/6-dice.png";
                 c.drawImage(my_pic,260+i*60,460);
                   break;
               }
@@ -2249,31 +2434,31 @@ function clickt(x,y){
                   case 2:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/2-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 3:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/3-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 4:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/4-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 5:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/5-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                   case 6:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/6-dice.png";
                   c.drawImage(my_pic,670+i*60,460);
                     break;
                 }
@@ -2302,31 +2487,31 @@ function clickt(x,y){
               case 2:
               c.beginPath();
               var my_pic=new Image();
-              my_pic.src="img/1-dice.png";
+              my_pic.src="img/2-dice.png";
               c.drawImage(my_pic,260+i*60,460);
                 break;
               case 3:
               c.beginPath();
               var my_pic=new Image();
-              my_pic.src="img/1-dice.png";
+              my_pic.src="img/3-dice.png";
               c.drawImage(my_pic,260+i*60,460);
                 break;
               case 4:
               c.beginPath();
               var my_pic=new Image();
-              my_pic.src="img/1-dice.png";
+              my_pic.src="img/4-dice.png";
               c.drawImage(my_pic,260+i*60,460);
                 break;
               case 5:
               c.beginPath();
               var my_pic=new Image();
-              my_pic.src="img/1-dice.png";
+              my_pic.src="img/5-dice.png";
               c.drawImage(my_pic,260+i*60,460);
                 break;
               case 6:
               c.beginPath();
               var my_pic=new Image();
-              my_pic.src="img/1-dice.png";
+              my_pic.src="img/6-dice.png";
               c.drawImage(my_pic,260+i*60,460);
                 break;
             }
@@ -2354,31 +2539,31 @@ function clickt(x,y){
                 case 2:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/2-dice.png";
                 c.drawImage(my_pic,670+i*60,460);
                   break;
                 case 3:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/3-dice.png";
                 c.drawImage(my_pic,670+i*60,460);
                   break;
                 case 4:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/4-dice.png";
                 c.drawImage(my_pic,670+i*60,460);
                   break;
                 case 5:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/5-dice.png";
                 c.drawImage(my_pic,670+i*60,460);
                   break;
                 case 6:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/6-dice.png";
                 c.drawImage(my_pic,670+i*60,460);
                   break;
               }
@@ -2408,31 +2593,31 @@ function clickt(x,y){
                 case 2:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/2-dice.png";
                 c.drawImage(my_pic,260+i*60,520);
                   break;
                 case 3:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/3-dice.png";
                 c.drawImage(my_pic,260+i*60,520);
                   break;
                 case 4:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/4-dice.png";
                 c.drawImage(my_pic,260+i*60,520);
                   break;
                 case 5:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/5-dice.png";
                 c.drawImage(my_pic,260+i*60,520);
                   break;
                 case 6:
                 c.beginPath();
                 var my_pic=new Image();
-                my_pic.src="img/1-dice.png";
+                my_pic.src="img/6-dice.png";
                 c.drawImage(my_pic,260+i*60,520);
                   break;
               }
@@ -2460,31 +2645,31 @@ function clickt(x,y){
                   case 2:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/2-dice.png";
                   c.drawImage(my_pic,670+i*60,520);
                     break;
                   case 3:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/3-dice.png";
                   c.drawImage(my_pic,670+i*60,520);
                     break;
                   case 4:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/4-dice.png";
                   c.drawImage(my_pic,670+i*60,520);
                     break;
                   case 5:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/5-dice.png";
                   c.drawImage(my_pic,670+i*60,520);
                     break;
                   case 6:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/6-dice.png";
                   c.drawImage(my_pic,670+i*60,520);
                     break;
                 }
@@ -2515,31 +2700,31 @@ function clickt(x,y){
                   case 2:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/2-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 3:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/3-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 4:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/4-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 5:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/5-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 6:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/6-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                 }
@@ -2567,31 +2752,31 @@ function clickt(x,y){
                     case 2:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/2-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 3:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/3-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 4:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/4-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 5:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/5-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 6:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/6-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                   }
@@ -2622,31 +2807,31 @@ function clickt(x,y){
                   case 2:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/2-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 3:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/3-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 4:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/4-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 5:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/5-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                   case 6:
                   c.beginPath();
                   var my_pic=new Image();
-                  my_pic.src="img/1-dice.png";
+                  my_pic.src="img/6-dice.png";
                   c.drawImage(my_pic,260+i*60,520);
                     break;
                 }
@@ -2674,31 +2859,31 @@ function clickt(x,y){
                     case 2:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/2-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 3:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/3-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 4:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/4-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 5:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/5-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                     case 6:
                     c.beginPath();
                     var my_pic=new Image();
-                    my_pic.src="img/1-dice.png";
+                    my_pic.src="img/6-dice.png";
                     c.drawImage(my_pic,670+i*60,520);
                       break;
                   }
@@ -2709,28 +2894,36 @@ function clickt(x,y){
     }
     //randeaza butoanele
     c.beginPath();
-    c.rect(470,480,160,60);
+    c.rect(465,480,170,60);
     c.fillStyle="red";
     c.stroke();
     c.fill();
     c.beginPath();
     var my_pic=new Image();
     my_pic.src="img/white_skull.png";
-    c.drawImage(my_pic,470,480);
+    c.drawImage(my_pic,465,480);
     c.beginPath();
     c.fillStyle = "white";
     c.font = "26px Verdana";
     c.fillText("ATTACK", 530, 520);
     c.beginPath();
-    c.rect(470,570,160,60);
+    c.rect(465,570,170,60);
     c.fillStyle="blue";
     c.stroke();
     c.fill();
     c.beginPath();
-    c.rect(470,660,160,60);
+    c.rect(465,660,170,60);
     c.fillStyle="green";
     c.stroke();
     c.fill();
+    c.beginPath();
+    var my_pic=new Image();
+    my_pic.src="img/runing-shues.png";
+    c.drawImage(my_pic,470,575);
+    c.beginPath();
+    c.fillStyle = "white";
+    c.font = "26px Verdana";
+    c.fillText("ESCAPE", 528, 610);
     //randeaza descrierile
     var color="white"
     c.beginPath();
@@ -3395,8 +3588,8 @@ function clickt(x,y){
   canvas.addEventListener('click', function(event) {
       var x = event.pageX,
             y = event.pageY;
-            console.log('x= '+x);
-            console.log('y= '+y);
+            // console.log('x= '+x);
+            // console.log('y= '+y);
         if(player.self===0){
             player.move(x,y);
           }
@@ -3412,6 +3605,8 @@ function clickt(x,y){
             player.invaction(x,y);
           }else if(player.self===3){
             player.findaction(x,y)
+          }else if(player.self===100){
+            player.atack(x,y);
           }
 
     }, false);

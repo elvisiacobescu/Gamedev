@@ -58,7 +58,9 @@ var player={
   max_foame:30,
   self:0,
   twigs:1,
-  inventory:[  {name:"Badages",hp:15,en:null,href:"img/consumabile/smal-bandage.png",value:40,type:"consumable"},
+  inventory:[   {name:"row_pig_mit",foame:4,en:5,def:3,hp:100,energie:0,dmg:1,href:"img/food/row_pig_mit.png",type:"food",q:1,max_q:10,recipe:[1],value:3},
+  {name:"faina",foame: 5,energie:0,href:"img/food/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:4},
+  {name:"carot",foame:5,energie:1,href:"img/food/carot.png",type:"food",q:1,max_q:10,recipe:[1],value:5},{name:"Badages",hp:15,en:null,href:"img/consumabile/smal-bandage.png",value:40,type:"consumable"},
     {name:"Large Bandages",hp:25,en:null,href:"img/consumabile/large-bandage.png",value:55,type:"consumable"},
     {name:"Smal Healthpeck",hp:50,en:null,href:"img/consumabile/smal-bandage.png",value:105,type:"consumable"},
     {name:"Medium Healthpeck",hp:100,en:null,href:"img/consumabile/smal-bandage.png",value:205,type:"consumable"},
@@ -69,9 +71,19 @@ var player={
     {name:"Energi drinck B",hp:null,en:30,href:"img/consumabile/largeenergidrinck.png",value:180,type:"consumable"},
     {name:"Energi drinck G",hp:null,en:50,href:"img/consumabile/hugeenergidrinck.png",value:300,type:"consumable"},
     {name:"pein medicine",hp:15,en:5,href:"img/consumabile/smal-bandage.png",value:70,type:"consumable"},
-    {name:"miracle drog",hp:25,en:10,href:"img/consumabile/potion1.png",value:130,type:"consumable"},
+    {name:"miracle drog",hp:25,en:10,href:"img/consumabile/potion3.png",value:130,type:"consumable"},
     {name:"Strong potion",hp:50,en:10,href:"img/consumabile/potion2.png",value:170,type:"consumable"},
-    {name:"invicibil potion",hp:100,en:25,href:"img/consumabile/potion3.png",value:360,type:"consumable"}],
+    {name:"XXL potion",hp:100,en:25,href:"img/consumabile/potion3.png",value:360,type:"consumable"},
+  {name:"Wod sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:2},
+  {name:"Cover",def:1,href:"img/armur/hed_armur_1.png",type:"hed-armur",value:2,modi:2},
+         {name:"Lether glovs",def:1,href:"img/armur/l_glovs1.png",type:"glovs-armur",value:2,modi:2},
+         {name:"coif",def:3,href:"img/armur/hed_armur_2.png",type:"hed-armur",value:10,modi:2},
+         {name:"Worn pants",def:3,href:"img/armur/pants1.png",type:"leg-armur",value:10,modi:2},
+         {name:"cloth armur",def:5,href:"img/armur/bodi_armur_2.png",type:"bodi-armur",value:20,modi:2},
+         {name:"Lite boots",def:3,href:"img/armur/boots2.png",type:"fit-armur",value:10,modi:2},
+         {name:"armur",def:3,href:"img/armur/hed_armur_1.png",type:"bodi-armur",value:10,modi:2},
+         {name:"wariar glovs",def:5,href:"img/armur/l_glovs2.png",type:"glovs-armur",value:10,modi:2},
+         {name:"lite armur",def:15,href:"img/armur/bodi_armur_1.png",type:"bodi-armur",value:30,modi:2}],
   status:{},
   max_inventory:30,
   torso_slot:null,
@@ -457,9 +469,9 @@ var player={
       }
     }
    }
-   else if(x>760 && y<460){
+   else if(x>760 && y<520){
      console.log("suntem in equipt") ;
-      //echipam sabie in mana dreapta
+
        if(x<1070&&x>1020&&y<330&&y>280){
          if(this.selected[0]!=-1 && this.selected[1]!=-1){
          if(this.inventory[this.selected[0]*10+this.selected[1]].type==="wepon"||this.inventory[this.selected[0]*10+this.selected[1]].type==="sheeld"){
@@ -523,7 +535,7 @@ var player={
                this.selected[1]=-1;
              }
             }
-          }else{
+          }else{if(this.inventory.length<this.max_inventory){
             if(this.hand_l_slot.hp!=null){
               this.max_helth-=this.hand_l_slot.hp;
             }
@@ -540,7 +552,11 @@ var player={
               this.dex-=this.hand_l_slot.dex;
             }
             this.inventory.push(clone(this.hand_l_slot));
-            this.hand_l_slot=null;
+            this.hand_l_slot=null;}else{
+              this.warning=100;
+              this.warning_fader=200
+            }
+
           }
 
        };
@@ -624,7 +640,8 @@ var player={
              this.dex-=this.hand_r_slot.dex;
            }
            console.log("dezechipez acuma sefu");
-           this.inventory.push(clone(this.hand_r_slot));
+           if(this.inventory.length<this.max_inventory){
+           this.inventory.push(clone(this.hand_r_slot));}
            this.hand_r_slot=null;
           }
        }
@@ -707,8 +724,8 @@ var player={
                  }
                  if(this.ring_slot1.def!=null) {
                    this.def-=this.ring_slot1.def;
-                 }
-                 this.inventory.push(clone(this.ring_slot1));
+                 }if(this.inventory.length<this.max_inventory){
+                 this.inventory.push(clone(this.ring_slot1));};
                  this.ring_slot1=null;
 
            }
@@ -795,8 +812,8 @@ var player={
                   }
                   if(this.ring_slot2.dex!=null) {
                     this.dex-=this.ring_slot2.dex;
-                  }
-                  this.inventory.push(clone(this.ring_slot2));
+                  }if(this.inventory.length<this.max_inventory){
+                  this.inventory.push(clone(this.ring_slot2));}
                   this.ring_slot2=null;
 
             }
@@ -882,8 +899,8 @@ var player={
                }
                if(this.had_slot.dex!=null) {
                  this.dex-=this.had_slot.dex;
-               }
-               this.inventory.push(clone(this.had_slot));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.had_slot));}
                this.had_slot=null;
 
          }
@@ -969,8 +986,8 @@ var player={
                }
                if(this.hands_slot.dex!=null) {
                  this.dex-=this.hands_slot.dex;
-               }
-               this.inventory.push(clone(this.hands_slot));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.hands_slot));}
                this.hands_slot=null;
          }
        }
@@ -1055,8 +1072,8 @@ var player={
                }
                if(this.torso_slot.dex!=null) {
                  this.dex-=this.torso_slot.def;
-               }
-               this.inventory.push(clone(this.torso_slot));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.torso_slot));}
                this.torso_slot=null;
          }
        }
@@ -1141,8 +1158,8 @@ var player={
                }
                if(this.pents_slot.dex!=null) {
                  this.dex-=this.pents_slot.dex;
-               }
-               this.inventory.push(clone(this.pents_slot));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.pents_slot));}
                this.pents_slot=null;
          }
        }
@@ -1227,8 +1244,8 @@ var player={
                }
                if(this.shues_slot.dex!=null) {
                  this.dex-=this.shues_slot.dex;
-               }
-               this.inventory.push(clone(this.shues_slot));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.shues_slot));}
                this.shues_slot=null;
          }
        }
@@ -1322,8 +1339,8 @@ var player={
                }
                if(this.earring_slot1.dex!=null) {
                  this.dex-=this.earring_slot1.dex;
-               }
-               this.inventory.push(clone(this.earring_slot1));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.earring_slot1));}
                this.earring_slot1=null;
          }
        }
@@ -1408,8 +1425,8 @@ var player={
                }
                if(this.earring_slot2.dex!=null) {
                  this.dex-=this.earring_slot2.dex;
-               }
-               this.inventory.push(clone(this.earring_slot2));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.earring_slot2));}
                this.earring_slot2=null;
          }
        }
@@ -1494,14 +1511,56 @@ var player={
                }
                if(this.neckles.dex!=null) {
                  this.dex-=this.neckles.dex;
-               }
-               this.inventory.push(clone(this.neckles));
+               }if(this.inventory.length<this.max_inventory){
+               this.inventory.push(clone(this.neckles));}
                this.neckles=null;
          }
        }
 
      }else{
-      console.log("suntem in descriere") ;
+       if(Math.sqrt(((1045-x)*(1045-x))+((725-y)*(725-y)))<=50&&this.selected[0]!=-1){
+         this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+         this.selected[0]=-1;
+         this.selected[1]=-1;
+         console.log("intem delete");
+       }
+       if(x<970&&x>790&&y<750&&y>700 &&this.selected[0]!=-1 && this.inventory[this.selected[0]*10+this.selected[1]].type==="consumable"){
+         if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null&&this.helth+this.inventory[this.selected[0]*10+this.selected[1]].hp>this.max_helth)
+         {
+
+           this.helth=this.max_helth;
+           if (this.inventory[this.selected[0]*10+this.selected[1]].en!=null&&this.energi+this.inventory[this.selected[0]*10+this.selected[1]].en>this.max_energi) {
+              this.energi=this.max_energi;
+           }
+           else if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null)
+           {
+             this.energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+           }
+         }
+         else
+         if(this.inventory[this.selected[0]*10+this.selected[1]].hp!=null)
+         {
+           this.helth+=this.inventory[this.selected[0]*10+this.selected[1]].hp;
+           if (this.inventory[this.selected[0]*10+this.selected[1]].en!=null&&this.energi+this.inventory[this.selected[0]*10+this.selected[1]].en>this.max_energi) {
+              this.energi=this.max_energi;
+           }
+           else if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null)
+           {
+             this.energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+           }
+         }else if (this.inventory[this.selected[0]*10+this.selected[1]].en!=null&&this.energi+this.inventory[this.selected[0]*10+this.selected[1]].en>this.max_energi) {
+            this.energi=this.max_energi;
+         }
+         else if(this.inventory[this.selected[0]*10+this.selected[1]].en!=null)
+         {
+           this.energi+=this.inventory[this.selected[0]*10+this.selected[1]].en;
+         }
+         console.log("consumat");
+         this.inventory.splice(this.selected[0]*10+this.selected[1],1);
+         this.selected[0]=-1;
+         this.selected[1]=-1;
+       }
+      // console.log("suntem in descriere") ;
     }
   },
   incaseaza:function(x){
@@ -1550,7 +1609,8 @@ var player={
           }else
           if(typeof this.loot[i]==="object" && this.loot[i]!=null)
           {console.log("intru aici");
-            this.inventory.push(clone(this.loot[i]));
+          if(this.inventory.length<this.max_inventory){
+            this.inventory.push(clone(this.loot[i]));}
           }
 
         }
@@ -1568,7 +1628,8 @@ var player={
       if(typeof this.loot[0]=="number"){
         this.incaseaza(this.loot[0]);
       }else{
-        this.inventory.push(clone(this.loot[0]));
+        if(this.inventory.length<this.max_inventory){
+        this.inventory.push(clone(this.loot[0]));}
       }
       this.loot.splice(0,1);
 
@@ -3281,11 +3342,213 @@ function clickt(x,y){
     };
       //randeaza suportu pentru descriere
       c.beginPath();
-      c.rect(780,460,300,300);
+      c.rect(780,520,300,240);
       c.fillStyle="rgba(50,50,50,0.95)";
       c.stroke();
       c.fill();
-      // de aici in jos desenam iteme
+      //delete buton
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src="img/trash.png";
+      c.drawImage(my_pic3,1020,700);
+      if(player.selected[0]!=-1 && player.inventory[player.selected[0]*10+player.selected[1]].type==="consumable")
+      {
+        //aratam butonul de consum
+        c.beginPath();
+        c.rect(790,700,180,50);
+        c.fillStyle="rgba(2,255,2,1)";
+        c.stroke();
+        c.fill();
+        c.beginPath();
+        c.fillStyle = "red";
+        c.font = "35px Verdana";
+        c.fillText("CONSUM",800 ,735 );
+      }else
+      {
+        c.beginPath();
+        c.rect(790,700,180,50);
+        c.fillStyle="rgba(50,50,50,0.5)";
+        c.stroke();
+        c.fill();
+        c.beginPath();
+        c.fillStyle = "gray";
+        c.font = "35px Verdana";
+        c.fillText("CONSUM",800 ,735 );
+      }
+      if(player.selected[0]!=-1){
+      c.beginPath();
+      c.fillStyle = "white";
+      c.font = "16px Verdana";
+      c.fillText("Name: "+player.inventory[player.selected[0]*10+player.selected[1]].name,800 ,535 );
+      c.beginPath();
+      c.fillStyle = "white";
+      c.font = "16px Verdana";
+      c.fillText("Type  : "+player.inventory[player.selected[0]*10+player.selected[1]].type,800 ,555 );
+      var s=0,g=0;
+      g=Math.floor(player.inventory[player.selected[0]*10+player.selected[1]].value/100)
+      s=player.inventory[player.selected[0]*10+player.selected[1]].value-g*100;
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("S :"+s,1000,535 );
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("G :"+g,1000,555 );
+      }
+      var n=0;
+      if(player.selected[0]!=-1){
+      if(player.inventory[player.selected[0]*10+player.selected[1]].dmg!=null)
+      {
+        if(n<4){
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("STR :"+player.inventory[player.selected[0]*10+player.selected[1]].dmg,800,575+n*20);
+        }else{
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("STR :"+player.inventory[player.selected[0]*10+player.selected[1]].dmg,950,575+(n-4)*20);
+        }
+        n+=1;
+      }
+      if(player.inventory[player.selected[0]*10+player.selected[1]].def!=null)
+      {
+        if(n<4){
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("DEF :"+player.inventory[player.selected[0]*10+player.selected[1]].def,800,575+n*20);
+        }else{
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("DEF:"+player.inventory[player.selected[0]*10+player.selected[1]].def,950,575+(n-4)*20);
+        }
+        n+=1;
+      }
+      if(player.inventory[player.selected[0]*10+player.selected[1]].dex!=null)
+      {
+        if(n<5){
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("DEX :"+player.inventory[player.selected[0]*10+player.selected[1]].dex,800,575+n*20);
+        }else{
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("DEX:"+player.inventory[player.selected[0]*10+player.selected[1]].dex,950,575+(n-4)*20);
+        }
+        n+=1;
+      }
+      if(player.inventory[player.selected[0]*10+player.selected[1]].hp!=null)
+      {
+        if(player.inventory[player.selected[0]*10+player.selected[1]].type==="consumable"){
+        if(n<5){
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("Heal :"+player.inventory[player.selected[0]*10+player.selected[1]].hp,800,575+n*20);
+        }else{
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("Heal:"+player.inventory[player.selected[0]*10+player.selected[1]].hp,950,575+(n-4)*20);
+        }
+        n+=1;
+      }else{
+        if(n<4){
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("Max_hp :"+player.inventory[player.selected[0]*10+player.selected[1]].hp,800,575+n*20);
+        }else{
+          c.beginPath();
+          c.fillStyle = "white";
+          c.font = "16px Verdana";
+          c.fillText("Max_hp:"+player.inventory[player.selected[0]*10+player.selected[1]].hp,950,575+(n-4)*20);
+        }
+        n+=1;
+      }
+    }
+    if(player.inventory[player.selected[0]*10+player.selected[1]].en!=null)
+    {
+      if(player.inventory[player.selected[0]*10+player.selected[1]].type==="consumable"||player.inventory[player.selected[0]*10+player.selected[1]].type==="food"){
+      if(n<5){
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("restor energi :"+player.inventory[player.selected[0]*10+player.selected[1]].en,800,575+n*20);
+      }else{
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("restor energi:"+player.inventory[player.selected[0]*10+player.selected[1]].en,950,575+(n-4)*20);
+      }
+      n+=1;
+    }else{
+      if(n<5){
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Max_en :"+player.inventory[player.selected[0]*10+player.selected[1]].en,800,575+n*20);
+      }else{
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Max_en:"+player.inventory[player.selected[0]*10+player.selected[1]].en,950,575+(n-4)*20);
+      }
+      n+=1;
+      }
+    }
+    if(player.inventory[player.selected[0]*10+player.selected[1]].foame!=null)
+    {
+      if(n<5){
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Feed :"+player.inventory[player.selected[0]*10+player.selected[1]].foame,800,575+n*20);
+      }else{
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Feed :"+player.inventory[player.selected[0]*10+player.selected[1]].foame,950,575+(n-4)*20);
+      }
+      n+=1;
+    }
+    if(player.inventory[player.selected[0]*10+player.selected[1]].insp!=null)
+    {
+      if(n<5){
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Inventory space :"+player.inventory[player.selected[0]*10+player.selected[1]].insp,800,575+n*20);
+      }else{
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Inventory space :"+player.inventory[player.selected[0]*10+player.selected[1]].insp,950,575+(n-4)*20);
+      }
+      n+=1;
+    }
+    if(player.inventory[player.selected[0]*10+player.selected[1]].idmg!=null)
+    {
+      if(n<5){
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Instant Dmg:"+player.inventory[player.selected[0]*10+player.selected[1]].idmg,800,575+n*20);
+      }else{
+        c.beginPath();
+        c.fillStyle = "white";
+        c.font = "16px Verdana";
+        c.fillText("Instant Dmg :"+player.inventory[player.selected[0]*10+player.selected[1]].idmg,950,575+(n-4)*20);
+      }
+      n+=1;
+    }
+    }
   }
   function rendermap(){
         for(i=0;i<mat.length;i+=1){x=0;y=0

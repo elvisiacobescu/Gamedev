@@ -1564,14 +1564,14 @@ var player={
     }
   },
   incaseaza:function(x){
-    if(this.silvar+x>100){
+      if(this.silvar+x>100){
       this.gold=Math.floor((this.silvar+x)/100);
       this.silvar=(this.silvar+x)%100;
     //  console.log((this.silvar+x)%100);
-    }else
-    {
-      this.silvar+=x;
-    }
+      }else
+      {
+        this.silvar+=x;
+      }
   },
   plateste:function(x)
    {
@@ -3564,11 +3564,11 @@ function clickt(x,y){
             else  if(mat[i][j]===2)
             {var my_pic3=new Image();
               my_pic3.src=hexagoane[mat[i][j]-1].ref;
-              c.drawImage(my_pic3,x-0.75,y+0.75);}
+              c.drawImage(my_pic3,x,y);}
               else{
                 var my_pic3=new Image();
                 my_pic3.src=hexagoane[mat[i][j]-1].ref;
-              c.drawImage(my_pic3,x-0.75,y+0.75);}
+              c.drawImage(my_pic3,x,y);}
            };
       };
       }

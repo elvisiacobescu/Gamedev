@@ -1,15 +1,14 @@
 -2.5d hexagoane (sa iei putin in calcul si lumina si joacate su umbrele )
-    -grass (o campie poate avea mici denivelari ideia e sa
-           nu fie complet verde cum is acuma )
+    -grass   ----am facut eu si imi place um a iesit
     -hill  (seamana cat de cat cu campia numa ca denivelarile
            sunt mult mai mare)
     -munte (e o zona pietroasa care are si un munte )
-    -jungle
-    -forest
+    -jungle  ----am facut eu ceva da cred ca se poate mai bine
+    -forest  ----am facut eu si imi place um a iesit
     -swamp
     -desert (dume de nisip nuante diferite de culori)
     //pentru oras de aici in jos
-    -palat;
+    -palat; -- am incercat eu ceva da poti sa continui sau sa faci alt ceva
     -ferma;
     -stables;
     -pasture;

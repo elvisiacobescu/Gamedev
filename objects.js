@@ -59,12 +59,12 @@ var stuf={food:[
                   {name:"Strong potion",hp:50,en:10,href:"img/consumabile/potion2.png",value:170,type:"consumable"},
                   {name:"XXL potion",hp:100,en:25,href:"img/consumabile/potion3.png",value:360,type:"consumable"}
                 ],
-                transport:[
-                  {name:"bag1",trans:1,href:"img/hors.png",type:"bag",value:10},
-                  {name:"bag2",trans:2,href:"img/hors.png",type:"bag",value:20},
-                  {name:"bag3",trans:3,href:"img/hors.png",type:"bag",value:30},
-                  {name:"bag4",trans:4,href:"img/hors.png",type:"bag",value:40},
-                  {name:"bag5",trans:5,href:"img/hors.png",type:"bag",value:50},
+                transport:[//37 elemente 5 bags 8 carute 24 caii/unicorni/boi
+                  {name:"bag1",trans:1,href:"img/bag1.png",type:"bag",value:10},
+                  {name:"bag2",trans:2,href:"img/bag2.png",type:"bag",value:20},
+                  {name:"bag3",trans:3,href:"img/bag3.png",type:"bag",value:30},
+                  {name:"bag4",trans:4,href:"img/bag4.png",type:"bag",value:40},
+                  {name:"bag5",trans:5,href:"img/bag5.png",type:"bag",value:50},
                   {name:"carage1",trans:5,href:"img/hors.png",type:"car",value:50},
                   {name:"hors1",trans:10,href:"img/hors.png",type:"hors",value:100},
                   {name:"carage2",trans:10,href:"img/hors.png",type:"car",value:100},

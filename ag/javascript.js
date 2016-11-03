@@ -137,7 +137,7 @@ function mein1(){
     console.log("in cel mai rau caz minimu pentru random a fost= "+ warst_case_min_rand);
 }
 //mein1();
-//interva[-5.12,5,12]
+//interva[-5.12,5,12] minim poate fi si unu
 function calc_rastrigin(n,vector){
     var sum=0;
     for (var i = 0; i < n; i++) {
@@ -158,12 +158,13 @@ function calc_Griewang(n,vector){
     sum=sum+Math.pow(x,2)/4000;
   }
   for (var i = 0; i < n; i++) {
-    produs=produs*Math.cos(x/Math.sqrt(i));
+    produs=produs*Math.cos(x/Math.sqrt(i+1));
+    // console.log(x/Math.sqrt(i));
   }
   rezultat=sum-produs+1;
   return rezultat;
 }
-//interval[-2.048,2048]--aici trebuie cel utin doi x
+//interval[-2.048,2.048]--aici trebuie cel utin doi x
 function calc_Rosenbrock(n,vector){
   var sum=0;
   for (var i = 0; i <n-1; i++) {
@@ -189,13 +190,324 @@ function randomarbitrar(min,max,n){
 //
 function play_rastringin(n){
   var x1,x2;
-  var array=[];
+  var array=[], array2=[], array3=[];
   var intervalstg=-5.12;
   var intervaldrp=5.12;
   var valori=2;
+  var turns=1000,turns2=turns;
+  var min=100;
+  var interval=0.005;//acuratetea in care gaseste vecini
+  //decate ori sa incerce sa caute un maxim local
+
+  while(turns>0){
+  array=[];
   x1=randomarbitrar(intervalstg,intervaldrp,n);
   x2=randomarbitrar(intervalstg,intervaldrp,n);
-  array.push(x1);array.push(x2);
-  console.log(calc_rastrigin(valori,array));
+  array.push(x1); array.push(x2);
+  //console.log(calc_rastrigin(valori,array));
+  var min1=calc_rastrigin(valori,array);
+  var test=1;
+
+    test=1;
+  while(test===1){
+    //inainte
+    array2[0]+=interval;
+    //inapoi
+    array2[0]-=interval;
+    //calculam minim local
+    if(calc_rastrigin(valori,array2)<min1)
+    {
+      min1=calc_rastrigin(valori,array2);
+    }
+    else if(calc_rastrigin(valori,array3)<min1)
+    {
+      min1=calc_rastrigin(valori,array3);
+      //inseamna ca sa blocat intr-un minim local.. aproximativ
+    }else test=0;
+
+      }
+      // console.log(min1);
+      if(min>min1){min=min1;
+      }
+      turns-=1;
+    }
+    console.log("minimul pentru rastringin este= "+min);
+    var max=-1000000;
+    while(turns2>0){
+    array=[];
+    x1=randomarbitrar(intervalstg,intervaldrp,n);
+    x2=randomarbitrar(intervalstg,intervaldrp,n);
+    array.push(x1); array.push(x2);
+    //console.log(calc_rastrigin(valori,array));
+    var max1=calc_rastrigin(valori,array);
+    var test=1;
+
+      test=1;
+    while(test===1){
+      //inainte
+      array2[0]+=interval;
+      //inapoi
+      array2[0]-=interval;
+      //calculam minim local
+      if(calc_rastrigin(valori,array2)>max1)
+      {
+        max1=calc_rastrigin(valori,array2);
+      }
+      else if(calc_rastrigin(valori,array3)>max1)
+      {
+        max1=calc_rastrigin(valori,array3);
+        //inseamna ca sa blocat intr-un minim local.. aproximativ
+      }else test=0;
+
+        }
+        // console.log(min1);
+        if(max<max1){max=max1;
+        }
+        turns2-=1;
+      }
+      console.log("maximul pentru rastringin este= "+max);
+
 }
-play_rastringin(5);
+play_rastringin(3);
+function play_Griewang(n){
+  var x1,x2;
+  var array=[], array2=[], array3=[];
+  var intervalstg=-600;
+  var intervaldrp=600;
+  var valori=2;
+  var turns=1000,turns2=turns;
+  var min=100;
+  var interval=0.005;//acuratetea in care gaseste vecini
+  //decate ori sa incerce sa caute un maxim local
+
+  while(turns>0){
+  array=[];
+  x1=randomarbitrar(intervalstg,intervaldrp,n);
+  x2=randomarbitrar(intervalstg,intervaldrp,n);
+  array.push(x1); array.push(x2);
+  var min1=calc_Griewang(valori,array);
+  //  console.log(min1);
+  var test=1;
+
+    test=1;
+  while(test===1){
+    //inainte
+    array2[0]+=interval;
+    //inapoi
+    array2[0]-=interval;
+    //calculam minim local
+    if(calc_Griewang(valori,array2)<min1)
+    {
+      min1=calc_Griewang(valori,array2);
+    }
+    else if(calc_Griewang(valori,array3)<min1)
+    {
+      min1=calc_Griewang(valori,array2);
+      //inseamna ca sa blocat intr-un minim local.. aproximativ
+    }else test=0;
+
+      }
+      // console.log(min1);
+      if(min>min1){min=min1;
+      }
+      turns-=1;
+    }
+    console.log("minimul pentru Griewang este= "+min);
+    var max=-1000000;
+    while(turns2>0){
+    array=[];
+    x1=randomarbitrar(intervalstg,intervaldrp,n);
+    x2=randomarbitrar(intervalstg,intervaldrp,n);
+    array.push(x1); array.push(x2);
+    //console.log(calc_rastrigin(valori,array));
+    var max1=calc_Griewang(valori,array);
+    var test=1;
+
+      test=1;
+    while(test===1){
+      //inainte
+      array2[0]+=interval;
+      //inapoi
+      array2[0]-=interval;
+      //calculam minim local
+      if(calc_Griewang(valori,array2)>max1)
+      {
+        max1=calc_Griewang(valori,array2);
+      }
+      else if(calc_Griewang(valori,array3)>max1)
+      {
+        max1=calc_Griewang(valori,array2);
+        //inseamna ca sa blocat intr-un minim local.. aproximativ
+      }else test=0;
+
+        }
+        // console.log(min1);
+        if(max<max1){max=max1;
+        }
+        turns2-=1;
+      }
+      console.log("maximul pentru Griewang este= "+max);
+}
+play_Griewang(3);
+
+function play_Rosenbrock(n){
+  var x1,x2;
+  var array=[], array2=[], array3=[];
+  var intervalstg=-2.048;
+  var intervaldrp=2.048;
+  var valori=2;
+  var turns=1000,turns2=turns;
+  var min=100;
+  var interval=0.005;//acuratetea in care gaseste vecini
+  //decate ori sa incerce sa caute un maxim local
+
+  while(turns>0){
+  array=[];
+  x1=randomarbitrar(intervalstg,intervaldrp,n);
+  x2=randomarbitrar(intervalstg,intervaldrp,n);
+  array.push(x1); array.push(x2);
+  var min1=calc_Rosenbrock(valori,array);
+  //  console.log(min1);
+  var test=1;
+
+    test=1;
+  while(test===1){
+    //inainte
+    array2[0]+=interval;
+    //inapoi
+    array2[0]-=interval;
+    //calculam minim local
+    if(calc_Rosenbrock(valori,array2)<min1)
+    {
+      min1=calc_Rosenbrock(valori,array2);
+    }
+    else if(calc_Rosenbrock(valori,array3)<min1)
+    {
+      min1=calc_Rosenbrock(valori,array2);
+      //inseamna ca sa blocat intr-un minim local.. aproximativ
+    }else test=0;
+
+      }
+      // console.log(min1);
+      if(min>min1){min=min1;
+      }
+      turns-=1;
+    }
+    console.log("minimul pentru Rosenbrocks este= "+min);
+    var max=-1000000;
+    while(turns2>0){
+    array=[];
+    x1=randomarbitrar(intervalstg,intervaldrp,n);
+    x2=randomarbitrar(intervalstg,intervaldrp,n);
+    array.push(x1); array.push(x2);
+    //console.log(calc_rastrigin(valori,array));
+    var max1=calc_Rosenbrock(valori,array);
+    var test=1;
+
+      test=1;
+    while(test===1){
+      //inainte
+      array2[0]+=interval;
+      //inapoi
+      array2[0]-=interval;
+      //calculam minim local
+      if(calc_Rosenbrock(valori,array2)>max1)
+      {
+        max1=calc_Rosenbrock(valori,array2);
+      }
+      else if(calc_Rosenbrock(valori,array3)>max1)
+      {
+        max1=calc_Rosenbrock(valori,array2);
+        //inseamna ca sa blocat intr-un minim local.. aproximativ
+      }else test=0;
+
+        }
+        // console.log(min1);
+        if(max<max1){max=max1;
+        }
+        turns2-=1;
+      }
+      console.log("maximul pentru Rosenbrock este= "+max);
+}
+play_Rosenbrock(3);
+
+function play_Six_hump(n){
+  var x1,x2;
+  var array=[], array2=[], array3=[];
+  var intervalstg=-2.048;
+  var intervaldrp=2.048;
+  var valori=2;
+  var turns=1000,turns2=turns;
+  var min=100;
+  var interval=0.005;//acuratetea in care gaseste vecini
+  //decate ori sa incerce sa caute un maxim local
+
+  while(turns>0){
+  array=[];
+  x1=randomarbitrar(intervalstg,intervaldrp,n);
+  x2=randomarbitrar(intervalstg,intervaldrp,n);
+  array.push(x1); array.push(x2);
+  var min1=calc_Six_hump(array[0],array[1]);
+  //  console.log(min1);
+  var test=1;
+
+    test=1;
+  while(test===1){
+    //inainte
+    array2[0]+=interval;
+    //inapoi
+    array2[0]-=interval;
+    //calculam minim local
+    if(calc_Six_hump(array2[0],array2[1])<min1)
+    {
+      min1=calc_Six_hump(array2[0],array2[1]);
+    }
+    else if(calc_Six_hump(array3[0],array3[1])<min1)
+    {
+      min1=calc_Six_hump(array3[0],array3[1]);
+      //inseamna ca sa blocat intr-un minim local.. aproximativ
+    }else test=0;
+
+      }
+      // console.log(min1);
+      if(min>min1){min=min1;
+      }
+      turns-=1;
+    }
+    console.log("minimul pentru Six hump este= "+min);
+    var max=-1000000;
+    while(turns2>0){
+    array=[];
+    x1=randomarbitrar(intervalstg,intervaldrp,n);
+    x2=randomarbitrar(intervalstg,intervaldrp,n);
+    array.push(x1); array.push(x2);
+    //console.log(calc_rastrigin(valori,array));
+    var max1=calc_Six_hump(array[0],array[1]);
+    var test=1;
+
+      test=1;
+    while(test===1){
+      //inainte
+      array2[0]+=interval;
+      //inapoi
+      array2[0]-=interval;
+      //calculam minim local
+      if(calc_Six_hump(array2[0],array2[1])>max1)
+      {
+        max1=calc_Six_hump(array2[0],array2[1]);
+      }
+      else if(calc_Six_hump(array3[0],array3[1])>max1)
+      {
+        max1=calc_Six_hump(array3[0],array3[1]);
+        //inseamna ca sa blocat intr-un minim local.. aproximativ
+      }else test=0;
+
+        }
+        // console.log(min1);
+        if(max<max1){max=max1;
+        }
+        turns2-=1;
+      }
+      console.log("maximul pentru Six hump este= "+max);
+}
+play_Six_hump(3);

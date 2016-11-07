@@ -7,7 +7,11 @@ my_bolet.src="img/2-white25.png";
 var retete={
 
 }
-
+var shop={
+  select_s:-1,
+  select_p:-1,
+  select_c:1
+}
 var betle={
   c:0,//daca vreau sa beau
   runf:1,
@@ -59,8 +63,8 @@ var player={
   self:0,
   twigs:1,
   inventory:[   {name:"row_pig_mit",foame:4,en:5,def:3,hp:100,energie:0,dmg:1,href:"img/food/row_pig_mit.png",type:"food",q:1,max_q:10,recipe:[1],value:3},
-  {name:"faina",foame: 5,energie:0,href:"img/food/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:4},
-  {name:"carot",foame:5,energie:1,href:"img/food/carot.png",type:"food",q:1,max_q:10,recipe:[1],value:5},{name:"Badages",hp:15,en:null,href:"img/consumabile/smal-bandage.png",value:40,type:"consumable"},
+    {name:"faina",foame: 5,energie:0,href:"img/food/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:4},
+    {name:"carot",foame:5,energie:1,href:"img/food/carot.png",type:"food",q:1,max_q:10,recipe:[1],value:5},{name:"Badages",hp:15,en:null,href:"img/consumabile/smal-bandage.png",value:40,type:"consumable"},
     {name:"Large Bandages",hp:25,en:null,href:"img/consumabile/large-bandage.png",value:55,type:"consumable"},
     {name:"Smal Healthpeck",hp:50,en:null,href:"img/consumabile/smal-bandage.png",value:105,type:"consumable"},
     {name:"Medium Healthpeck",hp:100,en:null,href:"img/consumabile/smal-bandage.png",value:205,type:"consumable"},
@@ -266,7 +270,7 @@ var player={
     this.warning==1;
     this.self=0;}
     else{
-    console.log(string);
+    //console.log(string);
     switch (string) {
       case "loot1":
             loot1();
@@ -363,14 +367,17 @@ var player={
     this.passtime(15*60);
 
    }
+    }else if(opt===6){
+     this.self=50;
+
     }else if(opt===7){
-      //aici se face chestii in meniu inclusiv face self=0
+        //aici se face chestii in meniu inclusiv face self=0
 
 
-    }else{
-          console.log("am apasat pe langa optiune");
-         this.self=0;
-        };
+      }else{
+            console.log("am apasat pe langa optiune");
+           this.self=0;
+          };
   },
   deth:function(){
     console.log("ups ai murit.....ps asta inseamna ca nu ai facutfunctia pt moarte daca inca trimit mesaju ista");
@@ -1780,7 +1787,10 @@ var player={
       betle.md1=null;betle.md2=null;betle.md3=null;betle.md4=null;betle.md5=null;betle.md6=null;
       betle.m_l=0;
       betle.p_l=0;
-    }
+    },
+  shopclicks:function(){
+
+   }
  };
 // };
 //asta doar ca sa setem trebuie facuta o functie pt setarea initial
@@ -1983,7 +1993,7 @@ function wherclic(x,y,centru)
           buton=5;
           console.log("am apasat pe butonul 5");
         }
-        else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y-y)*(centru.y-y)))<=raza){
+        else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
           buton=6;
           console.log("am apasat pe butonul 6");
         }
@@ -2017,7 +2027,7 @@ function wherclic(x,y,centru)
            buton=5;
            console.log("am apasat pe butonul 5");
          }
-         else if(Math.sqrt(((centru.x+50-x)*(centru.x+50-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+         else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
            buton=6;
            console.log("am apasat pe butonul 6");
          }  else if(Math.sqrt(((centru.x-x)*(centru.x-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
@@ -2206,11 +2216,146 @@ function clickt(x,y){
        if(player.self===5){
          renderinventory();
        }
+       if(player.self===50)
+       {
+         rendershop();
+       }
        if(player.self===100){
          renderbatleground();
        }
        renderwarning();
       };
+  function rendershop(){
+      var x;
+    //frame categorii
+    c.beginPath();
+    c.rect(0,20,600,50);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+
+    //aici o sa trebuiasca randate categoriile TODO sa pui alte imagini
+    var img=["img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png"];
+    for (var i = 0; i < 12; i++) {
+      x=i*50
+      c.beginPath();
+      c.rect(x,20,50,50);
+      c.fillStyle="white";
+      c.strokeStyle="black";
+      c.stroke();
+      c.fill();
+
+      c.beginPath();
+      var my_pic3=new Image();
+      my_pic3.src=img[i];
+      c.drawImage(my_pic3,x,20);
+    }
+
+    //render selected border
+    x=(shop.select_c-1)*50;
+    c.beginPath();
+    c.rect(x,20,50,50);
+    c.strokeStyle="red";
+    c.stroke();
+    //frame inventar mare
+    c.beginPath();
+    c.strokeStyle="Black";
+    c.rect(0,70,1220,610);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+      //frame shop
+      c.beginPath();
+      c.rect(0,70,610,610);
+      c.fillStyle="rgba(50,50,50,0.95)";
+      c.stroke();
+      c.fill();
+          //shop tiles
+          var y;
+          for (var i = 0; i < 10; i++) {
+            y=60*i+10;
+            for (var j = 0; j < 10; j++) {
+              x=60*j+10;
+              c.beginPath();
+              c.strokeStyle="Black";
+              c.rect(x,y+70,50,50);
+              c.fillStyle="white";
+              c.stroke();
+              c.fill();
+            }
+          }
+      //frame inventory
+      c.beginPath();
+      c.rect(610,70,610,610);
+      c.fillStyle="rgba(50,50,50,0.95)";
+      c.stroke();
+      c.fill();
+        //inventory tiles
+        for (var i = 0; i < 10; i++) {
+          y=60*i+10;
+          for (var j = 0; j < 10; j++) {
+            x=60*j+10;
+            c.beginPath();
+            c.strokeStyle="Black";
+            c.rect(x+610,y+70,50,50);
+            c.fillStyle="white";
+            c.stroke();
+            c.fill();
+            if(i*10+j>=player.max_inventory){
+              c.beginPath();
+              c.strokeStyle="Black";
+              c.rect(x+610,y+70,50,50);
+              c.fillStyle="red";
+              c.stroke();
+              c.fill();
+            }
+          }
+        }
+    //shop description frame
+    c.beginPath();
+    c.rect(0,680,410,120);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+    //shop description
+
+    //meniu description frame
+    c.beginPath();
+    c.rect(810,680,410,120);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+    //shop description
+
+    //butons
+    c.beginPath();
+    c.rect(410,680,400,80);
+    c.fillStyle="rgba(50,50,50,0.95)";
+    c.stroke();
+    c.fill();
+    //buton buy
+    c.beginPath();
+    c.rect(420,690,180,60);
+    c.fillStyle="rgba(0,210,0,0.95)";
+    c.stroke();
+    c.fill();
+      //buton buy text
+      c.beginPath();
+      c.fillStyle = "black";
+      c.font = "46px Verdana";
+      c.fillText("BUY", 460, 736);
+    //buton sel
+    c.beginPath();
+    c.rect(620,690,180,60);
+    c.fillStyle="rgba(0,210,0,0.95)";
+    c.stroke();
+    c.fill();
+      //buton buy text
+      c.beginPath();
+      c.fillStyle = "black";
+      c.font = "46px Verdana";
+      c.fillText("SELL", 660, 736);
+  }
   function renderbatleground(){
     //randeaza cadru exterior
     c.beginPath();
@@ -3663,12 +3808,13 @@ function clickt(x,y){
               c.drawImage(my_pic3,x,y);
             };
             //warck
-            c.beginPath();
+
             if(hexaop.worck!=null)
             {var x;
               var y;
               var my_pic3=new Image();
               my_pic3.src = "img/warck.png";
+              c.beginPath();
               var centers=cenAftCoordonates(i,j);
               if(player.i%2===0){
                 x=centers.x-50;
@@ -3694,6 +3840,25 @@ function clickt(x,y){
                 x=centers.x;
                 y=centers.y-25;
               };
+              c.drawImage(my_pic3,x,y);
+            };
+            //shop
+
+            if(hexaop.shop!=null && hexaop.shop===true)
+            {var x;
+              var y;
+                c.beginPath();
+              var my_pic3=new Image();
+              my_pic3.src = "img/shopol.png";
+              var centers=cenAftCoordonates(i,j);
+              if(player.i%2===0){
+                x=centers.x-50;
+                y=centers.y+25;
+              }else if(player.i%2===1){
+                x=centers.x-50;
+                y=centers.y+75;
+              };
+
               c.drawImage(my_pic3,x,y);
             };
       };

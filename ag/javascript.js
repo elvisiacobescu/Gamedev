@@ -188,6 +188,7 @@ function randomarbitrar(min,max,n){
 // console.log(randomarbitrar(-15,15,5));
 //n este numaru cifre dupa ,
 //
+//play se refera la hil claiming
 function play_rastringin(n){
   var x1,x2;
   var array=[], array2=[], array3=[];
@@ -209,23 +210,18 @@ function play_rastringin(n){
   var test=1;
 
     test=1;
+
   while(test===1){
     //inainte
-    array2[0]+=interval;
-    //inapoi
-    array2[0]-=interval;
+    array2[0]=todecimal(changebit(tobit(array[0]*Math.pow(10,n)),i))/Math.pow(10,n);
+    console.log(array2[0]);
     //calculam minim local
     if(calc_rastrigin(valori,array2)<min1)
-    {
+    { array[0]=array2[0]
       min1=calc_rastrigin(valori,array2);
+      test=0;
     }
-    else if(calc_rastrigin(valori,array3)<min1)
-    {
-      min1=calc_rastrigin(valori,array3);
       //inseamna ca sa blocat intr-un minim local.. aproximativ
-    }else test=0;
-
-      }
       // console.log(min1);
       if(min>min1){min=min1;
       }
@@ -511,3 +507,150 @@ function play_Six_hump(n){
       console.log("maximul pentru Six hump este= "+max);
 }
 play_Six_hump(3);
+
+function tobit(num){
+  var bitum =(num >>> 0).toString(2);
+  return bitum;
+}
+function todecimal(num){
+  var decimal=0;
+  var iteration=0;
+  while(num>0)
+  {
+    decimal=decimal+num%10*Math.pow(2,iteration);
+    // console.log(decimal);
+    iteration++;
+    num=Math.floor(num/10);
+  }
+  return decimal
+}
+// console.log(todecimal(111));
+//schimba random unu din biti
+function changebit(num,nr){
+  var length=1;
+  var num2=num;
+  while(num2>9)
+  {
+    length+=1;
+    num2=Math.floor(num2/10);
+  }
+    // console.log("avem atatea biti "+length);
+  //var ran=Math.floor(Math.random() * (length) + 1)
+    var ran=nr;
+  // console.log(ran);
+  var partea_d_fata=Math.floor(num/Math.pow(10,ran))
+  var partea_d_spate=num-partea_d_fata*Math.pow(10,ran);
+  // console.log(partea_d_fata);
+  // console.log(partea_d_spate);
+  var final=0;
+  var partial;
+  // console.log("aici ar trebui sa citeacdaca numaru de pe pozitia ran este egal= "+Math.floor(partea_d_spate/Math.pow(10,ran-1)));
+  if(Math.floor(partea_d_spate/Math.pow(10,ran-1))===1)
+  {
+    partial=partea_d_spate/Math.pow(10,ran-1);
+    // console.log("partial="+partial);
+    partea_d_spate=Math.floor((partial-1)*Math.pow(10,ran-1));
+    // console.log(partea_d_spate);
+    final=(partea_d_fata*Math.pow(10,ran))+partea_d_spate;
+    // console.log((partea_d_fata*Math.pow(10,ran)));
+  }else if(Math.floor(partea_d_spate/Math.pow(10,ran-1))===0){
+    //console.log(partea_d_fata*Math.pow(10,ran));
+    partial=partea_d_spate/Math.pow(10,ran-1);
+    partea_d_spate=Math.floor((partial+1)*Math.pow(10,ran-1));
+    final=partea_d_fata*Math.pow(10,ran)+partea_d_spate;
+    //console.log(partea_d_spate);
+  }
+  return final;
+}
+//console.log(changebit(100000000));
+// function plas_rastingin(n){
+//   var x1,x2;
+//   var temperature=100,temperature2=temperature;
+//   var list=[],list1=[],list2=[];
+//   var intervalstg=-5.12;
+//   var intervaldrp=5.12;
+//   var valori=2;
+//   var min=1000;
+//   var max=-1000;
+//   var list_solutii=[];
+//
+// x1=Math.floor(randomarbitrar(intervalstg,intervaldrp,n)*Math.pow(10,n))/Math.pow(10,n);
+// x2=Math.floor(randomarbitrar(intervalstg,intervaldrp,n)*Math.pow(10,n))/Math.pow(10,n);
+// console.log(x1);
+// list.push(x1); list.push(x2);
+// //avem lista si variabilile
+// min=calc_rastrigin(valori,list);
+// max=calc_rastrigin(valori,list);
+// //trebuie sa ajungm la un freez poit setat de noi
+// list1.push(list[0]);list1.push(list[1]);
+// while (temperature2>0)
+// {
+//   list_solutii=[]
+//   var numardbiti=1;
+//   var lung =tobit(list1[0]*Math.pow(10,n));
+//   while(lung>9){
+//     numardbiti+=1;
+//     lung=Math.floor(lung/10);
+//
+//   }
+//   // console.log(numardbiti);
+//   for (var i = 0; i < numardbiti; i++){
+//
+//     list_solutii.push(todecimal(changebit(tobit(list1[0]*Math.pow(10,n)),i))/Math.pow(10,n));
+//     console.log(list1[0]);
+//     // console.log(changebit(tobit(list1[0]*Math.pow(10,n)),i) +" "+ tobit(list1[0]*Math.pow(10,n)));
+//   }
+//   console.log(list_solutii);
+//   // vedem care din lista de solutii e cea mai buna
+// sol=null;
+// var min_local=10000;
+// var bet=1
+// while(bet===1){
+//   bet=0
+// for (var i = 0; i<numardbiti; i++) {
+//   list1[0]=list_solutii[i];
+//   console.log(list1[0]);
+//   if(min_local > calc_rastrigin(valori,list1)){
+//     min_local=calc_rastrigin(valori,list1);
+//     console.log(min_local);
+//     sol=list1[0];
+//     if(min_local===min)
+//     {
+//         bet=1
+//         list_solutii.splice(i,1);
+//     }
+//   }
+//
+// }
+//
+// }
+// // console.log(min_local);
+// if(min>min_local){
+//   min=min_local;
+//   temperature2=temperature;
+// }else{
+//   temperature2-=1;
+// }
+//
+//
+//   //list1[0] = todecimal(changebit(tobit(list1[0]*Math.pow(10*n))))/Math.pow(10,n);
+//
+//   //spunem, daca acceptam soluti
+// }
+//
+//
+// // while (temperature2>0&&iteration>0)
+// // { list2.push(list[0]);list2.push(list[1]);
+// //   list2[0] = todecimal(changebit(tobit(list2[0]*Math.pow(10*n))))/Math.pow(10,n);
+// //   //spunem, daca acceptam solutia
+// //   if(max<calc_rastrigin(valori,list2))
+// //   {
+// //       max1=calc_rastrigin(valori,list2);
+// //       temperature--;
+// //   }
+// //   iteration-=1
+// // }
+// console.log("valuare minima pentru Simulated Annealingpe functia rastincgin este: "+min);
+// //1console.log("valuare maxima pentru Simulated Annealingpe functia rastincgin este: "+max);
+// }
+// // plas_rastingin(3);

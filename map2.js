@@ -4,12 +4,13 @@ var my_bolet=new Image();
 my_pic.src="img/green-terain.png";
 my_pic2.src="img/orange-terain.png";
 my_bolet.src="img/2-white25.png";
+var loot101=[];var loot102=[];var loot103=[];var loot104=[];var loot105=[];var loot106=[];var loot107=[];var loot108=[];var loot101=[];var loot109=[];var loot110=[];
 var retete={
 
 }
 var shop={
-  select_s:-1,
-  select_p:-1,
+  select_s:1,
+  select_p:1,
   select_c:1
 }
 var betle={
@@ -64,25 +65,11 @@ var player={
   twigs:1,
   inventory:[   {name:"row_pig_mit",foame:4,en:5,def:3,hp:100,energie:0,dmg:1,href:"img/food/row_pig_mit.png",type:"food",q:1,max_q:10,recipe:[1],value:3},
     {name:"faina",foame: 5,energie:0,href:"img/food/flower.png",type:"food",q:1,max_q:10,recipe:[1],value:4},
-    {name:"carot",foame:5,energie:1,href:"img/food/carot.png",type:"food",q:1,max_q:10,recipe:[1],value:5},{name:"Badages",hp:15,en:null,href:"img/consumabile/smal-bandage.png",value:40,type:"consumable"},
-    {name:"Large Bandages",hp:25,en:null,href:"img/consumabile/large-bandage.png",value:55,type:"consumable"},
-    {name:"Smal Healthpeck",hp:50,en:null,href:"img/consumabile/smal-bandage.png",value:105,type:"consumable"},
-    {name:"Medium Healthpeck",hp:100,en:null,href:"img/consumabile/smal-bandage.png",value:205,type:"consumable"},
-    {name:"Largi Healthpeck",hp:150,en:null,href:"img/consumabile/smal-bandage.png",value:305,type:"consumable"},
-    {name:"Medical Cart",hp:200,en:null,href:"img/consumabile/smal-bandage.png",value:400,type:"consumable"},
-    {name:"Energi drinck S",hp:null,en:5,href:"img/consumabile/smalenergidrinck.png",value:30,type:"consumable"},
-    {name:"Energi drinck M",hp:null,en:15,href:"img/consumabile/mediumenergidrinck.png",value:90,type:"consumable"},
-    {name:"Energi drinck B",hp:null,en:30,href:"img/consumabile/largeenergidrinck.png",value:180,type:"consumable"},
-    {name:"Energi drinck G",hp:null,en:50,href:"img/consumabile/hugeenergidrinck.png",value:300,type:"consumable"},
-    {name:"pein medicine",hp:15,en:5,href:"img/consumabile/smal-bandage.png",value:70,type:"consumable"},
+    {name:"carot",foame:5,energie:1,href:"img/food/carot.png",type:"food",q:1,max_q:10,recipe:[1],value:5},
     {name:"miracle drog",hp:25,en:10,href:"img/consumabile/potion3.png",value:130,type:"consumable"},
     {name:"Strong potion",hp:50,en:10,href:"img/consumabile/potion2.png",value:170,type:"consumable"},
     {name:"XXL potion",hp:100,en:25,href:"img/consumabile/potion3.png",value:360,type:"consumable"},
-         {name:"bag1",trans:1,href:"img/cara/bag1.png",type:"bag",value:10},
-         {name:"bag2",trans:2,href:"img/cara/bag2.png",type:"bag",value:20},
-         {name:"bag3",trans:3,href:"img/cara/bag3.png",type:"bag",value:30},
-         {name:"bag4",trans:4,href:"img/cara/bag4.png",type:"bag",value:40},
-         {name:"bag5",trans:5,href:"img/cara/bag5.png",type:"bag",value:50}],
+  ],
   status:{},
   max_inventory:30,
   torso_slot:null,
@@ -256,15 +243,16 @@ var player={
       this.self=0;
     }
     //aici face hranirea
-    else if(opt===2 ){
+    else if(opt===2){
     // console.log("self");
-    }else if(opt===3 ){
-        //aici se face co cautare face self=0 important
+    }else if(opt===3){
+        //aici se face o cautare face self=0 important
     // console.log("caut");
     var noroc=dice();
     //renders.d1=noroc-1;
     var i ;
     var string=hexagoane[mat[this.i][this.j]-1].options.cauta[noroc-1];
+    console.log(string);
      //LOTING
     if(this.energi<0.50){
     this.warning==1;
@@ -278,35 +266,33 @@ var player={
             this.energi-=0.5;
         break;
       case "loot2":
-      var loot =loot2();
+      loot2();
         this.self=3;
-        var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
+
           this.energi-=0.5;
-        this.loot.push(clone(obj));
+
          break;
       case "loot3":
         loot3();
         this.self=3;
-          var obj={name:"mar",foame: 6,energie:2,href:"img/mar.png",type:"food",q:1,recipe:[5,6]};
-        this.loot.push(clone(obj ));
+
+
           this.energi-=0.5;
         break;
       case "loot4":
-      var loot =loot4();
+      loot4();
         this.self=3;
-        this.loot.push(clone(obj));
+
           this.energi-=0.5;
         break;
       case "loot5":
-      var loot =loot5();
+      loot5();
         this.self=3;
-        this.loot.push(clone(obj));
           this.energi-=0.5;
          break;
       case "loot6":
-      var loot =loot6();
+      loot6();
         this.self=3;
-        this.loot.push(clone(obj));
           this.energi-=0.5;
          break;
       case "s_monster":
@@ -1567,7 +1553,7 @@ var player={
   },
   incaseaza:function(x){
       if(this.silvar+x>100){
-      this.gold=Math.floor((this.silvar+x)/100);
+      this.gold+=Math.floor((this.silvar+x)/100);
       this.silvar=(this.silvar+x)%100;
     //  console.log((this.silvar+x)%100);
       }else
@@ -1778,6 +1764,10 @@ var player={
             break;
           case "l8":loot8();
             break;
+          case "l9":loot9();
+            break;
+          case "l10":loot10();
+            break;
         }
       }
       //deschide lootscrean annd clouse batle sceen
@@ -1788,13 +1778,23 @@ var player={
       betle.m_l=0;
       betle.p_l=0;
     },
-  shopclicks:function(){
-
+  shopclicks:function(x,y){
+      //exis TODO
+      //select from inventory TODO
+      //buy TODO
+      //select category TODO
+      //select from shop TODO
+      //sell TODO
+      //exit
+      if(x<1220&&x>1160&&y>10&&y<70)
+      {
+        this.self=0
+      }
    }
  };
 // };
 //asta doar ca sa setem trebuie facuta o functie pt setarea initial
-player.setposition(3,0);
+player.setposition(4,2);
 function initfight(){
       //vede cine are mai mare dexteritatea
       var n=1 ,m=1 , s=player.n_monster.dex;
@@ -1868,88 +1868,216 @@ function multiplaer(d){
       break;
   }
 }
-function loot1(){
+function lootcreator(y,x){
   var list=[];
-  list.push(1);list.push(2);list.push(3);list.push(4);list.push(5);list.push(6);
   var i;
-  //pune mancarea pe care ar putea sa o gaseasca
-  for (var i = 0; i < 5; i++) {
-    list.push(clone(stuf.food[i]));
-  }
-  //pune itemele pe care ar putea sa le gaseasca
-  list.push(clone(stuf.wepan[0]));
-  list.push(clone(stuf.armur[0]));
-  list.push(clone(stuf.armur[1]));
-  list.push(7);
-  list.push(clone(stuf.armur[2]));
-  list.push(clone(stuf.armur[3]));
-  list.push(8);
-  list.push(clone(stuf.armur[4]));
-  list.push(clone(stuf.armur[5]));
-  list.push(clone(stuf.julary[0]));
-  list.push(9);
-  list.push(clone(stuf.julary[2]));
-  list.push(clone(stuf.julary[4]));
-  list.push(10);
-  // ar mai trebui adaugate si alte iteme cand sunt facute
-
-  // puen in lu itemu
-  var ran=random(0,list.length);
-
-  if(typeof list[ran] === "number")
-  {
-    player.loot.push(list[ran]);
-  } else {
-      player.loot.push(clone(list[ran]));
-  }
+  for (var i = y+1; i < x+1; i++) {
+      list.push(i);
+  };
+  for (i = 0; i < stuf.food.length; i++) {
+    if(stuf.food[i].value<x+1&&stuf.food[i].value>y)
+    {
+      list.push(clone(stuf.food[i]));
+    }
+  };
+  for (i = 0; i < stuf.wepan.length; i++) {
+    if(stuf.wepan[i].value<x+1&&stuf.wepan[i].value>y)
+    {
+      list.push(clone(stuf.wepan[i]));
+    }
+  };
+  for (i = 0; i < stuf.armur.length; i++) {
+    if(stuf.armur[i].value<x+1&&stuf.armur[i].value>y)
+    {
+      list.push(clone(stuf.armur[i]));
+    }
+  };
+  for (i = 0; i < stuf.julary.length; i++) {
+    if(stuf.julary[i].value<x+1&&stuf.julary[i].value>y)
+    {
+      list.push(clone(stuf.julary[i]));
+    }
+  };
+  for (i = 0; i < stuf.consumabile.length; i++) {
+    if(stuf.consumabile[i].value<x+1&&stuf.consumabile[i].value>y)
+    {
+      list.push(clone(stuf.consumabile[i]));
+    }
+  };
+  for (i = 0; i < stuf.ingredients.length; i++) {
+    if(stuf.ingredients[i].value<x+1&&stuf.ingredients[i].value>y)
+    {
+      list.push(clone(stuf.ingredients[i]));
+    }
+  };
+  for (i = 0; i < stuf.transport.length; i++) {
+    if(stuf.transport[i].value<x+1&&stuf.transport[i].value>y)
+    {
+      list.push(clone(stuf.transport[i]));
+    }
+  };
+  return list;
 }
-///loot 2 trebuie schimbat ... acum e facut in interesul functionarii TODO
-function loot2(){
-  var list=[];
-  list.push(1);list.push(2);list.push(3);list.push(4);list.push(5);list.push(6);
-  var i;
-  //pune mancarea pe care ar putea sa o gaseasca
-  for (var i = 0; i < 5; i++) {
-    list.push(clone(stuf.food[i]));
-  }
-  //pune itemele pe care ar putea sa le gaseasca
-  list.push(clone(stuf.wepan[0]));
-  list.push(clone(stuf.armur[0]));
-  list.push(clone(stuf.armur[1]));
-  list.push(7);
-  list.push(clone(stuf.armur[2]));
-  list.push(clone(stuf.armur[3]));
-  list.push(8);
-  list.push(clone(stuf.armur[4]));
-  list.push(clone(stuf.armur[5]));
-  list.push(clone(stuf.julary[0]));
-  list.push(9);
-  list.push(clone(stuf.julary[2]));
-  list.push(clone(stuf.julary[4]));
-  list.push(10);
-  // ar mai trebui adaugate si alte iteme cand sunt facute
-
-  // puen in lu itemu
-  var ran=random(0,list.length);
-
-  if(typeof list[ran] === "number")
+function loot1(){
+  if(loot101.length===0)
   {
-    player.loot.push(list[ran]);
-  } else {
-      player.loot.push(clone(list[ran]));
+    loot101=lootcreator(0,10)
   }
+
+    // punem in lu itemu
+    var ran=random(0,loot101.length);
+
+    if(typeof loot101[ran] === "number")
+    {
+      player.loot.push(loot101[ran]);
+    } else {
+        player.loot.push(clone(loot101[ran]));
+    }
+
+}
+function loot2(){
+  if(loot102.length===0)
+  {
+    loot102=lootcreator(10,20)
+  }
+
+    // punem in lu itemu
+    var ran=random(0,loot102.length);
+
+    if(typeof loot102[ran] === "number")
+    {
+      player.loot.push(loot102[ran]);
+    } else {
+        player.loot.push(clone(loot102[ran]));
+    }
 }
 function loot3(){
-  return 3;
+  if(loot103.length===0)
+  {
+    loot103=lootcreator(20,30)
+  }
+
+    // punem in lu itemu
+    var ran=random(0,loot103.length);
+
+    if(typeof loot103[ran] === "number")
+    {
+      player.loot.push(loot103[ran]);
+    } else {
+        player.loot.push(clone(loot103[ran]));
+    }
 }
 function loot4(){
-  return 4;
+  if(loot104.length===0)
+  {
+    loot104=lootcreator(30,50)
+  }
+
+    // punem in lu itemu
+    var ran=random(0,loot104.length);
+
+    if(typeof loot104[ran] === "number")
+    {
+      player.loot.push(loot104[ran]);
+    } else {
+        player.loot.push(clone(loot104[ran]));
+    }
 }
 function loot5(){
-  return 5;
+  if(loot105.length===0)
+  {
+    loot105=lootcreator(50,70)
+  }
+
+    // punem in lu itemu
+    var ran=random(0,loot105.length);
+
+    if(typeof loot105[ran] === "number")
+    {
+      player.loot.push(loot105[ran]);
+    } else {
+        player.loot.push(clone(loot105[ran]));
+    }
 }
 function loot6(){
-  return 6;
+  if(loot106.length===0)
+  {
+    loot106=lootcreator(70,90)
+  }
+
+    // punem in lu itemu
+    var ran=random(0,loot106.length);
+
+    if(typeof loot106[ran] === "number")
+    {
+      player.loot.push(loot106[ran]);
+    } else {
+        player.loot.push(clone(loot106[ran]));
+    }
+}
+function loot7(){
+    if(loot107.length===0)
+    {
+      loot107=lootcreator(90,120)
+    }
+
+      // punem in lu itemu
+      var ran=random(0,loot107.length);
+
+      if(typeof loot107[ran] === "number")
+      {
+        player.loot.push(loot107[ran]);
+      } else {
+          player.loot.push(clone(loot107[ran]));
+      }
+}
+function loot8(){
+    if(loot108.length===0)
+    {
+      loot108=lootcreator(120,150)
+    }
+
+      // punem in lista de loot itemu
+      var ran=random(0,loot108.length);
+
+      if(typeof loot108[ran] === "number")
+      {
+        player.loot.push(loot108[ran]);
+      } else {
+          player.loot.push(clone(loot108[ran]));
+      }
+}
+function loot9(){
+    if(loot109.length===0)
+    {
+      loot109=lootcreator(150,180)
+    }
+
+      // punem in lista de loot itemu
+      var ran=random(0,loot109.length);
+
+      if(typeof loot109[ran] === "number")
+      {
+        player.loot.push(loot109[ran]);
+      } else {
+          player.loot.push(clone(loot109[ran]));
+      }
+}
+function loot10(){
+    if(loot110.length===0)
+    {
+      loot110=lootcreator(180,200)
+    }
+
+      // punem in lista de loot itemu
+      var ran=random(0,loot110.length);
+
+      if(typeof loot110[ran] === "number")
+      {
+        player.loot.push(loot110[ran]);
+      } else {
+          player.loot.push(clone(loot110[ran]));
+      }
 }
 function dice(){
     // random 1-6
@@ -2027,7 +2155,7 @@ function wherclic(x,y,centru)
            buton=5;
            console.log("am apasat pe butonul 5");
          }
-         else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
+         else if(Math.sqrt(((centru.x-25-x)*(centru.x-25-x))+((centru.y+100-y)*(centru.y+100-y)))<=raza){
            buton=6;
            console.log("am apasat pe butonul 6");
          }  else if(Math.sqrt(((centru.x-x)*(centru.x-x))+((centru.y+50-y)*(centru.y+50-y)))<=raza){
@@ -2290,29 +2418,52 @@ function clickt(x,y){
       c.fillStyle="rgba(50,50,50,0.95)";
       c.stroke();
       c.fill();
-        //inventory tiles
-        for (var i = 0; i < 10; i++) {
-          y=60*i+10;
-          for (var j = 0; j < 10; j++) {
-            x=60*j+10;
-            c.beginPath();
-            c.strokeStyle="Black";
-            c.rect(x+610,y+70,50,50);
-            c.fillStyle="white";
-            c.stroke();
-            c.fill();
-            if(i*10+j>=player.max_inventory){
+            //inventory tiles
+            for (var i = 0; i < 10; i++) {
+              y=60*i+10;
+              for (var j = 0; j < 10; j++) {
+                x=60*j+10;
+                c.beginPath();
+                c.strokeStyle="Black";
+                c.rect(x+610,y+70,50,50);
+                c.fillStyle="white";
+                c.stroke();
+                c.fill();
+                if(i*10+j>=player.max_inventory){
+                  c.beginPath();
+                  c.strokeStyle="Black";
+                  c.rect(x+610,y+70,50,50);
+                  c.fillStyle="red";
+                  c.stroke();
+                  c.fill();
+                }
+              }
+            }
+            //inventory items
+            var nritems=player.inventory.length;
+            for (var i = 0; i < nritems; i++) {
+              x=60*(i%10)+10;
+              y=60*Math.floor(i/10)+10;
               c.beginPath();
-              c.strokeStyle="Black";
+              var my_pic3=new Image();
+              my_pic3.src=player.inventory[i].href;
+              c.drawImage(my_pic3,x+610,y+70);
+            }
+            //inventory select
+            var i=shop.select_p;
+            if(i>-1){
+              x=60*(i%10)+10;
+              y=60*Math.floor(i/10)+10;
+              c.beginPath();
+              c.strokeStyle="blue";
               c.rect(x+610,y+70,50,50);
               c.fillStyle="red";
               c.stroke();
-              c.fill();
+
             }
-          }
-        }
     //shop description frame
     c.beginPath();
+    c.strokeStyle="black";
     c.rect(0,680,410,120);
     c.fillStyle="rgba(50,50,50,0.95)";
     c.stroke();
@@ -2355,6 +2506,12 @@ function clickt(x,y){
       c.fillStyle = "black";
       c.font = "46px Verdana";
       c.fillText("SELL", 660, 736);
+    //render exist
+    c.beginPath();
+    c.rect(1160,10,60,60);
+    c.fillStyle="red";
+    c.stroke();
+    c.fill();
   }
   function renderbatleground(){
     //randeaza cadru exterior
@@ -3491,7 +3648,7 @@ function clickt(x,y){
       var my_pic3=new Image();
       my_pic3.src="img/trash.png";
       c.drawImage(my_pic3,1020,700);
-      if(player.selected[0]!=-1 && player.inventory[player.selected[0]*10+player.selected[1]].type==="consumable")
+      if(player.selected[0]!=-1 && player.inventory[player.selected[0]*10+player.selected[1]].type!=null && player.inventory[player.selected[0]*10+player.selected[1]].type==="consumable")
       {
         //aratam butonul de consum
         c.beginPath();
@@ -4028,6 +4185,8 @@ function clickt(x,y){
             player.invaction(x,y);
           }else if(player.self===3){
             player.findaction(x,y)
+          }else if(player.self===50){
+            player.shopclicks(x,y);
           }else if(player.self===100){
             player.atack(x,y);
           }

@@ -57,8 +57,8 @@ var player={
   time: 2548654,
   energi : 25,
   max_energi:25,
-  silvar:20,
-  gold:150,
+  silvar:0,
+  gold:3,
   foame: 5,
   max_foame:30,
   self:0,
@@ -1563,22 +1563,17 @@ var player={
   },
   plateste:function(x)
    {
-    var gold=Math.floor(x/100);
-    var silver;
-    if(this.silvar-(x-gold*100)<0)
-    {
-      gold+1;
-      silver=100+this.silvar-(x-gold*100);
-    }
-    else
-    {
-      silver=this.silvar-(x-gold*100);
-    }
-    if(this.gold>=gold && this.silvar>=silver)
-    {  this.gold-=gold;
-      this.silvar-=silver;
-      return true;
-   }else{return false;}
+     var total=this.silvar+this.gold*100;
+     if(total>=x)
+     {
+       total=total-x;
+       this.gold=Math.floor(total/100);
+       this.silvar=total%100;
+
+       return true;
+     }else{
+       return false;
+     }
   },
   findaction:function(x,y)
     {
@@ -1779,17 +1774,204 @@ var player={
       betle.p_l=0;
     },
   shopclicks:function(x,y){
-      //exis TODO
-      //select from inventory TODO
-      //buy TODO
-      //select category TODO
-      //select from shop TODO
-      //sell TODO
+      //case 5 pentru bui are cantitate si trebuie vazut cum adaug TODO !! uitate si cand faci lutingu ca la fel trebuie sa faca si acolo si nu face
       //exit
       if(x<1220&&x>1160&&y>10&&y<70)
       {
         this.self=0
       }
+      //select from inventory
+      if(x>610&&x<1220&&y<680&&y>70){
+
+        var i=Math.floor((y-70)/60);
+        var j=Math.floor((x-610)/60);
+        var wobj=i*10+j
+        if(x>j*60+10+610&&x<j*60+670&&y>i*60+80 &&y<i*60+130){
+          if(this.inventory.length >wobj)
+          {
+            shop.select_p=wobj;
+
+          }
+        }
+      }
+      //select from shop
+         if(x>0&&x<610&&y<680&&y>70){
+
+              var i=Math.floor((y)/60)-1;
+              var j=Math.floor((x)/60);
+              var wobj=i*10+j
+              if(x>j*60+10 &&x<(j+1)*60&&y>i*60+80 &&y<i*60+130){
+                switch (shop.select_c) {
+                  case 1:
+                      if(stuf.wepan.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                    break;
+                  case 2:
+                      if(stuf.armur.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                      break;
+                  case 3:
+                      if(stuf.julary.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                      break;
+                  case 4:
+                      if(stuf.transport.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                      break;
+                  case 5:
+                      if(stuf.food.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                      break;
+                  case 6:
+                      if(stuf.ingredients.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                      break;
+                  case 7:
+                      if(stuf.consumabile.length>wobj)
+                      {
+                        shop.select_s=wobj;
+                      }
+                      break;
+                }
+
+
+              }
+            }
+      //sell/buy
+      if(x>410&&x<810&&y<760&&y>680)
+      {
+        //sell
+        if(x>620&&x<800&&y<750&&y>690)
+        {
+          if(shop.select_p!=-1)
+          {
+            this.incaseaza(Math.floor(this.inventory[shop.select_p].value-this.inventory[shop.select_p].value/4));
+            this.inventory.splice(shop.select_p,1);
+            shop.select_p=-1;
+          }
+        }
+        if(x>420&&x<600&&y<750&&y>690)
+        {
+          if(shop.select_s!=-1){
+            switch (shop.select_c) {
+              case 1:
+              if(this.max_inventory>this.inventory.length){
+              if(this.plateste(stuf.wepan[shop.select_s].value)){
+                  this.inventory.push(stuf.wepan[shop.select_s]);
+                }else{
+                  //warning no pesos
+                  this.warning=51;
+                  this.warning_fader=1000;
+                }
+              }else{
+                //no space
+                this.warning=49;
+                this.warning_fader=1000;
+              }
+                break;
+              case 2:if(this.max_inventory>this.inventory.length){
+                  if(this.plateste(stuf.armur[shop.select_s].value)){
+                      this.inventory.push(stuf.armur[shop.select_s]);
+                    }else{
+                      this.warning=51;
+                      this.warning_fader=1000;
+                    }
+                  }else{
+                    //no space
+                    this.warning=49;
+                    this.warning_fader=1000;
+                  }
+                  break;
+              case 3:if(this.max_inventory>this.inventory.length){
+                  if(this.plateste(stuf.julary[shop.select_s].value)){
+                      this.inventory.push(stuf.julary[shop.select_s]);
+                    }else{
+                      this.warning=51;
+                      this.warning_fader=1000;
+                    }
+                  }else{
+                    //no space
+                    this.warning=49;
+                    this.warning_fader=1000;
+                  }
+                  break;
+              case 4:if(this.max_inventory>this.inventory.length){
+                  if(this.plateste(stuf.transport[shop.select_s].value)){
+                      this.inventory.push(stuf.transport[shop.select_s]);
+                    }else{
+                      this.warning=51;
+                      this.warning_fader=1000;
+                    }
+                  }else{
+                    //no space
+                    this.warning=49;
+                    this.warning_fader=1000;
+                  }
+                  break;
+              case 5:if(this.max_inventory>this.inventory.length){
+                    // is singurele care au cantitate TODO
+                  if(this.plateste(stuf.food[shop.select_s].value)){
+                      this.inventory.push(stuf.food[shop.select_s]);
+                    }else{
+                      this.warning=51;
+                      this.warning_fader=1000;
+                    }
+                  }else{
+                    //no space
+                    this.warning=49;
+                    this.warning_fader=1000;
+                  }
+                  break;
+              case 6:if(this.max_inventory>this.inventory.length){
+                  if(this.plateste(stuf.ingredients[shop.select_s].value)){
+                      this.inventory.push(stuf.ingredients[shop.select_s]);
+                    }else{
+                      this.warning=51;
+                      this.warning_fader=1000;
+                    }
+                  }else{
+                    //no space
+                    this.warning=49;
+                    this.warning_fader=1000;
+                  }
+                  break;
+              case 7:if(this.max_inventory>this.inventory.length){
+                  if(this.plateste(stuf.consumabile[shop.select_s].value)){
+                      this.inventory.push(stuf.consumabile[shop.select_s]);
+                    }else{
+                      this.warning=51;
+                      this.warning_fader=1000;
+                    }
+                  }else{
+                    //no space
+                    this.warning=49;
+                    this.warning_fader=1000;
+                  }
+
+                  break;
+            }
+          }
+        }
+      }
+      //select category
+        if(x>0&&x<350&&y<70&&y>20)
+        {
+          var j=Math.floor(x/50);
+          shop.select_c=j+1;
+          shop.select_s=-1;
+        }
    }
  };
 // };
@@ -2357,14 +2539,14 @@ function clickt(x,y){
       var x;
     //frame categorii
     c.beginPath();
-    c.rect(0,20,600,50);
+    c.rect(0,20,350,50);
     c.fillStyle="rgba(50,50,50,0.95)";
     c.stroke();
     c.fill();
 
     //aici o sa trebuiasca randate categoriile TODO sa pui alte imagini
-    var img=["img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png"];
-    for (var i = 0; i < 12; i++) {
+    var img=["img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png"];
+    for (var i = 0; i < 7; i++) {
       x=i*50
       c.beginPath();
       c.rect(x,20,50,50);
@@ -2412,9 +2594,93 @@ function clickt(x,y){
               c.fill();
             }
           }
+          var t;//de la type
+          switch (shop.select_c) {
+            case 1:
+                for (var i = 0; i <stuf.wepan.length; i++) {
+                  x=(i%10)*60+10
+                  y=Math.floor(i/10)*60+10
+                  c.beginPath();
+                  var my_pic3=new Image();
+                  my_pic3.src=stuf.wepan[i].href;
+                  c.drawImage(my_pic3,x,y+70);
+                }
+              break;
+            case 2:
+                  for (var i = 0; i <stuf.armur.length; i++) {
+                    x=(i%10)*60+10
+                    y=Math.floor(i/10)*60+10
+                    c.beginPath();
+                    var my_pic3=new Image();
+                    my_pic3.src=stuf.armur[i].href;
+                    c.drawImage(my_pic3,x,y+70);
+                  }
+                break;
+            case 3:
+                  for (var i = 0; i <stuf.julary.length; i++) {
+                    x=(i%10)*60+10
+                    y=Math.floor(i/10)*60+10
+                    c.beginPath();
+                    var my_pic3=new Image();
+                    my_pic3.src=stuf.julary[i].href;
+                    c.drawImage(my_pic3,x,y+70);
+                  }
+                break;
+            case 4:
+                  for (var i = 0; i <stuf.transport.length; i++) {
+                    x=(i%10)*60+10
+                    y=Math.floor(i/10)*60+10
+                    c.beginPath();
+                    var my_pic3=new Image();
+                    my_pic3.src=stuf.transport[i].href;
+                    c.drawImage(my_pic3,x,y+70);
+                  }
+                break;
+            case 5:
+                  for (var i = 0; i <stuf.food.length; i++) {
+                    x=(i%10)*60+10
+                    y=Math.floor(i/10)*60+10
+                    c.beginPath();
+                    var my_pic3=new Image();
+                    my_pic3.src=stuf.food[i].href;
+                    c.drawImage(my_pic3,x,y+70);
+                  }
+                break;
+            case 6:
+                  for (var i = 0; i <stuf.ingredients.length; i++) {
+                    x=(i%10)*60+10
+                    y=Math.floor(i/10)*60+10
+                    c.beginPath();
+                    var my_pic3=new Image();
+                    my_pic3.src=stuf.ingredients[i].href;
+                    c.drawImage(my_pic3,x,y+70);
+                  }
+                break;
+            case 7:
+                  for (var i = 0; i <stuf.consumabile.length; i++) {
+                    x=(i%10)*60+10
+                    y=Math.floor(i/10)*60+10
+                    c.beginPath();
+                    var my_pic3=new Image();
+                    my_pic3.src=stuf.consumabile[i].href;
+                    c.drawImage(my_pic3,x,y+70);
+                  }
+                break;
+          }
+          var i=shop.select_s;
+          if(shop.select_s >-1){
+            x=60*(i%10)+10;
+            y=60*Math.floor(i/10)+10;
+            c.beginPath();
+            c.strokeStyle="blue";
+            c.rect(x,y+70,50,50);
+            c.lineWidth=3;
+            c.stroke();
+          }
       //frame inventory
       c.beginPath();
       c.rect(610,70,610,610);
+      c.strokeStyle="black";
       c.fillStyle="rgba(50,50,50,0.95)";
       c.stroke();
       c.fill();
@@ -2457,26 +2723,26 @@ function clickt(x,y){
               c.beginPath();
               c.strokeStyle="blue";
               c.rect(x+610,y+70,50,50);
-              c.fillStyle="red";
+              c.lineWidth=3;
               c.stroke();
-
             }
     //shop description frame
     c.beginPath();
     c.strokeStyle="black";
     c.rect(0,680,410,120);
     c.fillStyle="rgba(50,50,50,0.95)";
+    c.lineWidth=1;
     c.stroke();
     c.fill();
     //shop description
 
-    //meniu description frame
+    //INVENTORY description frame
     c.beginPath();
     c.rect(810,680,410,120);
     c.fillStyle="rgba(50,50,50,0.95)";
     c.stroke();
     c.fill();
-    //shop description
+    //inventory description description
 
     //butons
     c.beginPath();
@@ -2501,7 +2767,7 @@ function clickt(x,y){
     c.fillStyle="rgba(0,210,0,0.95)";
     c.stroke();
     c.fill();
-      //buton buy text
+      //buton sell text
       c.beginPath();
       c.fillStyle = "black";
       c.font = "46px Verdana";

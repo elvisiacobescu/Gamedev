@@ -110,7 +110,7 @@ var stuf={food:[{name:"food",foame:1,energie:0,href:"img/food/row_pig_mit.png",t
                 {name:"food",foame:30,energie:9,href:"img/food/row_pig_mit.png",type:"food",q:1,max_q:10,value:114},
                 {name:"food",foame:30,energie:10,href:"img/food/row_pig_mit.png",type:"food",q:1,max_q:10,value:120}
               ],
-          ingredients:[],
+          ingredients:[{name:"food",foame:30,energie:10,href:"img/food/row_pig_mit.png",type:"food",q:1,max_q:10,value:120}],
           wepan:[{name:"Wod short sord",dmg:1,href:"img/wepons/wod_sword.png",type:"wepon",value:7,modi:0},
                  {name:"Iron sord",dmg:3,href:"img/wepons/iron_sword.png",type:"wepon",value:23,modi:1},
                  {name:"sord3",dmg:5,href:"img/wepons/wod_sword.png",type:"wepon",value:45,modi:1},
@@ -257,7 +257,7 @@ var stuf={food:[{name:"food",foame:1,energie:0,href:"img/food/row_pig_mit.png",t
                   {name:"Strong potion",hp:50,en:10,href:"img/consumabile/potion2.png",value:170,type:"consumable"},
                   {name:"XXL potion",hp:100,en:25,href:"img/consumabile/potion3.png",value:360,type:"consumable"}
                 ],
-                transport:[//37 elemente 5 bags 8 carute 24 caii/unicorni/boi
+        transport:[//37 elemente 5 bags 8 carute 24 caii/unicorni/boi
                   {name:"bag1",trans:1,href:"img/cara/bag1.png",type:"bag",value:10},
                   {name:"bag2",trans:2,href:"img/cara/bag2.png",type:"bag",value:20},
                   {name:"bag3",trans:3,href:"img/cara/bag3.png",type:"bag",value:30},

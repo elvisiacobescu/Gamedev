@@ -17,3 +17,87 @@
   /*position: relative;*/
   margin:0 auto;
 }
+#log_in{
+  position: absolute;
+  left: 20%;
+  top:20%;
+}
+#user_span_text{
+  margin-left: 31px;
+  margin-right: 10px;
+}
+#password_span_text
+{
+  margin-right: 10px;
+}
+.celformat{
+  padding-top: 5px;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+.butons{
+  position: relative;
+  border: solid 1px black;
+  width:80px;
+  text-align: center;
+}
+.butons:hover{
+  background-color: gray;
+  cursor: pointer;
+}
+#login_buton{
+top:10px;
+left:80px
+}
+#register_buton{
+  left:170px;
+  top:-10px;
+}
+.card{
+  float: left;
+position: relative;
+margin-left:25px;
+border:solid black 1px;
+margin-bottom: 15px;
+}
+.card:hover{
+    cursor: pointer;
+}
+#cards{
+  display:none;
+}
+#new_game{
+  font-size: 64px;
+  border:solid black 1px;
+  margin-top:150px;
+  width: 354px;
+  margin-left:25px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+#new_game:hover{
+  background-color: gray;
+  cursor: pointer;
+
+}
+#load_game{
+  clear:both;
+  font-size: 64px;
+  border:solid black 1px;
+  width: 354px;
+  margin-left:25px;
+  text-align: center;
+}
+#load_game:hover{
+  background-color: gray;
+  cursor: pointer;
+
+}
+#meniu{
+  width:400px;
+  height:600px;
+  margin-top:150px;
+  margin-left:35%;
+  border:solid black 1px;
+}
+.active{display: block!important;}

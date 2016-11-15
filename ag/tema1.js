@@ -155,6 +155,10 @@ function compute_fitness(max_hilltop,type){
   		 a1 = -2;
   		 b1 = 2;
   		 return Six_hump(decodeSix(max_hilltop, a, b, a1, b1));
+    case 5:
+       a = 0;
+       b = 31;
+      return functie(decode(max_hilltop, a, b));
   	 default:
   		console.log("Cod gresit!");
   }
@@ -222,6 +226,10 @@ function steepest_ascent_hill_climbing(max_number_of_iterations,type,size)
 		a1 = -2;
 		b1 = 2;
 		break;
+  case 5:
+    a = 0;
+    b = 31;
+    break
 	default:
 		console.log("Cod gresit!");
 		break;
@@ -290,6 +298,10 @@ function steepest_ascent_hill_climbing(max_number_of_iterations,type,size)
   		a1 = -2;
   		b1 = 2;
   		break;
+    case 5:
+      a = 0;
+      b = 31;
+      break
   	default:
   		console.log("Cod gresit!");
   		break;
@@ -343,3 +355,8 @@ for (var i = 1; i <= 30; i++)
 		ceva = ceva + x;
 	}
 })();
+
+function functie(v){
+  var  x = v[0];
+  	return Math.pow(x, 3) - 60 * Math.pow(x, 2) + 900 * x + 100;
+}

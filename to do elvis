@@ -1,9 +1,43 @@
-combat_sistem
-              -in randare sa faca inceperea luptei daca monster e
-              diferit de null astfel pot sa pun monstri unde am eu chef;
-              -buton de atack;
-              -buton de fuga;
-              -cu cate zaruri se da dex/dex daca dmgul e mai mare
-              -se pierd 15 secunde la fiecare tura de dat cu zaruri
-              -daca mori lupta se termina
-              -
+GAME:
+    -Login :
+      * 
+    -create new acount
+    -finish new game
+    -SAVE GAME;
+    -LOAD GAME;
+    -Log aut
+    -dexterity shld be more valuble
+inventory:
+    -mount hors;
+    -eqiup bags;
+    -equip carage;
+    -consum -- can consum food to;
+combat_sistem:
+    -consume portion or Heal
+    -use magic spel from scrol
+shop:
+    -ther are no descriptions on selected
+Move player:
+    -animation
+worck:
+    -create categorii:
+    -create click action
+    -renther job panel
+    -
+Quests:
+    -create quests
+        *mein quest:
+            +adu regelui 500 de gold.
+        *secundary quests
+            +
+bug report:
+    -cand mananci nu se sterg bine itemele din lista(unele nu se sterg deloc)
+    -in inventar nu arata energia pe care o da mancarea
+    -on move pe patratelele impare ese o portiune care da eruare.
+icon creation:
+    -create all
+
+idei noi:
+-in 5 days the dragons start to appear and distroy the map?
+-daungrade the loot values?
+-re thinck values

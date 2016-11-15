@@ -7,11 +7,16 @@ function removejscssfile(filename, filetype){
         allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
     }
 }
-function addjs_to_body(path){
+function addjs_to_body(path,wher){
   var js = document.createElement("script");
   js.type = "text/javascript";
   js.src = path;
-  document.body.appendChild(js);
+  if(wher==="after"){
+   document.body.appendChild(js);}
+   else if(wher==="before"){
+     var child = document.getElementById('border');
+      child.parentNode.insertBefore(js, child);
+    }
 }
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -40,4 +45,37 @@ function toggleClass(elem, className) {
     } else {
         elem.className += ' ' + className;
     }
+}
+function clone(obj) {
+    var copy;
+
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
 }

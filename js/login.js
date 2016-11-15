@@ -21,7 +21,7 @@ function removejscssfile(filename, filetype){
     if(logatdeja!=null && logatdeja>0){
       var elem=document.getElementById('log_in');
       elem.parentNode.removeChild(elem);
-      addjs_to_body("js/first_meniu.js");
+      addjs_to_body("js/first_meniu.js","after");
       removejscssfile("login.js","js");
     }
     log_in_buton.addEventListener("click",function (){
@@ -53,7 +53,7 @@ function removejscssfile(filename, filetype){
                         setCookie("player",rezultat,3);
                     var elem=document.getElementById('log_in');
                     elem.parentNode.removeChild(elem);
-                    addjs_to_body("js/first_meniu.js");
+                    addjs_to_body("js/first_meniu.js","after");
                     removejscssfile("login.js","js");
                     }
               }

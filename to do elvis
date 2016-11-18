@@ -1,11 +1,11 @@
 GAME:
     -Login :
-      * 
     -create new acount
     -finish new game
     -SAVE GAME;
     -LOAD GAME;
     -Log aut
+    -loading -trebuie sa incarce toate imaginile de care are nevoie
     -dexterity shld be more valuble
 inventory:
     -mount hors;
@@ -16,28 +16,96 @@ combat_sistem:
     -consume portion or Heal
     -use magic spel from scrol
 shop:
+    -nu se randeaza cantitatea pt cele cu cantitate
     -ther are no descriptions on selected
+    -when shop food or items is not staking as it shuuld
 Move player:
     -animation
 worck:
     -create categorii:
     -create click action
     -renther job panel
-    -
+    -do jobs
+Right canvas:
+    -add player status
+          *exp,lvl
+          *def,str,spd
 Quests:
     -create quests
         *mein quest:
-            +adu regelui 500 de gold.
+            +adu regelui 500 de gold sau mai mult sa vad cam cat de repede se poate face goldul
+            ca sa aduca un nivel ridicat de dificultate avand in vedere ca e una din misiunile principale
+            +ajungi la novelu 30.
+            +invenge x numar de monsstr.
+            +fa x numar de joburi specifice.
+            +chalange the 5th dragon.
+            +chalange the ultimate bos.
+            +ecwip your self in value of 100G
         *secundary quests
-            +
+            +difit specific monster.
+            +fa job specific.
+            +help with materials.
+            +help with crafting(construeste ceva)
+            +gateste  ceva.
+            +fa rost de ingredient specific(nivele diferite de dificultate)
+            +build an upgrade
+Joburi:
+    -palat:
+        *Defend palace;(nivel greu)
+        *Help rebuild;
+        *grand coock;(trebuie sa ai anumite ingrediente ca sa poti face jobul si
+        primesti o cantitate mai mare de bani decat daca ai vinde,trebuie sa multumesti regele)
+        *apara impotriva invaziei(nivel foarte greu)
+    -pasture:
+        *sacrifica din turma;(nivel scazut)
+        *apara turma de hoti;(nivel mediu)
+        *apara turma de paraziti;(nivel scazut)
+        *tunde turma;()
+    -piata:
+        *vanzator pt o zi;
+        *gardian impotriva hotilor;
+        *
+        *
+    -ferma:
+        *culege roade de pe camp;(nivel scazut)
+        *deparaziteaza;()
+        *muncitor cu ziua;
+        *construeste granar (trebuie sa cumperi sau sa gasesti materialele ti se da pretul cat si )
+    -in:
+        *clean rooms(gold si o sansa mica de un item mediocru)
+        *ospatar
+        *bucatar
+        *paznic
+    -warckshop
+        *repara item
+        *upgrade item
+        *lucreaza ca ucenic
+        *make sword
+    -stables
+        *potcoveste(resurse)
+        *curata grajdiuri(bani)
+        *hraneste animale
+        *opreste banditi(!!)
+Home :
+    -enter home:
+        *Storage
+        *Safe guard storage items with golden string
+        *mision control(vede progresul)
+
+
 bug report:
     -cand mananci nu se sterg bine itemele din lista(unele nu se sterg deloc)
     -in inventar nu arata energia pe care o da mancarea
     -on move pe patratelele impare ese o portiune care da eruare.
-icon creation:
+objects icon creation:
     -create all
-
 idei noi:
+
 -in 5 days the dragons start to appear and distroy the map?
 -daungrade the loot values?
 -re thinck values
+-hover detalii
+-pt misiuni un sem de dager... cu cat mai periculoasa misiunea cu atat mai multe semne
+si de pus acel semn si pe hover cand te hotarasti sa ataci
+-primeste anumite afinitati care pleaca de la 0 daca faci un job care scad timpul pt
+facerea acesteia cu o valuarex sau y)

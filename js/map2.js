@@ -609,7 +609,7 @@ function clickt(x,y){
     c.fill();
 
     //aici o sa trebuiasca randate categoriile TODO sa pui alte imagini
-    var img=["img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png","img/pants.png"];
+    var img=["img/wepons/large_steel_sword.png","img/pants.png","img/julary/ring15.png","img/pants.png","img/food/corn.png","img/pants.png","img/consumabile/potion1.png"];
     for (var i = 0; i < 7; i++) {
       x=i*50
       c.beginPath();
